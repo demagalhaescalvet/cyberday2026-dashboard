@@ -60,7 +60,7 @@ export default function MixIdeal() {
           </div>
           <div className="bg-[#111827] rounded-xl border border-[#1e293b] p-5">
             <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Total Revenue</div>
-            <div className="text-2xl font-bold text-green">${(tR / 1e3).toFixed(1)}M</div>
+            <div className="text-2xl font-bold text-green">${tR.toLocaleString()}M</div>
           </div>
           <div className="bg-[#111827] rounded-xl border border-[#1e293b] p-5">
             <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Ticket Promedio</div>
@@ -95,7 +95,7 @@ export default function MixIdeal() {
                       </div>
                     </td>
                     <td className="text-right px-5 py-3 text-cyan">{item.units.toLocaleString()}</td>
-                    <td className="text-right px-5 py-3 text-green">${(item.revenue / 1e3).toFixed(1)}M</td>
+                    <td className="text-right px-5 py-3 text-green">${item.revenue.toLocaleString()}M</td>
                     <td className="text-right px-5 py-3 text-amber font-medium">{item.pct.toFixed(1)}%</td>
                     <td className="px-5 py-3">
                       <div className="w-32 bg-[#0f172a] rounded-full h-1.5 overflow-hidden">
@@ -115,7 +115,7 @@ export default function MixIdeal() {
             <div className="px-5 py-3 bg-[#0f172a] border-t border-[#1e293b] flex justify-between text-sm font-semibold text-muted-foreground">
               <span>Subtotal Apple</span>
               <span>{appleSubtotal.units.toLocaleString()}u</span>
-              <span>${(appleSubtotal.revenue / 1e3).toFixed(1)}M</span>
+              <span>${appleSubtotal.revenue.toLocaleString()}M</span>
             </div>
           </div>
 
@@ -144,7 +144,7 @@ export default function MixIdeal() {
                       </div>
                     </td>
                     <td className="text-right px-5 py-3 text-cyan">{item.units.toLocaleString()}</td>
-                    <td className="text-right px-5 py-3 text-green">${(item.revenue / 1e3).toFixed(1)}M</td>
+                    <td className="text-right px-5 py-3 text-green">${item.revenue.toLocaleString()}M</td>
                     <td className="text-right px-5 py-3 text-amber font-medium">{item.pct.toFixed(1)}%</td>
                     <td className="px-5 py-3">
                       <div className="w-32 bg-[#0f172a] rounded-full h-1.5 overflow-hidden">
@@ -164,7 +164,7 @@ export default function MixIdeal() {
             <div className="px-5 py-3 bg-[#0f172a] border-t border-[#1e293b] flex justify-between text-sm font-semibold text-muted-foreground">
               <span>Subtotal 3rd Party</span>
               <span>{tpSubtotal.units.toLocaleString()}u</span>
-              <span>${(tpSubtotal.revenue / 1e3).toFixed(1)}M</span>
+              <span>${tpSubtotal.revenue.toLocaleString()}M</span>
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function MixIdeal() {
                   border: '1px solid #1e293b',
                   borderRadius: '8px',
                 }}
-                formatter={(value) => `$${(value / 1e3).toFixed(1)}M`}
+                formatter={(value) => `$${value.toLocaleString()}M`}
               />
             </Treemap>
           </ResponsiveContainer>
@@ -212,7 +212,7 @@ export default function MixIdeal() {
                       </div>
                       <div>
                         <div className="text-muted-foreground text-xs">Revenue</div>
-                        <div className="text-green font-semibold">${(item.revenue / 1e3).toFixed(1)}M</div>
+                        <div className="text-green font-semibold">${item.revenue.toLocaleString()}M</div>
                       </div>
                       <div>
                         <div className="text-muted-foreground text-xs">Ticket</div>

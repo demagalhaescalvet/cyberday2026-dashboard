@@ -44,13 +44,13 @@ export default function Sidebar({ tabs, activeTab, onTabChange }) {
       {/* Footer stats */}
       <div className="p-3 border-t border-border">
         <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Revenue Target</div>
-        <div className="text-xl font-bold text-green">${(tR/1e3).toFixed(0)}M</div>
+        <div className="text-xl font-bold text-green">${tR.toLocaleString()}M</div>
         <div className="flex gap-1.5 mt-1.5 flex-wrap">
           <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e293b] text-cyan">{tU.toLocaleString()}u</span>
           <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e293b] text-amber">${avgTicket}K avg</span>
         </div>
         <div className="flex gap-1.5 mt-1 flex-wrap">
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e293b] text-green">${(appleR/1e3).toFixed(0)}M</span>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e293b] text-green">${appleR.toLocaleString()}M</span>
           <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e293b] text-pink">3P ${tpR}M</span>
         </div>
         <div className="text-[9px] text-muted-foreground mt-1.5">Valores netos (sin IVA) · 157K txns · Abr 2026</div>
