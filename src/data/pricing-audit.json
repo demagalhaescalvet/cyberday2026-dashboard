@@ -1,0 +1,74 @@
+[
+  {
+    "product": "AirPods Pro 3",
+    "pvpMO": 279990,
+    "cyberPlan": 249990,
+    "marketLow": 249990,
+    "marketStore": "Lider BCI",
+    "status": "match",
+    "note": "Iguala mínimo mercado"
+  },
+  {
+    "product": "AirPods 4 ANC",
+    "pvpMO": 199990,
+    "cyberPlan": 180990,
+    "marketLow": 189990,
+    "marketStore": "MercadoLibre",
+    "status": "ok",
+    "note": "Cyber < mercado"
+  },
+  {
+    "product": "AirPods 4",
+    "pvpMO": 139990,
+    "cyberPlan": 126990,
+    "marketLow": 119990,
+    "marketStore": "Lider BCI",
+    "status": "warn",
+    "note": "Verificar BCI card-only"
+  },
+  {
+    "product": "AirPods Max",
+    "pvpMO": 599990,
+    "cyberPlan": 558990,
+    "marketLow": 549990,
+    "marketStore": "Travel Tienda",
+    "status": "warn",
+    "note": "Considerar bajar a $549K"
+  },
+  {
+    "product": "iPhone 17 256GB",
+    "pvpMO": 999990,
+    "cyberPlan": 899990,
+    "marketLow": 929990,
+    "marketStore": "Falabella",
+    "status": "ok",
+    "note": "Cyber < mercado"
+  },
+  {
+    "product": "iPhone 17 PM 256GB",
+    "pvpMO": 1549990,
+    "cyberPlan": 1426990,
+    "marketLow": 1449990,
+    "marketStore": "Falabella",
+    "status": "ok",
+    "note": "Cyber < mercado"
+  },
+  {
+    "product": "MacBook Neo",
+    "pvpMO": 649990,
+    "cyberPlan": 598990,
+    "marketLow": 599990,
+    "marketStore": "Falabella",
+    "status": "match",
+    "note": "Iguala mercado"
+  },
+  {
+    "product": "HomePod mini",
+    "pvpMO": 84990,
+    "cyberPlan": 78290,
+    "marketLow": 74990,
+    "marketStore": "Lider",
+    "status": "warn",
+    "note": "Considerar bajar a $74K"
+  }
+]

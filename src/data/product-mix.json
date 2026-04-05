@@ -1,0 +1,2112 @@
+{
+  "categories": [
+    {
+      "name": "iPhone Pro",
+      "icon": "📱",
+      "units": 409,
+      "revenue": 429,
+      "asp": 1049,
+      "color": "#4f8cf7",
+      "subcategories": [
+        {
+          "name": "17 Pro 256GB",
+          "units": 306,
+          "asp": 1050,
+          "revenue": 321,
+          "skus": [
+            {
+              "sku": "iPh17Pro-256-Pla",
+              "name": "256GB Plata",
+              "units": 137,
+              "price": 1050
+            },
+            {
+              "sku": "iPh17Pro-256-AzP",
+              "name": "256GB Azul Profundo",
+              "units": 110,
+              "price": 1050
+            },
+            {
+              "sku": "iPh17Pro-256-Nar",
+              "name": "256GB Naranja Cósmico",
+              "units": 59,
+              "price": 1050
+            }
+          ]
+        },
+        {
+          "name": "17 Pro 512GB",
+          "units": 85,
+          "asp": 1218,
+          "revenue": 104,
+          "skus": [
+            {
+              "sku": "iPh17Pro-512-Pla",
+              "name": "512GB Plata",
+              "units": 38,
+              "price": 1218
+            },
+            {
+              "sku": "iPh17Pro-512-AzP",
+              "name": "512GB Azul Profundo",
+              "units": 30,
+              "price": 1218
+            },
+            {
+              "sku": "iPh17Pro-512-Nar",
+              "name": "512GB Naranja Cósmico",
+              "units": 17,
+              "price": 1218
+            }
+          ]
+        },
+        {
+          "name": "17 Pro 1TB",
+          "units": 18,
+          "asp": 1429,
+          "revenue": 26,
+          "skus": [
+            {
+              "sku": "iPh17Pro-1TB-Pla",
+              "name": "1TB Plata",
+              "units": 8,
+              "price": 1429
+            },
+            {
+              "sku": "iPh17Pro-1TB-AzP",
+              "name": "1TB Azul Profundo",
+              "units": 7,
+              "price": 1429
+            },
+            {
+              "sku": "iPh17Pro-1TB-Nar",
+              "name": "1TB Naranja Cósmico",
+              "units": 3,
+              "price": 1429
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPhone Pro Max",
+      "icon": "📱",
+      "units": 650,
+      "revenue": 776,
+      "asp": 1193,
+      "color": "#9b7af7",
+      "subcategories": [
+        {
+          "name": "17 PM 256GB",
+          "units": 468,
+          "asp": 1134,
+          "revenue": 531,
+          "skus": [
+            {
+              "sku": "iPh17PM-256-Pla",
+              "name": "256GB Plata",
+              "units": 222,
+              "price": 1134
+            },
+            {
+              "sku": "iPh17PM-256-Nar",
+              "name": "256GB Naranja Cósmico",
+              "units": 125,
+              "price": 1134
+            },
+            {
+              "sku": "iPh17PM-256-AzP",
+              "name": "256GB Azul Profundo",
+              "units": 121,
+              "price": 1134
+            }
+          ]
+        },
+        {
+          "name": "17 PM 512GB",
+          "units": 134,
+          "asp": 1303,
+          "revenue": 175,
+          "skus": [
+            {
+              "sku": "iPh17PM-512-Pla",
+              "name": "512GB Plata",
+              "units": 64,
+              "price": 1303
+            },
+            {
+              "sku": "iPh17PM-512-Nar",
+              "name": "512GB Naranja Cósmico",
+              "units": 36,
+              "price": 1303
+            },
+            {
+              "sku": "iPh17PM-512-AzP",
+              "name": "512GB Azul Profundo",
+              "units": 34,
+              "price": 1303
+            }
+          ]
+        },
+        {
+          "name": "17 PM 1TB",
+          "units": 38,
+          "asp": 1555,
+          "revenue": 59,
+          "skus": [
+            {
+              "sku": "iPh17PM-1TB-Pla",
+              "name": "1TB Plata",
+              "units": 18,
+              "price": 1555
+            },
+            {
+              "sku": "iPh17PM-1TB-Nar",
+              "name": "1TB Naranja Cósmico",
+              "units": 10,
+              "price": 1555
+            },
+            {
+              "sku": "iPh17PM-1TB-AzP",
+              "name": "1TB Azul Profundo",
+              "units": 10,
+              "price": 1555
+            }
+          ]
+        },
+        {
+          "name": "17 PM 2TB",
+          "units": 10,
+          "asp": 1849,
+          "revenue": 18,
+          "skus": [
+            {
+              "sku": "iPh17PM-2TB-Pla",
+              "name": "2TB Plata",
+              "units": 5,
+              "price": 1849
+            },
+            {
+              "sku": "iPh17PM-2TB-AzP",
+              "name": "2TB Azul Profundo",
+              "units": 3,
+              "price": 1849
+            },
+            {
+              "sku": "iPh17PM-2TB-Nar",
+              "name": "2TB Naranja Cósmico",
+              "units": 2,
+              "price": 1849
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPhone Air",
+      "icon": "📱",
+      "units": 120,
+      "revenue": 96,
+      "asp": 797,
+      "color": "#f0b840",
+      "isNew": false,
+      "subcategories": [
+        {
+          "name": "Air 256GB",
+          "units": 78,
+          "asp": 797,
+          "revenue": 62,
+          "skus": [
+            {
+              "sku": "iPhAir-256-NEs",
+              "name": "256GB Negro Espacial",
+              "units": 27,
+              "price": 797
+            },
+            {
+              "sku": "iPhAir-256-AzC",
+              "name": "256GB Azul Cielo",
+              "units": 20,
+              "price": 797
+            },
+            {
+              "sku": "iPhAir-256-Bla",
+              "name": "256GB Blanco Nube",
+              "units": 16,
+              "price": 797
+            },
+            {
+              "sku": "iPhAir-256-Oro",
+              "name": "256GB Oro Claro",
+              "units": 15,
+              "price": 797
+            }
+          ]
+        },
+        {
+          "name": "Air 512GB",
+          "units": 12,
+          "asp": 882,
+          "revenue": 11,
+          "skus": [
+            {
+              "sku": "iPhAir-512-NEs",
+              "name": "512GB Negro Espacial",
+              "units": 4,
+              "price": 882
+            },
+            {
+              "sku": "iPhAir-512-AzC",
+              "name": "512GB Azul Cielo",
+              "units": 3,
+              "price": 882
+            },
+            {
+              "sku": "iPhAir-512-Oro",
+              "name": "512GB Oro Claro",
+              "units": 3,
+              "price": 882
+            },
+            {
+              "sku": "iPhAir-512-Bla",
+              "name": "512GB Blanco Nube",
+              "units": 2,
+              "price": 882
+            }
+          ]
+        },
+        {
+          "name": "Air 1TB",
+          "units": 30,
+          "asp": 1134,
+          "revenue": 34,
+          "skus": [
+            {
+              "sku": "iPhAir-1TB-NEs",
+              "name": "1TB Negro Espacial",
+              "units": 11,
+              "price": 1134
+            },
+            {
+              "sku": "iPhAir-1TB-AzC",
+              "name": "1TB Azul Cielo",
+              "units": 7,
+              "price": 1134
+            },
+            {
+              "sku": "iPhAir-1TB-Bla",
+              "name": "1TB Blanco Nube",
+              "units": 6,
+              "price": 1134
+            },
+            {
+              "sku": "iPhAir-1TB-Oro",
+              "name": "1TB Oro Claro",
+              "units": 6,
+              "price": 1134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPhone 17 Standard",
+      "icon": "📱",
+      "units": 651,
+      "revenue": 437,
+      "asp": 671,
+      "color": "#38d4e8",
+      "subcategories": [
+        {
+          "name": "17 256GB",
+          "units": 603,
+          "asp": 655,
+          "revenue": 395,
+          "skus": [
+            {
+              "sku": "iPh17-256-Lav",
+              "name": "256GB Lavanda",
+              "units": 160,
+              "price": 655
+            },
+            {
+              "sku": "iPh17-256-Neg",
+              "name": "256GB Negro",
+              "units": 149,
+              "price": 655
+            },
+            {
+              "sku": "iPh17-256-AzN",
+              "name": "256GB Azul Neblina",
+              "units": 105,
+              "price": 655
+            },
+            {
+              "sku": "iPh17-256-Bla",
+              "name": "256GB Blanco",
+              "units": 102,
+              "price": 655
+            },
+            {
+              "sku": "iPh17-256-Sal",
+              "name": "256GB Salvia",
+              "units": 87,
+              "price": 655
+            }
+          ]
+        },
+        {
+          "name": "17 512GB",
+          "units": 48,
+          "asp": 756,
+          "revenue": 37,
+          "skus": [
+            {
+              "sku": "iPh17-512-Lav",
+              "name": "512GB Lavanda",
+              "units": 13,
+              "price": 756
+            },
+            {
+              "sku": "iPh17-512-Neg",
+              "name": "512GB Negro",
+              "units": 12,
+              "price": 756
+            },
+            {
+              "sku": "iPh17-512-AzN",
+              "name": "512GB Azul Neblina",
+              "units": 9,
+              "price": 756
+            },
+            {
+              "sku": "iPh17-512-Bla",
+              "name": "512GB Blanco",
+              "units": 8,
+              "price": 756
+            },
+            {
+              "sku": "iPh17-512-Sal",
+              "name": "512GB Salvia",
+              "units": 6,
+              "price": 756
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPhone Budget",
+      "icon": "📱",
+      "units": 1100,
+      "revenue": 490,
+      "asp": 445,
+      "color": "#3dd68c",
+      "subcategories": [
+        {
+          "name": "16e 128GB",
+          "units": 600,
+          "asp": 420,
+          "revenue": 252,
+          "skus": [
+            {
+              "sku": "iPh16e-128-Neg",
+              "name": "128GB Negro",
+              "units": 395,
+              "price": 420
+            },
+            {
+              "sku": "iPh16e-128-Bla",
+              "name": "128GB Blanco",
+              "units": 205,
+              "price": 420
+            }
+          ]
+        },
+        {
+          "name": "17e 256GB",
+          "units": 250,
+          "asp": 529,
+          "revenue": 133,
+          "skus": [
+            {
+              "sku": "iPh17e-256-Neg",
+              "name": "256GB Negro",
+              "units": 110,
+              "price": 529
+            },
+            {
+              "sku": "iPh17e-256-Ros",
+              "name": "256GB Rosado Pálido",
+              "units": 90,
+              "price": 529
+            },
+            {
+              "sku": "iPh17e-256-Bla",
+              "name": "256GB Blanco",
+              "units": 50,
+              "price": 529
+            }
+          ]
+        },
+        {
+          "name": "16e 256GB",
+          "units": 100,
+          "asp": 546,
+          "revenue": 55,
+          "skus": [
+            {
+              "sku": "iPh16e-256-Neg",
+              "name": "256GB Negro",
+              "units": 66,
+              "price": 546
+            },
+            {
+              "sku": "iPh16e-256-Bla",
+              "name": "256GB Blanco",
+              "units": 34,
+              "price": 546
+            }
+          ]
+        },
+        {
+          "name": "iPh 15 128GB (liq.)",
+          "units": 100,
+          "asp": 504,
+          "revenue": 50,
+          "skus": [
+            {
+              "sku": "iPh15-128-Neg",
+              "name": "128GB Negro",
+              "units": 40,
+              "price": 504
+            },
+            {
+              "sku": "iPh15-128-Ros",
+              "name": "128GB Rosa",
+              "units": 30,
+              "price": 504
+            },
+            {
+              "sku": "iPh15-128-Azu",
+              "name": "128GB Azul",
+              "units": 30,
+              "price": 504
+            }
+          ]
+        },
+        {
+          "name": "iPh 13 128GB (liq.)",
+          "units": 50,
+          "asp": 336,
+          "revenue": 17,
+          "skus": [
+            {
+              "sku": "iPh13-128-Med",
+              "name": "128GB Medianoche",
+              "units": 30,
+              "price": 336
+            },
+            {
+              "sku": "iPh13-128-Bla",
+              "name": "128GB Blanco",
+              "units": 20,
+              "price": 336
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio (AirPods)",
+      "icon": "🎧",
+      "units": 5960,
+      "revenue": 924,
+      "asp": 155,
+      "color": "#e870b0",
+      "subcategories": [
+        {
+          "name": "AirPods 4",
+          "units": 1750,
+          "asp": 101,
+          "revenue": 176,
+          "skus": [
+            {
+              "sku": "AP4",
+              "name": "AirPods 4",
+              "units": 1750,
+              "price": 101
+            }
+          ]
+        },
+        {
+          "name": "AirPods 4 ANC",
+          "units": 1670,
+          "asp": 146,
+          "revenue": 244,
+          "skus": [
+            {
+              "sku": "AP4-ANC",
+              "name": "AirPods 4 ANC",
+              "units": 1670,
+              "price": 146
+            }
+          ]
+        },
+        {
+          "name": "AirPods Pro 3",
+          "units": 1620,
+          "asp": 241,
+          "revenue": 390,
+          "skus": [
+            {
+              "sku": "APPro3",
+              "name": "AirPods Pro 3",
+              "units": 1620,
+              "price": 241
+            }
+          ]
+        },
+        {
+          "name": "HomePod mini",
+          "units": 600,
+          "asp": 65,
+          "revenue": 39,
+          "skus": [
+            {
+              "sku": "HPmini",
+              "name": "HomePod mini",
+              "units": 600,
+              "price": 65
+            }
+          ]
+        },
+        {
+          "name": "AirPods Max",
+          "units": 120,
+          "asp": 496,
+          "revenue": 60,
+          "skus": [
+            {
+              "sku": "APMax-Med",
+              "name": "Medianoche",
+              "units": 30,
+              "price": 496
+            },
+            {
+              "sku": "APMax-BEs",
+              "name": "Blanco Estelar",
+              "units": 30,
+              "price": 496
+            },
+            {
+              "sku": "APMax-Azu",
+              "name": "Azul",
+              "units": 20,
+              "price": 496
+            },
+            {
+              "sku": "APMax-Nar",
+              "name": "Naranja",
+              "units": 20,
+              "price": 496
+            },
+            {
+              "sku": "APMax-Mor",
+              "name": "Morado",
+              "units": 20,
+              "price": 496
+            }
+          ]
+        },
+        {
+          "name": "HomePod 2ª Gen",
+          "units": 35,
+          "asp": 274,
+          "revenue": 9,
+          "skus": [
+            {
+              "sku": "HP2",
+              "name": "HomePod 2ª Gen",
+              "units": 35,
+              "price": 274
+            }
+          ]
+        },
+        {
+          "name": "Otros Audio",
+          "units": 165,
+          "asp": 34,
+          "revenue": 6,
+          "skus": [
+            {
+              "sku": "EarPods",
+              "name": "EarPods USB-C",
+              "units": 100,
+              "price": 21
+            },
+            {
+              "sku": "Beats-IE",
+              "name": "Beats In-Ear",
+              "units": 35,
+              "price": 50
+            },
+            {
+              "sku": "Beats-OE",
+              "name": "Beats Over-Ear",
+              "units": 30,
+              "price": 84
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mac Notebook",
+      "icon": "💻",
+      "units": 1450,
+      "revenue": 1080,
+      "asp": 745,
+      "color": "#4f8cf7",
+      "subcategories": [
+        {
+          "name": "MacBook Neo 13\" ★",
+          "units": 800,
+          "asp": 462,
+          "revenue": 370,
+          "highlight": false,
+          "skus": [
+            {
+              "sku": "MBNeo-8-Med",
+              "name": "Medianoche",
+              "units": 240,
+              "price": 462
+            },
+            {
+              "sku": "MBNeo-8-Pla",
+              "name": "Plata",
+              "units": 200,
+              "price": 462
+            },
+            {
+              "sku": "MBNeo-8-AzC",
+              "name": "Azul Cielo",
+              "units": 190,
+              "price": 462
+            },
+            {
+              "sku": "MBNeo-8-Est",
+              "name": "Estelar",
+              "units": 170,
+              "price": 462
+            }
+          ]
+        },
+        {
+          "name": "MBA M5 13\"",
+          "units": 230,
+          "asp": 1092,
+          "revenue": 251,
+          "skus": [
+            {
+              "sku": "MBA-M5-13-16-AzC",
+              "name": "Azul Cielo 16GB",
+              "units": 70,
+              "price": 1050
+            },
+            {
+              "sku": "MBA-M5-13-16-Med",
+              "name": "Medianoche 16GB",
+              "units": 65,
+              "price": 1050
+            },
+            {
+              "sku": "MBA-M5-13-16-Pla",
+              "name": "Plata 16GB",
+              "units": 50,
+              "price": 1050
+            },
+            {
+              "sku": "MBA-M5-13-24-Med",
+              "name": "Medianoche 24GB",
+              "units": 25,
+              "price": 1218
+            },
+            {
+              "sku": "MBA-M5-13-16-Est",
+              "name": "Estelar 16GB",
+              "units": 20,
+              "price": 1050
+            }
+          ]
+        },
+        {
+          "name": "MBP M5 14\"",
+          "units": 140,
+          "asp": 1849,
+          "revenue": 259,
+          "skus": [
+            {
+              "sku": "MBP-M5-14-24-NEs",
+              "name": "Negro Esp. 24GB",
+              "units": 55,
+              "price": 1765
+            },
+            {
+              "sku": "MBP-M5-14-24-Pla",
+              "name": "Plata 24GB",
+              "units": 35,
+              "price": 1765
+            },
+            {
+              "sku": "MBP-M5-14-32-NEs",
+              "name": "Negro Esp. 32GB",
+              "units": 30,
+              "price": 2017
+            },
+            {
+              "sku": "MBP-M5-14-36-NEs",
+              "name": "Max 36GB",
+              "units": 20,
+              "price": 2941
+            }
+          ]
+        },
+        {
+          "name": "MBA M5 15\"",
+          "units": 120,
+          "asp": 1261,
+          "revenue": 151,
+          "skus": [
+            {
+              "sku": "MBA-M5-15-16-Med",
+              "name": "Medianoche 16GB",
+              "units": 40,
+              "price": 1218
+            },
+            {
+              "sku": "MBA-M5-15-16-AzC",
+              "name": "Azul Cielo 16GB",
+              "units": 30,
+              "price": 1218
+            },
+            {
+              "sku": "MBA-M5-15-16-Pla",
+              "name": "Plata 16GB",
+              "units": 25,
+              "price": 1218
+            },
+            {
+              "sku": "MBA-M5-15-24-Med",
+              "name": "Medianoche 24GB",
+              "units": 15,
+              "price": 1387
+            },
+            {
+              "sku": "MBA-M5-15-16-Est",
+              "name": "Estelar 16GB",
+              "units": 10,
+              "price": 1218
+            }
+          ]
+        },
+        {
+          "name": "MBP M5 16\"",
+          "units": 100,
+          "asp": 2101,
+          "revenue": 210,
+          "skus": [
+            {
+              "sku": "MBP-M5-16-24-NEs",
+              "name": "Negro Esp. 24GB",
+              "units": 50,
+              "price": 1933
+            },
+            {
+              "sku": "MBP-M5-16-24-Pla",
+              "name": "Plata 24GB",
+              "units": 25,
+              "price": 1933
+            },
+            {
+              "sku": "MBP-M5-16-48-NEs",
+              "name": "Max 48GB",
+              "units": 25,
+              "price": 3193
+            }
+          ]
+        },
+        {
+          "name": "MBA M4 13\" (liq.)",
+          "units": 60,
+          "asp": 924,
+          "revenue": 55,
+          "skus": [
+            {
+              "sku": "MBA-M4-13-Med",
+              "name": "Medianoche",
+              "units": 20,
+              "price": 924
+            },
+            {
+              "sku": "MBA-M4-13-AzC",
+              "name": "Azul Cielo",
+              "units": 20,
+              "price": 924
+            },
+            {
+              "sku": "MBA-M4-13-Pla",
+              "name": "Plata",
+              "units": 20,
+              "price": 924
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mac Desktop",
+      "icon": "🖥️",
+      "units": 40,
+      "revenue": 50,
+      "asp": 1261,
+      "color": "#5a9cf7",
+      "subcategories": [
+        {
+          "name": "iMac 24\" M4",
+          "units": 40,
+          "asp": 1261,
+          "revenue": 50,
+          "skus": [
+            {
+              "sku": "iMac-M4-base",
+              "name": "Base",
+              "units": 25,
+              "price": 1092
+            },
+            {
+              "sku": "iMac-M4-10c",
+              "name": "10-core",
+              "units": 15,
+              "price": 1513
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPad",
+      "icon": "📱",
+      "units": 1000.0,
+      "revenue": 504,
+      "asp": 504,
+      "color": "#f0b840",
+      "subcategories": [
+        {
+          "name": "iPad 11\" A16",
+          "units": 370,
+          "asp": 361,
+          "revenue": 134,
+          "skus": [
+            {
+              "sku": "iPad-A16-128",
+              "name": "128GB",
+              "units": 310,
+              "price": 336
+            },
+            {
+              "sku": "iPad-A16-256",
+              "name": "256GB",
+              "units": 60,
+              "price": 420
+            }
+          ]
+        },
+        {
+          "name": "iPad Air M4 11\"",
+          "units": 320,
+          "asp": 471,
+          "revenue": 150,
+          "skus": [
+            {
+              "sku": "iPadAir-M4-128",
+              "name": "128GB",
+              "units": 150,
+              "price": 445
+            },
+            {
+              "sku": "iPadAir-M4-256",
+              "name": "256GB",
+              "units": 120,
+              "price": 487
+            },
+            {
+              "sku": "iPadAir-M4-512",
+              "name": "512GB",
+              "units": 50,
+              "price": 588
+            }
+          ]
+        },
+        {
+          "name": "iPad Pro 11\" M5",
+          "units": 100,
+          "asp": 924,
+          "revenue": 92,
+          "skus": [
+            {
+              "sku": "iPadPro-11-256",
+              "name": "256GB",
+              "units": 52,
+              "price": 882
+            },
+            {
+              "sku": "iPadPro-11-512",
+              "name": "512GB",
+              "units": 28,
+              "price": 966
+            },
+            {
+              "sku": "iPadPro-11-1TB",
+              "name": "1TB",
+              "units": 20,
+              "price": 1092
+            }
+          ]
+        },
+        {
+          "name": "iPad Pro 13\" M5",
+          "units": 75,
+          "asp": 1134,
+          "revenue": 85,
+          "skus": [
+            {
+              "sku": "iPadPro-13-256",
+              "name": "256GB",
+              "units": 30,
+              "price": 1050
+            },
+            {
+              "sku": "iPadPro-13-512",
+              "name": "512GB",
+              "units": 30,
+              "price": 1176
+            },
+            {
+              "sku": "iPadPro-13-1TB",
+              "name": "1TB",
+              "units": 15,
+              "price": 1261
+            }
+          ]
+        },
+        {
+          "name": "iPad Air 13\"",
+          "units": 25,
+          "asp": 840,
+          "revenue": 21,
+          "skus": [
+            {
+              "sku": "iPadAir-13-M4",
+              "name": "128GB",
+              "units": 15,
+              "price": 798
+            },
+            {
+              "sku": "iPadAir-13-256",
+              "name": "256GB",
+              "units": 10,
+              "price": 924
+            }
+          ]
+        },
+        {
+          "name": "iPad mini 7",
+          "units": 30,
+          "asp": 462,
+          "revenue": 14,
+          "skus": [
+            {
+              "sku": "iPadMini7-128",
+              "name": "128GB",
+              "units": 18,
+              "price": 420
+            },
+            {
+              "sku": "iPadMini7-256",
+              "name": "256GB",
+              "units": 12,
+              "price": 529
+            }
+          ]
+        },
+        {
+          "name": "iPad Pro 12.9\" (liq.)",
+          "units": 80,
+          "asp": 588,
+          "revenue": 47,
+          "skus": [
+            {
+              "sku": "iPadPro-129",
+              "name": "6ª Gen",
+              "units": 80,
+              "price": 588
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apple Watch",
+      "icon": "⌚",
+      "units": 720,
+      "revenue": 193,
+      "asp": 269,
+      "color": "#3dd68c",
+      "subcategories": [
+        {
+          "name": "Watch SE 3",
+          "units": 420,
+          "asp": 218,
+          "revenue": 92,
+          "skus": [
+            {
+              "sku": "AWSE3-40",
+              "name": "GPS 40mm",
+              "units": 190,
+              "price": 202
+            },
+            {
+              "sku": "AWSE3-44",
+              "name": "GPS 44mm",
+              "units": 130,
+              "price": 227
+            },
+            {
+              "sku": "AWSE3-Cell",
+              "name": "Cell 44mm",
+              "units": 60,
+              "price": 269
+            },
+            {
+              "sku": "AWSE3-40-C",
+              "name": "Cell 40mm",
+              "units": 40,
+              "price": 261
+            }
+          ]
+        },
+        {
+          "name": "Watch Series 11",
+          "units": 200,
+          "asp": 336,
+          "revenue": 67,
+          "skus": [
+            {
+              "sku": "AWS11-42",
+              "name": "GPS 42mm",
+              "units": 80,
+              "price": 319
+            },
+            {
+              "sku": "AWS11-46",
+              "name": "GPS 46mm",
+              "units": 70,
+              "price": 345
+            },
+            {
+              "sku": "AWS11-Cell",
+              "name": "Cell 46mm",
+              "units": 50,
+              "price": 420
+            }
+          ]
+        },
+        {
+          "name": "Watch Ultra 3",
+          "units": 60,
+          "asp": 840,
+          "revenue": 50,
+          "skus": [
+            {
+              "sku": "AWU3-Nat",
+              "name": "Ti Natural",
+              "units": 30,
+              "price": 840
+            },
+            {
+              "sku": "AWU3-Neg",
+              "name": "Ti Negro",
+              "units": 30,
+              "price": 840
+            }
+          ]
+        },
+        {
+          "name": "Watch SE (liq.)",
+          "units": 40,
+          "asp": 168,
+          "revenue": 7,
+          "skus": [
+            {
+              "sku": "AWSE-40",
+              "name": "GPS 40mm",
+              "units": 25,
+              "price": 160
+            },
+            {
+              "sku": "AWSE-44",
+              "name": "GPS 44mm",
+              "units": 15,
+              "price": 185
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Accesorios y Otros",
+      "icon": "🔌",
+      "units": 4200,
+      "revenue": 282,
+      "asp": 67,
+      "color": "#7a8599",
+      "subcategories": [
+        {
+          "name": "Fundas iPhone",
+          "units": 800,
+          "asp": 50,
+          "revenue": 40,
+          "skus": [
+            {
+              "sku": "F-iPh17PM",
+              "name": "iPhone 17 PM",
+              "units": 280,
+              "price": 55
+            },
+            {
+              "sku": "F-iPh17Pro",
+              "name": "iPhone 17 Pro",
+              "units": 180,
+              "price": 50
+            },
+            {
+              "sku": "F-iPh17",
+              "name": "iPhone 17",
+              "units": 120,
+              "price": 46
+            },
+            {
+              "sku": "F-iPh16e",
+              "name": "iPhone 16e",
+              "units": 100,
+              "price": 38
+            },
+            {
+              "sku": "F-iPhAir",
+              "name": "iPhone Air",
+              "units": 60,
+              "price": 46
+            },
+            {
+              "sku": "F-Other",
+              "name": "Otros modelos",
+              "units": 60,
+              "price": 42
+            }
+          ]
+        },
+        {
+          "name": "Apple Pencil",
+          "units": 700,
+          "asp": 91,
+          "revenue": 64,
+          "skus": [
+            {
+              "sku": "APencil-Pro",
+              "name": "Pro",
+              "units": 420,
+              "price": 97
+            },
+            {
+              "sku": "APencil-USBC",
+              "name": "USB-C",
+              "units": 280,
+              "price": 67
+            }
+          ]
+        },
+        {
+          "name": "Cargadores y Cables",
+          "units": 600,
+          "asp": 31,
+          "revenue": 18,
+          "skus": [
+            {
+              "sku": "Carg-20W",
+              "name": "USB-C 20W",
+              "units": 180,
+              "price": 21
+            },
+            {
+              "sku": "Carg-MagSafe",
+              "name": "MagSafe",
+              "units": 120,
+              "price": 38
+            },
+            {
+              "sku": "Carg-35W",
+              "name": "Dual 35W",
+              "units": 80,
+              "price": 42
+            },
+            {
+              "sku": "Cable-USBC",
+              "name": "Cable USB-C",
+              "units": 140,
+              "price": 17
+            },
+            {
+              "sku": "Cable-Watch",
+              "name": "Cable Watch",
+              "units": 80,
+              "price": 25
+            }
+          ]
+        },
+        {
+          "name": "AirTag",
+          "units": 400,
+          "asp": 50,
+          "revenue": 20,
+          "skus": [
+            {
+              "sku": "AirTag-4",
+              "name": "Pack 4",
+              "units": 160,
+              "price": 71
+            },
+            {
+              "sku": "AirTag-1",
+              "name": "Unidad",
+              "units": 240,
+              "price": 25
+            }
+          ]
+        },
+        {
+          "name": "Apple TV",
+          "units": 200,
+          "asp": 101,
+          "revenue": 20,
+          "skus": [
+            {
+              "sku": "ATV-WiFi",
+              "name": "4K WiFi",
+              "units": 140,
+              "price": 92
+            },
+            {
+              "sku": "ATV-Eth",
+              "name": "4K WiFi+Eth",
+              "units": 60,
+              "price": 126
+            }
+          ]
+        },
+        {
+          "name": "Teclados iPad",
+          "units": 220,
+          "asp": 252,
+          "revenue": 55,
+          "skus": [
+            {
+              "sku": "MK-Air11",
+              "name": "Air 11\"",
+              "units": 75,
+              "price": 252
+            },
+            {
+              "sku": "MK-Pro11",
+              "name": "Pro 11\"",
+              "units": 65,
+              "price": 294
+            },
+            {
+              "sku": "MK-Air13",
+              "name": "Air 13\"",
+              "units": 30,
+              "price": 294
+            },
+            {
+              "sku": "MK-Pro13",
+              "name": "Pro 13\"",
+              "units": 20,
+              "price": 336
+            },
+            {
+              "sku": "MKF",
+              "name": "Folio",
+              "units": 30,
+              "price": 168
+            }
+          ]
+        },
+        {
+          "name": "Periféricos Mac",
+          "units": 200,
+          "asp": 80,
+          "revenue": 16,
+          "skus": [
+            {
+              "sku": "MMouse",
+              "name": "Magic Mouse",
+              "units": 100,
+              "price": 67
+            },
+            {
+              "sku": "MKB",
+              "name": "Magic Keyboard",
+              "units": 60,
+              "price": 84
+            },
+            {
+              "sku": "MTrack",
+              "name": "Magic Trackpad",
+              "units": 40,
+              "price": 109
+            }
+          ]
+        },
+        {
+          "name": "Bandas Watch",
+          "units": 150,
+          "asp": 46,
+          "revenue": 7,
+          "skus": [
+            {
+              "sku": "BandDep",
+              "name": "Deportiva",
+              "units": 80,
+              "price": 34
+            },
+            {
+              "sku": "BandLoop",
+              "name": "Loop",
+              "units": 40,
+              "price": 46
+            },
+            {
+              "sku": "BandTej",
+              "name": "Tejida",
+              "units": 30,
+              "price": 76
+            }
+          ]
+        },
+        {
+          "name": "Otros Accesorios",
+          "units": 930,
+          "asp": 45,
+          "revenue": 41,
+          "skus": [
+            {
+              "sku": "FundasMB",
+              "name": "Fundas MacBook",
+              "units": 180,
+              "price": 25
+            },
+            {
+              "sku": "FundasiPad",
+              "name": "Fundas iPad",
+              "units": 150,
+              "price": 46
+            },
+            {
+              "sku": "Protectores",
+              "name": "Protectores",
+              "units": 200,
+              "price": 13
+            },
+            {
+              "sku": "Baterias",
+              "name": "Baterías ext.",
+              "units": 150,
+              "price": 29
+            },
+            {
+              "sku": "Mochilas",
+              "name": "Mochilas",
+              "units": 80,
+              "price": 38
+            },
+            {
+              "sku": "Hubs",
+              "name": "Hubs USB-C",
+              "units": 80,
+              "price": 34
+            },
+            {
+              "sku": "OtrosAcc",
+              "name": "Otros",
+              "units": 90,
+              "price": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio Terceros",
+      "icon": "🔊",
+      "units": 300,
+      "revenue": 29,
+      "asp": 98,
+      "color": "#e87070",
+      "subcategories": [
+        {
+          "name": "Parlantes Marshall",
+          "units": 60,
+          "asp": 210,
+          "revenue": 13,
+          "skus": [
+            {
+              "sku": "MRS-Middle",
+              "name": "Middleton",
+              "units": 20,
+              "price": 193
+            },
+            {
+              "sku": "MRS-Emb2",
+              "name": "Emberton II",
+              "units": 20,
+              "price": 151
+            },
+            {
+              "sku": "MRS-Stmr2",
+              "name": "Stanmore III",
+              "units": 12,
+              "price": 294
+            },
+            {
+              "sku": "MRS-Acton",
+              "name": "Acton III",
+              "units": 8,
+              "price": 235
+            }
+          ]
+        },
+        {
+          "name": "Parlantes Sonos",
+          "units": 35,
+          "asp": 235,
+          "revenue": 8,
+          "skus": [
+            {
+              "sku": "SON-Era100",
+              "name": "Era 100",
+              "units": 15,
+              "price": 168
+            },
+            {
+              "sku": "SON-Era300",
+              "name": "Era 300",
+              "units": 10,
+              "price": 336
+            },
+            {
+              "sku": "SON-Roam2",
+              "name": "Roam 2",
+              "units": 10,
+              "price": 143
+            }
+          ]
+        },
+        {
+          "name": "Soundcore",
+          "units": 130,
+          "asp": 42,
+          "revenue": 6,
+          "skus": [
+            {
+              "sku": "SC-RaveP2",
+              "name": "Rave Party 2",
+              "units": 50,
+              "price": 61
+            },
+            {
+              "sku": "SC-Motion",
+              "name": "Motion 300",
+              "units": 40,
+              "price": 42
+            },
+            {
+              "sku": "SC-Sport",
+              "name": "Sport X20",
+              "units": 40,
+              "price": 25
+            }
+          ]
+        },
+        {
+          "name": "Audífonos 3P",
+          "units": 50,
+          "asp": 101,
+          "revenue": 5,
+          "skus": [
+            {
+              "sku": "SON-Ace",
+              "name": "Sonos Ace",
+              "units": 15,
+              "price": 269
+            },
+            {
+              "sku": "BOSE-QC",
+              "name": "Bose QC Ultra",
+              "units": 10,
+              "price": 294
+            },
+            {
+              "sku": "MRS-MonII",
+              "name": "Marshall Monitor III",
+              "units": 15,
+              "price": 126
+            },
+            {
+              "sku": "SC-Space",
+              "name": "Soundcore Space One",
+              "units": 10,
+              "price": 59
+            }
+          ]
+        },
+        {
+          "name": "Beats",
+          "units": 25,
+          "asp": 126,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "BT-PP2",
+              "name": "Powerbeats Pro 2",
+              "units": 15,
+              "price": 168
+            },
+            {
+              "sku": "BT-Solo4",
+              "name": "Solo 4",
+              "units": 10,
+              "price": 84
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Protección (ZAGG/ItSkins)",
+      "icon": "🛡️",
+      "units": 650,
+      "revenue": 21,
+      "asp": 32,
+      "color": "#c490f7",
+      "subcategories": [
+        {
+          "name": "Láminas iPhone ZAGG",
+          "units": 280,
+          "asp": 34,
+          "revenue": 9,
+          "skus": [
+            {
+              "sku": "ZG-XTR5-PM",
+              "name": "Glass XTR5 iPh 17 PM",
+              "units": 100,
+              "price": 38
+            },
+            {
+              "sku": "ZG-XTR5-Pro",
+              "name": "Glass XTR5 iPh 17 Pro",
+              "units": 80,
+              "price": 34
+            },
+            {
+              "sku": "ZG-XTR5-17",
+              "name": "Glass XTR5 iPh 17",
+              "units": 60,
+              "price": 29
+            },
+            {
+              "sku": "ZG-XTR5-Air",
+              "name": "Glass XTR5 iPh Air",
+              "units": 40,
+              "price": 32
+            }
+          ]
+        },
+        {
+          "name": "Fundas ZAGG iPhone",
+          "units": 180,
+          "asp": 35,
+          "revenue": 7,
+          "skus": [
+            {
+              "sku": "ZG-CP-PM",
+              "name": "Crystal Palace iPh 17 PM",
+              "units": 70,
+              "price": 38
+            },
+            {
+              "sku": "ZG-CP-Pro",
+              "name": "Crystal Palace iPh 17 Pro",
+              "units": 60,
+              "price": 35
+            },
+            {
+              "sku": "ZG-CP-17",
+              "name": "Crystal Palace iPh 17",
+              "units": 50,
+              "price": 32
+            }
+          ]
+        },
+        {
+          "name": "Protección iPad ZAGG",
+          "units": 120,
+          "asp": 29,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "ZG-LP-iPad",
+              "name": "Lámina iPad A16",
+              "units": 60,
+              "price": 25
+            },
+            {
+              "sku": "ZG-LP-iPadAir",
+              "name": "Lámina iPad Air",
+              "units": 40,
+              "price": 29
+            },
+            {
+              "sku": "ZG-Stylus2",
+              "name": "Pro Stylus 2",
+              "units": 20,
+              "price": 42
+            }
+          ]
+        },
+        {
+          "name": "Protección Watch",
+          "units": 70,
+          "asp": 24,
+          "revenue": 2,
+          "skus": [
+            {
+              "sku": "BLK-SF-W",
+              "name": "Belkin ScreenForce Watch",
+              "units": 70,
+              "price": 24
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fundas Terceros",
+      "icon": "👜",
+      "units": 500,
+      "revenue": 17,
+      "asp": 34,
+      "color": "#7ac4f7",
+      "subcategories": [
+        {
+          "name": "Decoded",
+          "units": 220,
+          "asp": 42,
+          "revenue": 9,
+          "skus": [
+            {
+              "sku": "DEC-iPh17PM",
+              "name": "DropTec iPh 17 PM",
+              "units": 80,
+              "price": 46
+            },
+            {
+              "sku": "DEC-iPh17Pro",
+              "name": "DropTec iPh 17 Pro",
+              "units": 60,
+              "price": 42
+            },
+            {
+              "sku": "DEC-iPh17",
+              "name": "DropTec iPh 17",
+              "units": 50,
+              "price": 38
+            },
+            {
+              "sku": "DEC-MBA",
+              "name": "Slim Cover MBA",
+              "units": 30,
+              "price": 42
+            }
+          ]
+        },
+        {
+          "name": "Native Union",
+          "units": 80,
+          "asp": 38,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "NU-Click-PM",
+              "name": "Click iPh 17 PM",
+              "units": 30,
+              "price": 42
+            },
+            {
+              "sku": "NU-Click-Pro",
+              "name": "Click iPh 17 Pro",
+              "units": 25,
+              "price": 38
+            },
+            {
+              "sku": "NU-Stow",
+              "name": "Stow Sleeve MB",
+              "units": 25,
+              "price": 34
+            }
+          ]
+        },
+        {
+          "name": "Gmode / Otros",
+          "units": 120,
+          "asp": 21,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "GM-iPh17",
+              "name": "Gmode fundas iPhone 17",
+              "units": 60,
+              "price": 17
+            },
+            {
+              "sku": "GM-Silicona",
+              "name": "Gmode silicona varios",
+              "units": 60,
+              "price": 25
+            }
+          ]
+        },
+        {
+          "name": "Beats Fundas",
+          "units": 80,
+          "asp": 42,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "BT-Case-PM",
+              "name": "Beats Case iPh 17 PM",
+              "units": 40,
+              "price": 46
+            },
+            {
+              "sku": "BT-Case-Pro",
+              "name": "Beats Case iPh 17 Pro",
+              "units": 25,
+              "price": 42
+            },
+            {
+              "sku": "BT-Case-17",
+              "name": "Beats Case iPh 17",
+              "units": 15,
+              "price": 38
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Carga Terceros",
+      "icon": "🔋",
+      "units": 400,
+      "revenue": 13,
+      "asp": 34,
+      "color": "#70c8a0",
+      "subcategories": [
+        {
+          "name": "Cargadores (Zens/Belkin)",
+          "units": 160,
+          "asp": 42,
+          "revenue": 7,
+          "skus": [
+            {
+              "sku": "ZN-Office3",
+              "name": "Zens Office Charger Pro 3",
+              "units": 50,
+              "price": 67
+            },
+            {
+              "sku": "GM-MagFold",
+              "name": "Gmode 3-en-1 plegable",
+              "units": 40,
+              "price": 38
+            },
+            {
+              "sku": "BLK-Boost3",
+              "name": "Belkin BoostCharge 3-en-1",
+              "units": 30,
+              "price": 46
+            },
+            {
+              "sku": "ZN-Velador",
+              "name": "Zens velador magnético",
+              "units": 40,
+              "price": 25
+            }
+          ]
+        },
+        {
+          "name": "Baterías externas",
+          "units": 140,
+          "asp": 29,
+          "revenue": 4,
+          "skus": [
+            {
+              "sku": "BLK-Snap5K",
+              "name": "Belkin Snap+ 5K",
+              "units": 50,
+              "price": 25
+            },
+            {
+              "sku": "ZN-Mag10K",
+              "name": "Zens Mag 10K",
+              "units": 40,
+              "price": 38
+            },
+            {
+              "sku": "XT-Fuel5K",
+              "name": "Xtorm Fuel 5K",
+              "units": 30,
+              "price": 21
+            },
+            {
+              "sku": "XT-Fuel10K",
+              "name": "Xtorm Fuel 10K",
+              "units": 20,
+              "price": 29
+            }
+          ]
+        },
+        {
+          "name": "Hubs y adaptadores",
+          "units": 100,
+          "asp": 38,
+          "revenue": 4,
+          "skus": [
+            {
+              "sku": "HYP-6P-iPad",
+              "name": "HyperDrive 6P iPad",
+              "units": 40,
+              "price": 29
+            },
+            {
+              "sku": "HYP-8P-Next",
+              "name": "HyperDrive Next 8P",
+              "units": 25,
+              "price": 46
+            },
+            {
+              "sku": "GM-Hub-USBC",
+              "name": "Gmode Hub HDMI",
+              "units": 20,
+              "price": 25
+            },
+            {
+              "sku": "BLK-7en1",
+              "name": "Belkin Connect 7-en-1",
+              "units": 15,
+              "price": 42
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Almacenamiento (SanDisk)",
+      "icon": "💾",
+      "units": 80,
+      "revenue": 7,
+      "asp": 84,
+      "color": "#d4a040",
+      "subcategories": [
+        {
+          "name": "SSD Portátil",
+          "units": 50,
+          "asp": 101,
+          "revenue": 5,
+          "skus": [
+            {
+              "sku": "SD-Ext1TB",
+              "name": "Extreme 1TB",
+              "units": 20,
+              "price": 92
+            },
+            {
+              "sku": "SD-ExtPro1T",
+              "name": "Extreme PRO 1TB",
+              "units": 15,
+              "price": 126
+            },
+            {
+              "sku": "SD-Creator1T",
+              "name": "Creator Phone SSD 1TB",
+              "units": 15,
+              "price": 118
+            }
+          ]
+        },
+        {
+          "name": "Pendrive / Otros",
+          "units": 30,
+          "asp": 34,
+          "revenue": 1,
+          "skus": [
+            {
+              "sku": "SD-Ultra256",
+              "name": "Ultra Dual 256GB",
+              "units": 20,
+              "price": 25
+            },
+            {
+              "sku": "SD-Ultra512",
+              "name": "Ultra Dual 512GB",
+              "units": 10,
+              "price": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Otros Terceros",
+      "icon": "📦",
+      "units": 350,
+      "revenue": 9,
+      "asp": 26,
+      "color": "#a0a8b8",
+      "subcategories": [
+        {
+          "name": "Starlink",
+          "units": 15,
+          "asp": 235,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "STL-V4",
+              "name": "Kit V4",
+              "units": 10,
+              "price": 252
+            },
+            {
+              "sku": "STL-Mini",
+              "name": "Kit Mini",
+              "units": 5,
+              "price": 151
+            }
+          ]
+        },
+        {
+          "name": "Microsoft 365",
+          "units": 50,
+          "asp": 34,
+          "revenue": 2,
+          "skus": [
+            {
+              "sku": "MS-365P",
+              "name": "365 Personal",
+              "units": 40,
+              "price": 29
+            },
+            {
+              "sku": "MS-365F",
+              "name": "365 Familia",
+              "units": 10,
+              "price": 46
+            }
+          ]
+        },
+        {
+          "name": "Teclados iPad ZAGG",
+          "units": 100,
+          "asp": 21,
+          "revenue": 3,
+          "skus": [
+            {
+              "sku": "ZG-ProKeys",
+              "name": "Pro Keys iPad A16",
+              "units": 50,
+              "price": 24
+            },
+            {
+              "sku": "ZG-Messenger",
+              "name": "Messenger Folio iPad",
+              "units": 50,
+              "price": 13
+            }
+          ]
+        },
+        {
+          "name": "Dusted / Lifestyle",
+          "units": 100,
+          "asp": 13,
+          "revenue": 2,
+          "skus": [
+            {
+              "sku": "DST-Base",
+              "name": "Dusted Base dual carga",
+              "units": 60,
+              "price": 13
+            },
+            {
+              "sku": "DST-Audio",
+              "name": "Dusted Zen ANC",
+              "units": 20,
+              "price": 25
+            },
+            {
+              "sku": "LVL-C20",
+              "name": "Livall Casco C20",
+              "units": 20,
+              "price": 17
+            }
+          ]
+        },
+        {
+          "name": "Varios",
+          "units": 85,
+          "asp": 17,
+          "revenue": 2,
+          "skus": [
+            {
+              "sku": "NBL-Capsule",
+              "name": "Nebula Capsule 3",
+              "units": 5,
+              "price": 336
+            },
+            {
+              "sku": "EUFY-S350",
+              "name": "Eufy Cámara S350",
+              "units": 5,
+              "price": 84
+            },
+            {
+              "sku": "OTR-Varios",
+              "name": "Otros accesorios 3P",
+              "units": 75,
+              "price": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
