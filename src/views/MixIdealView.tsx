@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Fragment } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -276,7 +276,7 @@ export function MixIdealView() {
                     const pct = (cat.revenue / totalRevenue) * 100
                     const isExpanded = expandedCategory === cat.name
                     return (
-                      <tbody key={cat.name}>
+                      <Fragment key={cat.name}>
                         <TableRow
                           onClick={() => toggleExpand(cat.name)}
                           className="cursor-pointer hover:bg-muted/50 transition-colors"
@@ -335,7 +335,7 @@ export function MixIdealView() {
                             </TableCell>
                           </TableRow>
                         )}
-                      </tbody>
+                      </Fragment>
                     )
                   })}
                   <TableRow className="font-bold bg-muted/50">
