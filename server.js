@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 });
 
 // SPA fallback — all routes serve index.html
-app.get('*', (req, res) => {
+app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
