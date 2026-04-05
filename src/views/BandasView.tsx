@@ -499,7 +499,7 @@ function InstallmentDistributionChart() {
             <CartesianGrid className="stroke-border/50" />
             <XAxis dataKey="year" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${Math.round(v * 100)}%`} />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${(Number(v) * 100).toFixed(1)}%`} />} />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${Number(v).toLocaleString()} uds`} />} />
             <Area type="monotone" dataKey="Sin Cuotas" fill={TIER_COLORS[0]} stroke={TIER_COLORS[0]} stackId="a" fillOpacity={0.8} />
             <Area type="monotone" dataKey="3 Cuotas" fill={TIER_COLORS[1]} stroke={TIER_COLORS[1]} stackId="a" fillOpacity={0.8} />
             <Area type="monotone" dataKey="6 Cuotas" fill={TIER_COLORS[2]} stroke={TIER_COLORS[2]} stackId="a" fillOpacity={0.8} />
