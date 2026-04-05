@@ -82,7 +82,7 @@ export function MixIdealView() {
           </CardHeader>
           <CardContent className="flex-1 pb-0">
             <ChartContainer config={donutConfig} className="mx-auto aspect-square max-h-[280px]">
-              <PieChart>
+              <PieChart accessibilityLayer>
                 <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel formatter={(v) => `$${v}M`} />} />
                 <Pie data={donutData} dataKey="value" nameKey="name" innerRadius={65} strokeWidth={2}>
                   {donutData.map((_, i) => (

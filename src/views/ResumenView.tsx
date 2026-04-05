@@ -114,6 +114,7 @@ export function ResumenView() {
           <CardContent className="px-2 pt-4 sm:p-6">
             <ChartContainer config={chartConfig} className="aspect-auto h-[350px] w-full">
               <BarChart
+                accessibilityLayer
                 data={chartData}
                 margin={{ top: 10, right: 10, left: 0, bottom: 80 }}
               >
@@ -160,7 +161,7 @@ export function ResumenView() {
           </CardHeader>
           <CardContent className="flex-1 pb-0">
             <ChartContainer config={donutConfig} className="mx-auto aspect-square max-h-[300px]">
-              <PieChart>
+              <PieChart accessibilityLayer>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel formatter={(v) => `$${v}M`} />}

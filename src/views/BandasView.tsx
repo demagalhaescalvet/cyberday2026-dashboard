@@ -5,13 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
 
@@ -35,9 +32,7 @@ type SKUItem = {
 }
 
 const clpFormatter = new Intl.NumberFormat('es-CL', {
-  style: 'currency',
-  currency: 'CLP',
-  minimumFractionDigits: 0,
+  style: 'currency', currency: 'CLP', minimumFractionDigits: 0,
 })
 
 function formatCLP(value: number): string {
@@ -45,14 +40,26 @@ function formatCLP(value: number): string {
 }
 
 function getDiscountBadgeColor(discountPercent: number): string {
-  if (discountPercent > 0.15) return 'bg-green-500/10 text-green-700 dark:text-green-400'
-  if (discountPercent >= 0.1) return 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400'
-  return 'bg-slate-500/10 text-slate-700 dark:text-slate-400'
+  if (discountPercent > 0.15) return 'bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border-emerald-500/30'
+  if (discountPercent >= 0.1) return 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border-amber-500/30'
+  return 'bg-muted text-muted-foreground'
 }
+
+// Installment preference data for horizontal bar chart
+const installmentPrefs = [
+  { cuotas: '3 cuotas', pct: 15 },
+  { cuotas: '6 cuotas', pct: 35 },
+  { cuotas: '12 cuotas', pct: 40 },
+  { cuotas: '24+ cuotas', pct: 10 },
+]
+
+const prefChartConfig = {
+  pct: { label: 'Preferencia', color: '#2b7fff' },
+} satisfies ChartConfig
 
 function TierCard({ tier }: { tier: Tier }) {
   return (
-    <Card className="dark:border-slate-700">
+    <Card>
       <CardHeader className="pb-3">
         <CardTitle className="text-lg">{tier.name}</CardTitle>
         {tier.notes && (
@@ -76,7 +83,7 @@ function TierCard({ tier }: { tier: Tier }) {
           </div>
         </div>
 
-        <div className="space-y-2 border-t border-slate-200 pt-3 dark:border-slate-700">
+        <div className="space-y-2 border-t border-border pt-3">
           <div className="text-xs">
             <p className="text-muted-foreground">Monto Mín/Máx</p>
             <p className="font-mono text-sm">
@@ -85,7 +92,7 @@ function TierCard({ tier }: { tier: Tier }) {
           </div>
         </div>
 
-        <div className="space-y-2 border-t border-slate-200 pt-3 dark:border-slate-700">
+        <div className="space-y-2 border-t border-border pt-3">
           <p className="text-xs text-muted-foreground">Categorías</p>
           <div className="flex flex-wrap gap-1">
             {tier.target_categories.map((cat) => (
@@ -111,7 +118,7 @@ function PaymentMethodsTable() {
   ]
 
   return (
-    <Card className="dark:border-slate-700">
+    <Card>
       <CardHeader>
         <CardTitle>Descuentos por Método de Pago</CardTitle>
       </CardHeader>
@@ -145,7 +152,7 @@ function VolumeBonusesCard() {
   ]
 
   return (
-    <Card className="dark:border-slate-700">
+    <Card>
       <CardHeader>
         <CardTitle>Bonificaciones por Volumen</CardTitle>
       </CardHeader>
@@ -154,13 +161,13 @@ function VolumeBonusesCard() {
           <div key={bonus.threshold} className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="font-medium">{bonus.threshold}</span>
-              <span className="font-semibold text-green-600 dark:text-green-400">
+              <span className="font-semibold text-emerald-400">
                 +{bonus.percentage}%
               </span>
             </div>
-            <div className="h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700">
+            <div className="h-2 w-full rounded-full bg-muted">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-green-400 to-green-600"
+                className="h-full rounded-full bg-emerald-500 transition-all"
                 style={{ width: `${Math.min((bonus.percentage / 3) * 100, 100)}%` }}
               />
             </div>
@@ -172,47 +179,56 @@ function VolumeBonusesCard() {
 }
 
 function EstimatedImpactCard() {
-  const prefs = [
-    { label: '3 cuotas', value: 15 },
-    { label: '6 cuotas', value: 35 },
-    { label: '12 cuotas', value: 40 },
-    { label: '24+ cuotas', value: 10 },
-  ]
-
   return (
-    <Card className="dark:border-slate-700">
+    <Card>
       <CardHeader>
         <CardTitle>Impacto Estimado</CardTitle>
+        <CardDescription>Proyección basada en historial CyberDay</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">Conversión Esperada</p>
-          <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">25-30%</p>
-        </div>
-
-        <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">Aumento Ticket Promedio</p>
-          <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">15-20%</p>
-        </div>
-
-        <div className="space-y-3 border-t border-slate-200 pt-4 dark:border-slate-700">
-          <p className="text-sm font-semibold">Preferencia de Cuotas</p>
-          <div className="space-y-2">
-            {prefs.map((pref) => (
-              <div key={pref.label} className="space-y-1">
-                <div className="flex justify-between text-xs">
-                  <span>{pref.label}</span>
-                  <span className="font-semibold">{pref.value}%</span>
-                </div>
-                <div className="h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-indigo-400 to-indigo-600"
-                    style={{ width: `${pref.value}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Conversión Esperada</p>
+            <p className="text-3xl font-bold text-primary">25-30%</p>
           </div>
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">Aumento Ticket</p>
+            <p className="text-3xl font-bold text-primary">15-20%</p>
+          </div>
+        </div>
+
+        <div className="border-t border-border pt-4">
+          <p className="text-sm font-semibold mb-3">Preferencia de Cuotas</p>
+          <ChartContainer config={prefChartConfig} className="h-[160px] w-full">
+            <BarChart
+              accessibilityLayer
+              data={installmentPrefs}
+              layout="vertical"
+              margin={{ top: 0, right: 16, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid horizontal={false} className="stroke-border/50" />
+              <YAxis
+                dataKey="cuotas"
+                type="category"
+                tickLine={false}
+                axisLine={false}
+                width={80}
+                tick={{ fontSize: 11 }}
+              />
+              <XAxis
+                type="number"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 11 }}
+                tickFormatter={(v) => `${v}%`}
+              />
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent formatter={(v) => `${v}%`} />}
+              />
+              <Bar dataKey="pct" fill="#2b7fff" radius={[0, 6, 6, 0]} />
+            </BarChart>
+          </ChartContainer>
         </div>
       </CardContent>
     </Card>
@@ -231,7 +247,6 @@ function SKUPricingGrid() {
 
   const filteredSKUs = useMemo(() => {
     if (!searchTerm) return skuList
-
     const term = searchTerm.toLowerCase()
     return skuList.filter(
       (sku) =>
@@ -241,22 +256,23 @@ function SKUPricingGrid() {
   }, [skuList, searchTerm])
 
   return (
-    <Card className="dark:border-slate-700">
+    <Card>
       <CardHeader>
-        <CardTitle>Grid de SKUs - Precios CyberDay</CardTitle>
-        <CardDescription>
-          {filteredSKUs.length} de {skuList.length} SKUs
-        </CardDescription>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <CardTitle>Grid de SKUs — Precios CyberDay</CardTitle>
+            <CardDescription>{filteredSKUs.length} de {skuList.length} SKUs</CardDescription>
+          </div>
+          <Input
+            placeholder="Buscar por SKU o código real..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="max-w-[250px] h-8 text-sm"
+          />
+        </div>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <Input
-          placeholder="Buscar por SKU o código real..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="dark:bg-slate-800"
-        />
-
-        <div className="overflow-x-auto">
+      <CardContent>
+        <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
@@ -269,7 +285,7 @@ function SKUPricingGrid() {
             </TableHeader>
             <TableBody>
               {filteredSKUs.map((sku) => (
-                <TableRow key={sku.skuCode} className="hover:bg-slate-50 dark:hover:bg-slate-800">
+                <TableRow key={sku.skuCode}>
                   <TableCell className="font-mono text-sm font-medium">{sku.skuCode}</TableCell>
                   <TableCell className="font-mono text-xs text-muted-foreground">
                     {sku.realSku}
@@ -281,21 +297,22 @@ function SKUPricingGrid() {
                   </TableCell>
                   <TableCell className="text-right font-semibold">{formatCLP(sku.cyberPrice)}</TableCell>
                   <TableCell className="text-right">
-                    <Badge className={`${getDiscountBadgeColor(sku.dcto)}`}>
+                    <Badge className={getDiscountBadgeColor(sku.dcto)}>
                       {(sku.dcto * 100).toFixed(0)}%
                     </Badge>
                   </TableCell>
                 </TableRow>
               ))}
+              {filteredSKUs.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                    No se encontraron SKUs
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
-
-        {filteredSKUs.length === 0 && (
-          <div className="flex items-center justify-center py-8">
-            <p className="text-muted-foreground">No se encontraron SKUs</p>
-          </div>
-        )}
       </CardContent>
     </Card>
   )
@@ -305,39 +322,23 @@ export function BandasView() {
   const tiers = bandasData.tiers as Tier[]
 
   return (
-    <div className="space-y-6 p-4 sm:p-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Bandas & Cuotas</h1>
-        <p className="text-muted-foreground mt-2">
-          Estrategia de financiamiento y descuentos para CyberDay 2026
-        </p>
+    <div className="space-y-6">
+      {/* Financing Tiers */}
+      <div className="grid auto-rows-max gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        {tiers.map((tier) => (
+          <TierCard key={tier.name} tier={tier} />
+        ))}
       </div>
 
-      {/* Financing Tiers Section */}
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Opciones de Financiamiento</h2>
-        <div className="grid auto-rows-max gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {tiers.map((tier) => (
-            <TierCard key={tier.name} tier={tier} />
-          ))}
-        </div>
-      </section>
-
-      {/* Payment Methods & Impact Section */}
-      <section className="grid gap-4 lg:grid-cols-2">
+      {/* Payment Methods + Impact */}
+      <div className="grid gap-4 lg:grid-cols-3">
         <PaymentMethodsTable />
         <EstimatedImpactCard />
-      </section>
-
-      {/* Volume Bonuses Section */}
-      <section>
         <VolumeBonusesCard />
-      </section>
+      </div>
 
       {/* SKU Pricing Grid */}
-      <section>
-        <SKUPricingGrid />
-      </section>
+      <SKUPricingGrid />
     </div>
   )
 }
