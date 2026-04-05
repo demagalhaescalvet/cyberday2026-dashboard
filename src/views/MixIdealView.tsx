@@ -225,15 +225,15 @@ export function MixIdealView() {
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
-              <Table className="table-fixed w-full">
+              <Table style={{ tableLayout: 'fixed', width: '100%' }}>
                 <colgroup>
-                  <col className="w-10" />
-                  <col className="w-[30%]" />
-                  <col className="w-[12%]" />
-                  <col className="w-[14%]" />
-                  <col className="w-[12%]" />
-                  <col className="w-[10%]" />
-                  <col className="w-[18%]" />
+                  <col style={{ width: '40px' }} />
+                  <col style={{ width: '28%' }} />
+                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '14%' }} />
+                  <col style={{ width: '12%' }} />
+                  <col style={{ width: '10%' }} />
+                  <col style={{ width: '20%' }} />
                 </colgroup>
                 <TableHeader>
                   <TableRow>
