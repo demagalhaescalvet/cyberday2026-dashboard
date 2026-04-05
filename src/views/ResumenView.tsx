@@ -10,29 +10,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-const categories = [
-  'iPh Pro',
-  'iPh Pro Max',
-  'iPh Air',
-  'iPh 17',
-  'iPh Budget',
-  'Audio Apple',
-  'Mac NB',
-  'Mac DT',
-  'iPad',
-  'Apple Watch',
-  'Acc Apple',
-  'Audio 3P',
-  'Prot 3P',
-  'Fundas 3P',
-  'Carga 3P',
-  'Almac 3P',
-  'Otros 3P',
-]
-
-const chartData = categories.map((category, index) => ({
+const chartData = revenueData.categories.map((category, index) => ({
   name: category,
-  revenue: revenueData[index] || 0,
+  revenue: revenueData.revenue_millions[index] || 0,
 }))
 
 export function ResumenView() {
