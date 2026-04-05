@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
@@ -177,6 +178,11 @@ export function ResumenView() {
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div id="que-paso" className="flex items-center gap-3 pt-4">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest whitespace-nowrap">¿Qué pasó?</h2>
+        <Separator className="flex-1" />
       </div>
 
       {/* ═══ INSIGHT: Overall narrative ═══ */}
@@ -531,6 +537,11 @@ export function ResumenView() {
         </Card>
       </div>
 
+      <div id="por-que" className="flex items-center gap-3 pt-4">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest whitespace-nowrap">¿Por qué?</h2>
+        <Separator className="flex-1" />
+      </div>
+
       {/* ═══ INSIGHT: Traffic narrative ═══ */}
       <InsightBanner
         variant="win"
@@ -861,6 +872,11 @@ export function ResumenView() {
         </Card>
       </div>
 
+      <div id="que-hacer" className="flex items-center gap-3 pt-4">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest whitespace-nowrap">¿Qué hacer?</h2>
+        <Separator className="flex-1" />
+      </div>
+
       {/* ═══ INSIGHT: Mobile opportunity ═══ */}
       <InsightBanner
         variant="opportunity"
@@ -1109,6 +1125,13 @@ export function ResumenView() {
           </CardContent>
         </Card>
       </div>
+
+      <Separator className="my-2" />
+      <InsightBanner
+        variant="action"
+        headline="3 prioridades para CyberDay 2026: (1) Cerrar brecha mobile (+$354M potencial), (2) Escalar flows Klaviyo de abandono, (3) Replicar FOMO del peak day en los primeros 3 días."
+        detail="El crecimiento 2025 fue price-driven. Para 2026, el foco debe ser volumen: más conversiones mobile, más triggers automatizados, y mejor distribución temporal del revenue."
+      />
     </div>
   )
 }

@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { InsightBanner } from '@/components/InsightBanner'
+import { Separator } from '@/components/ui/separator'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
@@ -165,6 +167,14 @@ export function AuditoriaView() {
           <p className="text-[10px] text-muted-foreground">{((data.status_breakdown.warn / data.total_products) * 100).toFixed(0)}%</p>
         </Card>
       </div>
+
+      <InsightBanner
+        variant="win"
+        headline="94% de competitividad — 48 de 51 productos están a precio de mercado o mejor."
+        detail="Solo 6 productos necesitan revisión: AirPods Max (+$9K), AirPods 4 (+$7K), HomePod mini (+$3.3K). Los 3 representan accesorios de audio donde la competencia es más agresiva."
+        metric="6"
+        metricLabel="productos a revisar"
+      />
 
       {/* Scatter Plot */}
       <Card>
@@ -369,6 +379,13 @@ export function AuditoriaView() {
           </Tabs>
         </CardContent>
       </Card>
+
+      <Separator className="my-2" />
+      <InsightBanner
+        variant="action"
+        headline="Acciones: (1) Bajar AirPods Max a $549.990 (paridad mercado), (2) AirPods 4 a $119.990, (3) Mantener HomePod mini — el delta es mínimo ($3.3K)."
+        detail="Ajustar estos 3 productos costaría ~$19K en margen total pero protege la percepción de competitividad CyberDay en toda la categoría audio."
+      />
     </div>
   )
 }

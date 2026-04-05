@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/table'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from '@/components/ui/chart'
 import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { InsightBanner } from '@/components/InsightBanner'
+import { Separator } from '@/components/ui/separator'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
 import priceBandsData from '@/data/price-bands.json'
@@ -63,7 +65,7 @@ const prefChartConfig = {
 
 function TierCard({ tier, index }: { tier: Tier; index: number }) {
   const isRecommended = tier.installments === 24
-  const cardClasses = isRecommended ? 'ring-2 ring-primary' : ''
+  const cardClasses = isRecommended ? 'ring-2 ring-primary bg-primary/5 scale-[1.02]' : ''
   const accentColor = TIER_COLORS[index % TIER_COLORS.length]
 
   return (
@@ -393,17 +395,17 @@ function DetailedBandsTable() {
   const getUnitBg = (value: number, max: number) => {
     const pct = (value / max) * 100
     if (pct < 25) return ''
-    if (pct < 50) return 'bg-blue-500/10'
-    if (pct < 75) return 'bg-blue-500/20'
-    return 'bg-blue-500/30'
+    if (pct < 50) return 'bg-blue-500/15'
+    if (pct < 75) return 'bg-blue-500/25'
+    return 'bg-blue-500/40'
   }
 
   const getRevBg = (value: number, max: number) => {
     const pct = (value / max) * 100
     if (pct < 25) return ''
-    if (pct < 50) return 'bg-emerald-500/10'
-    if (pct < 75) return 'bg-emerald-500/20'
-    return 'bg-emerald-500/30'
+    if (pct < 50) return 'bg-emerald-500/15'
+    if (pct < 75) return 'bg-emerald-500/25'
+    return 'bg-emerald-500/40'
   }
 
   const maxU2024 = Math.max(...rows.map(r => r.u2024))
@@ -602,6 +604,14 @@ export function BandasView() {
 
   return (
     <div className="space-y-4">
+      <InsightBanner
+        variant="insight"
+        headline="12 cuotas domina con 40% de preferencia. Oportunidad: la banda $500K–$1M está creciendo +35% — asegurar stock de iPad y Apple Watch."
+        detail="El 45% del revenue se concentra sobre $1M con solo 20% de unidades. 24 cuotas (BCI) es clave para productos premium."
+        metric="40%"
+        metricLabel="prefieren 12 cuotas"
+      />
+
       {/* Financing Tiers */}
       <div className="grid auto-rows-max gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {tiers.map((tier, idx) => (
@@ -630,6 +640,13 @@ export function BandasView() {
 
       {/* SKU Pricing Grid — Expandable */}
       <ExpandableSKUGrid />
+
+      <Separator className="my-2" />
+      <InsightBanner
+        variant="action"
+        headline="Acciones: (1) Empujar 24 cuotas BCI para Mac NB y iPad Pro (>$1M), (2) Activar 6 cuotas sin interés para banda $200K–$500K, (3) Negociar tasa 0% en 12 cuotas con más emisores."
+        detail="La combinación de cuotas largas + descuento CyberDay es el principal driver de conversión en productos premium."
+      />
     </div>
   )
 }

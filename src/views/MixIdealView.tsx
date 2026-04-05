@@ -4,11 +4,13 @@ import { useState, useMemo } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from '@/components/ui/chart'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, ReferenceLine } from 'recharts'
+import { InsightBanner } from '@/components/InsightBanner'
 import type { ProductMixCategory } from '@/types/product-mix'
 import productMixData from '@/data/product-mix.json'
 import elasticityData from '@/data/elasticity.json'
@@ -95,7 +97,7 @@ export function MixIdealView() {
         const units2025 = catIdx >= 0 ? (multiYearData.units['2025'][catIdx] || 0) : 0
         const units2026 = catIdx >= 0 ? (multiYearData.units['2026_target'][catIdx] || 0) : 0
         const growthPct = units2025 > 0 ? ((units2026 - units2025) / units2025) * 100 : 0
-        return { name: cat.name, growth: growthPct }
+        return { name: cat.name, growth: growthPct, clampedGrowth: Math.min(Math.max(growthPct, -100), 200) }
       })
   }, [categories])
 
@@ -164,6 +166,14 @@ export function MixIdealView() {
           <p className="text-xs text-muted-foreground">{highestAspCategory.name}</p>
         </Card>
       </div>
+
+      <InsightBanner
+        variant="insight"
+        headline="Mac NB lidera revenue ($1.073M) pero tiene baja elasticidad — la categoría más sensible al descuento es iPhone Budget."
+        detail="Top 3 categorías concentran el 53.5% del revenue. iPhone Air y Carga 3P son las de mayor crecimiento proyectado (+999% y +62%)."
+        metric="53.5%"
+        metricLabel="concentración Top 3"
+      />
 
       {/* Two-column: Bar Chart + Radar */}
       <div className="grid lg:grid-cols-5 gap-4">
@@ -389,7 +399,8 @@ export function MixIdealView() {
                 <XAxis type="number" tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
                 <YAxis dataKey="name" type="category" width={85} tick={{ fontSize: 11 }} />
                 <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${Number(v).toFixed(1)}%`} />} />
-                <Bar dataKey="growth" radius={[0, 4, 4, 0]}>
+                <ReferenceLine x={200} stroke="#94a3b8" strokeDasharray="5 5" label={{ value: '200% cap', position: 'top', fill: '#64748b', fontSize: 11 }} />
+                <Bar dataKey="clampedGrowth" radius={[0, 4, 4, 0]}>
                   {growthData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.growth >= 0 ? '#10b981' : '#ef4444'} />
                   ))}
@@ -405,6 +416,13 @@ export function MixIdealView() {
           </CardContent>
         </Card>
       </div>
+
+      <Separator className="my-2" />
+      <InsightBanner
+        variant="action"
+        headline="Acciones para CyberDay 2026: Proteger margen en Mac NB, escalar iPhone Budget (+1860% growth), y expandir Carga 3P como categoría cross-sell."
+        detail="El mix ideal prioriza categorías con alta elasticidad y alto potencial de crecimiento. iPhone Pro cae -64% — reasignar inversión a iPhone Air y Budget."
+      />
     </div>
   )
 }
