@@ -30,6 +30,8 @@ import dailyCurve from '@/data/daily-curve.json'
 import aspComparison from '@/data/asp-comparison.json'
 import orderMetrics from '@/data/order-metrics.json'
 import channelMix from '@/data/channel-mix.json'
+import hourlyDist from '@/data/hourly-distribution.json'
+import regionalData from '@/data/regional.json'
 
 // Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
@@ -955,6 +957,135 @@ export function ResumenView() {
           })()}
         </CardContent>
       </Card>
+
+      {/* Hourly Distribution & Regional Distribution */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        {/* Hourly Revenue Distribution */}
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Distribución Horaria de Revenue</CardTitle>
+            <CardDescription>Revenue por hora del día — pico a medianoche (inicio) y mediodía</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const hourData = hourlyDist.hours.map((h) => ({
+                hour: `${String(h).padStart(2, '0')}:00`,
+                '2024': hourlyDist['2024'].revenue[h],
+                '2025': hourlyDist['2025'].revenue[h],
+              }))
+              return (
+                <ChartContainer
+                  config={{
+                    '2024': { label: '2024', color: '#8ec5ff' },
+                    '2025': { label: '2025', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[280px] w-full"
+                >
+                  <AreaChart
+                    accessibilityLayer
+                    data={hourData}
+                    margin={{ top: 10, right: 10, left: 0, bottom: 10 }}
+                  >
+                    <CartesianGrid vertical={false} className="stroke-border/50" />
+                    <XAxis
+                      dataKey="hour"
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fontSize: 10 }}
+                      interval={2}
+                    />
+                    <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[160px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value) => `$${value}M`}
+                        />
+                      }
+                    />
+                    <Area type="monotone" dataKey="2024" stroke="#8ec5ff" fill="#8ec5ff" fillOpacity={0.2} strokeWidth={2} />
+                    <Area type="monotone" dataKey="2025" stroke="#2b7fff" fill="#2b7fff" fillOpacity={0.3} strokeWidth={2} />
+                  </AreaChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              Pico 12:00 ($427M en 2025) — Spike medianoche por apertura del evento
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Regional Distribution */}
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Revenue por Región</CardTitle>
+            <CardDescription>Concentración geográfica — RM = 65% del revenue</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const regData = regionalData.regions.map((reg, i) => ({
+                region: reg,
+                '2024': regionalData['2024'].revenue[i],
+                '2025': regionalData['2025'].revenue[i],
+              })).sort((a, b) => b['2025'] - a['2025'])
+              return (
+                <ChartContainer
+                  config={{
+                    '2024': { label: '2024', color: '#8ec5ff' },
+                    '2025': { label: '2025', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[280px] w-full"
+                >
+                  <BarChart
+                    accessibilityLayer
+                    data={regData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 60, left: 80, bottom: 10 }}
+                  >
+                    <CartesianGrid horizontal={false} className="stroke-border/50" />
+                    <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                    <YAxis
+                      type="category"
+                      dataKey="region"
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fontSize: 10 }}
+                      width={75}
+                    />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[180px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value) => `$${value}M`}
+                        />
+                      }
+                    />
+                    <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} barSize={8} />
+                    <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} barSize={8}>
+                      <LabelList
+                        dataKey="2025"
+                        position="right"
+                        fill="currentColor"
+                        formatter={(v: number) => `$${v}M`}
+                        fontSize={10}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              Top 3 (RM + Valparaíso + Bío Bío) = 81% del revenue total
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   )
 }
