@@ -622,21 +622,7 @@ export function ResumenView() {
           </CardHeader>
           <CardContent className="px-2 pt-3 pb-2">
             {(() => {
-              // Build waterfall
-              const waterfallData = [
-                { name: '2024', value: 4553, fill: YEAR_COLORS['2024'], display: 4553 },
-                { name: 'Volumen\n(+0.9%)', value: 39, fill: PALETTE.amber, display: 39 },
-                { name: 'Precio/ASP\n(+9.9%)', value: 455, fill: PALETTE.rose, display: 455 },
-                { name: '2025', value: 5047, fill: YEAR_COLORS['2025'], display: 5047 },
-              ]
-              // Stacked waterfall: invisible base + visible bar
-              const waterfallStacked = waterfallData.map((d, i) => {
-                if (i === 0) return { ...d, base: 0, bar: d.value }
-                if (i === waterfallData.length - 1) return { ...d, base: 0, bar: d.value }
-                const prevTotal = waterfallStacked ? waterfallData.slice(0, i).reduce((s, x, xi) => xi === 0 ? x.value : s + x.value, 0) : 0
-                return { ...d, base: prevTotal, bar: d.value }
-              })
-              // Manually compute bases
+              // Waterfall: invisible base + visible bar stacked
               const stacked = [
                 { name: '2024', base: 0, bar: 4553, fill: YEAR_COLORS['2024'], label: '$4,553M' },
                 { name: 'Volumen (+0.9%)', base: 4553, bar: 39, fill: PALETTE.amber, label: '+$39M' },
