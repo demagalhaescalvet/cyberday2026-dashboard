@@ -907,7 +907,7 @@
           "units2025": 71,
           "subpropiedades": [
             {
-              "name": "Teclado iPad Air M3 ",
+              "name": "Teclado iPad Air M3",
               "revenue2024": 0,
               "revenue2025": 7,
               "units2024": 0,
@@ -1559,24 +1559,81 @@
     },
     {
       "name": "#N/A",
-      "revenue2024": 15,
-      "revenue2025": 56,
-      "units2024": 455,
-      "units2025": 739,
+      "revenue2024": 9,
+      "revenue2025": 47,
+      "units2024": 349,
+      "units2025": 528,
       "propiedades": [
         {
           "name": "#N/A",
-          "revenue2024": 15,
-          "revenue2025": 56,
-          "units2024": 455,
-          "units2025": 739,
+          "revenue2024": 9,
+          "revenue2025": 47,
+          "units2024": 349,
+          "units2025": 528,
           "subpropiedades": [
             {
               "name": "#N/A",
-              "revenue2024": 15,
-              "revenue2025": 56,
-              "units2024": 455,
-              "units2025": 739
+              "revenue2024": 9,
+              "revenue2025": 47,
+              "units2024": 349,
+              "units2025": 528
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Parlantes",
+      "revenue2024": 51,
+      "revenue2025": 14,
+      "units2024": 247,
+      "units2025": 41,
+      "propiedades": [
+        {
+          "name": "No Portatil",
+          "revenue2024": 21,
+          "revenue2025": 10,
+          "units2024": 92,
+          "units2025": 25,
+          "subpropiedades": [
+            {
+              "name": "No Portatil",
+              "revenue2024": 21,
+              "revenue2025": 10,
+              "units2024": 92,
+              "units2025": 25
+            }
+          ]
+        },
+        {
+          "name": "Portatil",
+          "revenue2024": 11,
+          "revenue2025": 3,
+          "units2024": 110,
+          "units2025": 13,
+          "subpropiedades": [
+            {
+              "name": "Portatil",
+              "revenue2024": 11,
+              "revenue2025": 3,
+              "units2024": 110,
+              "units2025": 13
+            }
+          ]
+        },
+        {
+          "name": "Wi-Fi",
+          "revenue2024": 19,
+          "revenue2025": 1,
+          "units2024": 45,
+          "units2025": 3,
+          "subpropiedades": [
+            {
+              "name": "Wi-Fi",
+              "revenue2024": 19,
+              "revenue2025": 1,
+              "units2024": 45,
+              "units2025": 3
             }
           ]
         }
@@ -1640,98 +1697,41 @@
       ]
     },
     {
-      "name": "Parlantes",
-      "revenue2024": 50,
-      "revenue2025": 12,
-      "units2024": 244,
-      "units2025": 36,
-      "propiedades": [
-        {
-          "name": "No Portatil",
-          "revenue2024": 21,
-          "revenue2025": 10,
-          "units2024": 92,
-          "units2025": 25,
-          "subpropiedades": [
-            {
-              "name": "No Portatil",
-              "revenue2024": 21,
-              "revenue2025": 10,
-              "units2024": 92,
-              "units2025": 25
-            }
-          ]
-        },
-        {
-          "name": "Portatil",
-          "revenue2024": 10,
-          "revenue2025": 1,
-          "units2024": 107,
-          "units2025": 8,
-          "subpropiedades": [
-            {
-              "name": "Portatil",
-              "revenue2024": 10,
-              "revenue2025": 1,
-              "units2024": 107,
-              "units2025": 8
-            }
-          ]
-        },
-        {
-          "name": "Wi-Fi",
-          "revenue2024": 19,
-          "revenue2025": 1,
-          "units2024": 45,
-          "units2025": 3,
-          "subpropiedades": [
-            {
-              "name": "Wi-Fi",
-              "revenue2024": 19,
-              "revenue2025": 1,
-              "units2024": 45,
-              "units2025": 3
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Acc Terceros",
-      "revenue2024": 13,
+      "revenue2024": 15,
       "revenue2025": 11,
-      "units2024": 829,
-      "units2025": 421,
+      "units2024": 878,
+      "units2025": 443,
       "propiedades": [
         {
           "name": "Bateria",
-          "revenue2024": 2,
+          "revenue2024": 3,
           "revenue2025": 6,
-          "units2024": 58,
+          "units2024": 85,
           "units2025": 216,
           "subpropiedades": [
             {
               "name": "Bateria",
-              "revenue2024": 2,
+              "revenue2024": 3,
               "revenue2025": 6,
-              "units2024": 58,
+              "units2024": 85,
               "units2025": 216
             }
           ]
         },
         {
           "name": "Pencil",
-          "revenue2024": 9,
+          "revenue2024": 10,
           "revenue2025": 3,
-          "units2024": 578,
-          "units2025": 68,
+          "units2024": 596,
+          "units2025": 85,
           "subpropiedades": [
             {
               "name": "Pencil",
-              "revenue2024": 9,
+              "revenue2024": 10,
               "revenue2025": 3,
-              "units2024": 578,
-              "units2025": 68
+              "units2024": 596,
+              "units2025": 85
             }
           ]
         },
@@ -1896,6 +1896,22 @@
           ]
         },
         {
+          "name": "Organizador",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Organizador",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
           "name": "Presentador",
           "revenue2024": 0,
           "revenue2025": 0,
@@ -1947,15 +1963,15 @@
           "name": "Sleeve",
           "revenue2024": 0,
           "revenue2025": 0,
-          "units2024": 31,
-          "units2025": 13,
+          "units2024": 34,
+          "units2025": 15,
           "subpropiedades": [
             {
               "name": "Sleeve",
               "revenue2024": 0,
               "revenue2025": 0,
-              "units2024": 31,
-              "units2025": 13
+              "units2024": 34,
+              "units2025": 15
             }
           ]
         },
@@ -1964,14 +1980,14 @@
           "revenue2024": 0,
           "revenue2025": 0,
           "units2024": 10,
-          "units2025": 3,
+          "units2025": 6,
           "subpropiedades": [
             {
               "name": "Soporte",
               "revenue2024": 0,
               "revenue2025": 0,
               "units2024": 10,
-              "units2025": 3
+              "units2025": 6
             }
           ]
         },
@@ -1988,6 +2004,96 @@
               "revenue2025": 0,
               "units2024": 5,
               "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 16",
+      "revenue2024": 0,
+      "revenue2025": 10,
+      "units2024": 0,
+      "units2025": 269,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 7,
+          "units2024": 0,
+          "units2025": 139,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 16 Pro",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 77
+            },
+            {
+              "name": "Funda iPh 16 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 39
+            },
+            {
+              "name": "Funda iPh 16",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 21
+            },
+            {
+              "name": "Funda iPh 16 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPh 16e",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPhone",
+          "revenue2024": 0,
+          "revenue2025": 4,
+          "units2024": 0,
+          "units2025": 130,
+          "subpropiedades": [
+            {
+              "name": "Lámina iPh 16",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 12
+            },
+            {
+              "name": "Lámina iPh 16 Pro",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 72
+            },
+            {
+              "name": "Lámina iPh 16 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 45
+            },
+            {
+              "name": "Lámina iPh 16 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
             }
           ]
         }
@@ -2035,64 +2141,11 @@
       ]
     },
     {
-      "name": "Acc iPhone 16",
-      "revenue2024": 0,
-      "revenue2025": 5,
-      "units2024": 0,
-      "units2025": 108,
-      "propiedades": [
-        {
-          "name": "Funda iPhone",
-          "revenue2024": 0,
-          "revenue2025": 5,
-          "units2024": 0,
-          "units2025": 108,
-          "subpropiedades": [
-            {
-              "name": "Funda iPh 16 Pro Max",
-              "revenue2024": 0,
-              "revenue2025": 3,
-              "units2024": 0,
-              "units2025": 36
-            },
-            {
-              "name": "Funda iPh 16 Pro",
-              "revenue2024": 0,
-              "revenue2025": 1,
-              "units2024": 0,
-              "units2025": 57
-            },
-            {
-              "name": "Funda iPh 16",
-              "revenue2024": 0,
-              "revenue2025": 0,
-              "units2024": 0,
-              "units2025": 13
-            },
-            {
-              "name": "Funda iPh 16 Plus",
-              "revenue2024": 0,
-              "revenue2025": 0,
-              "units2024": 0,
-              "units2025": 1
-            },
-            {
-              "name": "Funda iPh 16e",
-              "revenue2024": 0,
-              "revenue2025": 0,
-              "units2024": 0,
-              "units2025": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Acc Notebook",
-      "revenue2024": 10,
+      "revenue2024": 11,
       "revenue2025": 4,
-      "units2024": 256,
-      "units2025": 203,
+      "units2024": 258,
+      "units2025": 206,
       "propiedades": [
         {
           "name": "Funda MacBook",
@@ -2128,17 +2181,17 @@
         },
         {
           "name": "Mochila",
-          "revenue2024": 5,
+          "revenue2024": 6,
           "revenue2025": 1,
-          "units2024": 86,
-          "units2025": 48,
+          "units2024": 90,
+          "units2025": 51,
           "subpropiedades": [
             {
               "name": "Mochila",
-              "revenue2024": 5,
+              "revenue2024": 6,
               "revenue2025": 1,
-              "units2024": 86,
-              "units2025": 48
+              "units2024": 90,
+              "units2025": 51
             }
           ]
         },
@@ -2146,15 +2199,15 @@
           "name": "Sleeve",
           "revenue2024": 1,
           "revenue2025": 1,
-          "units2024": 47,
-          "units2025": 25,
+          "units2024": 45,
+          "units2025": 27,
           "subpropiedades": [
             {
               "name": "Sleeve",
               "revenue2024": 1,
               "revenue2025": 1,
-              "units2024": 47,
-              "units2025": 25
+              "units2024": 45,
+              "units2025": 27
             }
           ]
         },
@@ -2191,18 +2244,34 @@
           ]
         },
         {
+          "name": "Organizador",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Organizador",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
           "name": "Soporte",
           "revenue2024": 2,
           "revenue2025": 0,
           "units2024": 49,
-          "units2025": 5,
+          "units2025": 2,
           "subpropiedades": [
             {
               "name": "Soporte",
               "revenue2024": 2,
               "revenue2025": 0,
               "units2024": 49,
-              "units2025": 5
+              "units2025": 2
             }
           ]
         }
@@ -2253,8 +2322,8 @@
       "name": "Acc Apple Watch",
       "revenue2024": 1,
       "revenue2025": 2,
-      "units2024": 59,
-      "units2025": 69,
+      "units2024": 60,
+      "units2025": 71,
       "propiedades": [
         {
           "name": "Banda",
@@ -2284,14 +2353,14 @@
           "revenue2024": 1,
           "revenue2025": 1,
           "units2024": 20,
-          "units2025": 45,
+          "units2025": 46,
           "subpropiedades": [
             {
               "name": "Bumper",
               "revenue2024": 1,
               "revenue2025": 1,
               "units2024": 20,
-              "units2025": 45
+              "units2025": 46
             }
           ]
         },
@@ -2315,15 +2384,15 @@
           "name": "Lamina AW",
           "revenue2024": 0,
           "revenue2025": 0,
-          "units2024": 1,
-          "units2025": 0,
+          "units2024": 2,
+          "units2025": 1,
           "subpropiedades": [
             {
               "name": "Lamina AW",
               "revenue2024": 0,
               "revenue2025": 0,
-              "units2024": 1,
-              "units2025": 0
+              "units2024": 2,
+              "units2025": 1
             }
           ]
         }
@@ -2452,22 +2521,22 @@
       "name": "Acc iPhone 15",
       "revenue2024": 5,
       "revenue2025": 1,
-      "units2024": 819,
-      "units2025": 33,
+      "units2024": 820,
+      "units2025": 47,
       "propiedades": [
         {
           "name": "Funda iPhone",
           "revenue2024": 4,
           "revenue2025": 1,
-          "units2024": 172,
-          "units2025": 29,
+          "units2024": 173,
+          "units2025": 42,
           "subpropiedades": [
             {
               "name": "Funda iPh 15",
               "revenue2024": 0,
               "revenue2025": 0,
               "units2024": 18,
-              "units2025": 4
+              "units2025": 5
             },
             {
               "name": "Funda iPh 15 Plus",
@@ -2480,15 +2549,15 @@
               "name": "Funda iPh 15 Pro",
               "revenue2024": 2,
               "revenue2025": 0,
-              "units2024": 106,
-              "units2025": 11
+              "units2024": 107,
+              "units2025": 21
             },
             {
               "name": "Funda iPh 15 Pro Max",
               "revenue2024": 1,
               "revenue2025": 0,
               "units2024": 45,
-              "units2025": 14
+              "units2025": 16
             }
           ]
         },
@@ -2497,14 +2566,14 @@
           "revenue2024": 1,
           "revenue2025": 0,
           "units2024": 646,
-          "units2025": 4,
+          "units2025": 5,
           "subpropiedades": [
             {
               "name": "Lamina iPh 15",
               "revenue2024": 0,
               "revenue2025": 0,
               "units2024": 5,
-              "units2025": 0
+              "units2025": 1
             },
             {
               "name": "Lamina iPh 15 Plus",
@@ -2552,21 +2621,21 @@
       "revenue2024": 1,
       "revenue2025": 1,
       "units2024": 12,
-      "units2025": 5,
+      "units2025": 8,
       "propiedades": [
         {
           "name": "Bateria",
           "revenue2024": 1,
           "revenue2025": 1,
           "units2024": 12,
-          "units2025": 5,
+          "units2025": 8,
           "subpropiedades": [
             {
               "name": "Bateria",
               "revenue2024": 1,
               "revenue2025": 1,
               "units2024": 12,
-              "units2025": 5
+              "units2025": 8
             }
           ]
         }
@@ -2690,7 +2759,7 @@
       "name": "Acc iPad 10.2",
       "revenue2024": 6,
       "revenue2025": 0,
-      "units2024": 184,
+      "units2024": 195,
       "units2025": 8,
       "propiedades": [
         {
@@ -2736,14 +2805,14 @@
           "name": "Teclado iPad",
           "revenue2024": 5,
           "revenue2025": 0,
-          "units2024": 118,
+          "units2024": 129,
           "units2025": 0,
           "subpropiedades": [
             {
               "name": "Teclado iPad 9/8 Gen",
               "revenue2024": 5,
               "revenue2025": 0,
-              "units2024": 118,
+              "units2024": 129,
               "units2025": 0
             }
           ]
@@ -2752,9 +2821,9 @@
     },
     {
       "name": "Acc iPad Air",
-      "revenue2024": 0,
+      "revenue2024": 2,
       "revenue2025": 0,
-      "units2024": 1,
+      "units2024": 35,
       "units2025": 7,
       "propiedades": [
         {
@@ -2777,6 +2846,22 @@
               "revenue2025": 0,
               "units2024": 0,
               "units2025": 7
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 2,
+          "revenue2025": 0,
+          "units2024": 34,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad Pro 11/ Air",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 34,
+              "units2025": 0
             }
           ]
         }
@@ -2943,15 +3028,15 @@
       "name": "Acc iPhone 14",
       "revenue2024": 1,
       "revenue2025": 0,
-      "units2024": 53,
-      "units2025": 31,
+      "units2024": 58,
+      "units2025": 32,
       "propiedades": [
         {
           "name": "Funda iPhone",
           "revenue2024": 1,
           "revenue2025": 0,
-          "units2024": 45,
-          "units2025": 20,
+          "units2024": 50,
+          "units2025": 21,
           "subpropiedades": [
             {
               "name": "Funda iPh 14",
@@ -2971,8 +3056,8 @@
               "name": "Funda iPh 14 Pro",
               "revenue2024": 0,
               "revenue2025": 0,
-              "units2024": 11,
-              "units2025": 0
+              "units2024": 16,
+              "units2025": 1
             },
             {
               "name": "Funda iPh 14 Pro Max",
