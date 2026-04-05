@@ -17,9 +17,14 @@ const clpFormatter = new Intl.NumberFormat('es-CL', {
   style: 'currency', currency: 'CLP', minimumFractionDigits: 0, maximumFractionDigits: 0,
 })
 
+type SortColumn = 'name' | 'units' | 'revenue' | 'asp' | 'pct'
+type SortDir = 'asc' | 'desc'
+
 export function MixIdealView() {
   const [searchTerm, setSearchTerm] = useState('')
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
+  const [sortColumn, setSortColumn] = useState<SortColumn>('revenue')
+  const [sortDir, setSortDir] = useState<SortDir>('desc')
 
   const categories = useMemo(() => {
     const data = productMixData as unknown as { categories: ProductMixCategory[] }
@@ -29,12 +34,46 @@ export function MixIdealView() {
   const totalRevenue = useMemo(() => categories.reduce((s, c) => s + c.revenue, 0), [categories])
   const totalUnits = useMemo(() => categories.reduce((s, c) => s + c.units, 0), [categories])
 
-  const sorted = useMemo(
-    () => [...categories]
-      .filter((c) => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      .sort((a, b) => b.revenue - a.revenue),
-    [categories, searchTerm]
-  )
+  const sorted = useMemo(() => {
+    let filtered = [...categories].filter((c) => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+
+    // Apply sorting
+    filtered.sort((a, b) => {
+      let aVal: number | string
+      let bVal: number | string
+
+      switch (sortColumn) {
+        case 'name':
+          aVal = a.name
+          bVal = b.name
+          break
+        case 'units':
+          aVal = a.units
+          bVal = b.units
+          break
+        case 'revenue':
+          aVal = a.revenue
+          bVal = b.revenue
+          break
+        case 'asp':
+          aVal = a.asp
+          bVal = b.asp
+          break
+        case 'pct':
+          aVal = (a.revenue / totalRevenue) * 100
+          bVal = (b.revenue / totalRevenue) * 100
+          break
+      }
+
+      if (sortDir === 'asc') {
+        return aVal > bVal ? 1 : -1
+      } else {
+        return aVal < bVal ? 1 : -1
+      }
+    })
+
+    return filtered
+  }, [categories, searchTerm, sortColumn, sortDir, totalRevenue])
 
   const donutData = useMemo(() => sorted.map((c) => ({ name: c.name, value: c.revenue })), [sorted])
   const donutConfig: ChartConfig = Object.fromEntries(
@@ -43,32 +82,67 @@ export function MixIdealView() {
 
   const toggleExpand = (name: string) => setExpandedCategory(expandedCategory === name ? null : name)
 
+  const handleHeaderClick = (col: SortColumn) => {
+    if (sortColumn === col) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortColumn(col)
+      setSortDir('desc')
+    }
+  }
+
+  // Calculate KPI data
+  const topCategory = sorted[0] || categories[0]
+  const top3Revenue = sorted.slice(0, 3).reduce((sum, c) => sum + c.revenue, 0)
+  const concentrationPct = totalRevenue > 0 ? (top3Revenue / totalRevenue) * 100 : 0
+  const highestAspCategory = sorted.reduce((prev, current) => {
+    return current.asp > prev.asp ? current : prev
+  }, sorted[0] || categories[0])
+
+  const renderSortIndicator = (col: SortColumn) => {
+    if (sortColumn !== col) return ''
+    return sortDir === 'asc' ? ' ▲' : ' ▼'
+  }
+
   return (
     <div className="space-y-6">
-      {/* Summary KPIs */}
+      {/* Improved KPI Cards */}
       <div className="grid grid-cols-3 gap-4">
         <Card>
           <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Revenue Total</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">Top Categoría</CardTitle>
           </CardHeader>
           <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold">${totalRevenue}M</p>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">{topCategory.icon}</span>
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">{topCategory.name}</p>
+                <p className="text-2xl font-bold">${topCategory.revenue}M</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Unidades Total</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">Mayor Concentración</CardTitle>
           </CardHeader>
           <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold">{totalUnits.toLocaleString()}</p>
+            <p className="text-xs text-muted-foreground mb-1">Top 3 categorías</p>
+            <p className="text-2xl font-bold">{concentrationPct.toFixed(1)}%</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">ASP Promedio</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">ASP Más Alto</CardTitle>
           </CardHeader>
           <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold">{clpFormatter.format(Math.round(totalRevenue / totalUnits * 1000))}</p>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">{highestAspCategory.icon}</span>
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">{highestAspCategory.name}</p>
+                <p className="text-2xl font-bold">{clpFormatter.format(highestAspCategory.asp)}</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -138,11 +212,36 @@ export function MixIdealView() {
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-8"></TableHead>
-                    <TableHead>Categoría</TableHead>
-                    <TableHead className="text-right">Uds</TableHead>
-                    <TableHead className="text-right">Rev (M)</TableHead>
-                    <TableHead className="text-right">ASP</TableHead>
-                    <TableHead className="text-right">%</TableHead>
+                    <TableHead
+                      className="cursor-pointer select-none hover:text-foreground transition-colors"
+                      onClick={() => handleHeaderClick('name')}
+                    >
+                      Categoría{renderSortIndicator('name')}
+                    </TableHead>
+                    <TableHead
+                      className="text-right cursor-pointer select-none hover:text-foreground transition-colors"
+                      onClick={() => handleHeaderClick('units')}
+                    >
+                      Uds{renderSortIndicator('units')}
+                    </TableHead>
+                    <TableHead
+                      className="text-right cursor-pointer select-none hover:text-foreground transition-colors"
+                      onClick={() => handleHeaderClick('revenue')}
+                    >
+                      Rev (M){renderSortIndicator('revenue')}
+                    </TableHead>
+                    <TableHead
+                      className="text-right cursor-pointer select-none hover:text-foreground transition-colors"
+                      onClick={() => handleHeaderClick('asp')}
+                    >
+                      ASP{renderSortIndicator('asp')}
+                    </TableHead>
+                    <TableHead
+                      className="text-right cursor-pointer select-none hover:text-foreground transition-colors"
+                      onClick={() => handleHeaderClick('pct')}
+                    >
+                      %{renderSortIndicator('pct')}
+                    </TableHead>
                     <TableHead className="w-[120px]">Mix</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -156,8 +255,17 @@ export function MixIdealView() {
                           onClick={() => toggleExpand(cat.name)}
                           className="cursor-pointer hover:bg-muted/50 transition-colors"
                         >
-                          <TableCell className="text-lg">{cat.icon}</TableCell>
-                          <TableCell className="font-medium">{cat.name}</TableCell>
+                          <TableCell className="text-center">
+                            <span className="text-lg transition-transform inline-block" style={{
+                              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                            }}>
+                              ▸
+                            </span>
+                          </TableCell>
+                          <TableCell className="font-medium">
+                            <span className="text-lg mr-2">{cat.icon}</span>
+                            {cat.name}
+                          </TableCell>
                           <TableCell className="text-right tabular-nums">{cat.units.toLocaleString()}</TableCell>
                           <TableCell className="text-right tabular-nums">${cat.revenue}M</TableCell>
                           <TableCell className="text-right tabular-nums">{clpFormatter.format(cat.asp)}</TableCell>

@@ -1,16 +1,19 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
+import type { PieSectorShapeProps } from 'recharts/types/polar/Pie'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
+import { ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  PieChart, Pie, Label, Cell,
+  PieChart, Pie, Label, Cell, Sector,
+  AreaChart, Area, LabelList,
 } from 'recharts'
 import revenueData from '@/data/revenue.json'
 import unitsData from '@/data/units.json'
 
-// Hex colors for the 5 chart slots (from Luma Blue oklch preset)
+// Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
 
 type MetricKey = 'revenue' | 'units'
@@ -47,16 +50,58 @@ const donutConfig: ChartConfig = Object.fromEntries(
 
 // KPI data
 const kpis = [
-  { title: 'Revenue 2024', value: '$4.553M', sub: 'Cifra histórica', delta: null },
-  { title: 'Revenue 2025', value: '$5.047M', sub: '+10.9% vs 2024', delta: '+10.9%' },
-  { title: 'Target 2026', value: '$5.421M', sub: '+7.4% vs 2025', delta: '+7.4%' },
-  { title: 'Ticket Promedio', value: '$290K', sub: 'Promedio por orden', delta: null },
-  { title: 'Unidades 2026', value: '18,670', sub: '+1.7% vs 2025', delta: '+1.7%' },
-  { title: 'Categorías', value: '17', sub: 'Apple + 3P', delta: null },
+  { title: 'Revenue 2024', value: '$4.553M', sub: 'Cifra histórica', delta: null, isTarget: false },
+  { title: 'Revenue 2025', value: '$5.047M', sub: '+10.9% vs 2024', delta: '+10.9%', isTarget: false },
+  { title: 'Target 2026', value: '$5.421M', sub: '+7.4% vs 2025', delta: '+7.4%', isTarget: true },
+  { title: 'Ticket Promedio', value: '$290K', sub: 'Promedio por orden', delta: null, isTarget: false },
+  { title: 'Unidades 2026', value: '18,670', sub: '+1.7% vs 2025', delta: '+1.7%', isTarget: false },
+  { title: 'Categorías', value: '17', sub: 'Apple + 3P', delta: null, isTarget: false },
 ]
+
+// Revenue trend data
+const trendData = [
+  { year: '2024', revenue: 4553, units: 11700 },
+  { year: '2025', revenue: 5047, units: 11800 },
+  { year: '2026 Target', revenue: 5421, units: 12000 },
+]
+
+const trendConfig: ChartConfig = {
+  revenue: { label: 'Ingresos (M)', color: '#2b7fff' },
+  units: { label: 'Unidades', color: '#8ec5ff' },
+} satisfies ChartConfig
+
+// Custom active sector renderer for interactive donut
+const renderActiveShape = (props: PieSectorShapeProps & { outerRadius?: number }) => {
+  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill } = props
+  const RADIAN = Math.PI / 180
+  const radius = (innerRadius || 0) + ((outerRadius || 0) - (innerRadius || 0)) * 0.5
+  const x = (cx || 0) + radius * Math.cos(-RADIAN * (startAngle || 0 + endAngle || 0) / 2)
+  const y = (cy || 0) + radius * Math.sin(-RADIAN * (startAngle || 0 + endAngle || 0) / 2)
+
+  return (
+    <>
+      <Sector
+        {...props}
+        outerRadius={(outerRadius || 0) + 10}
+        fill={fill}
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={innerRadius}
+        outerRadius={(outerRadius || 0) + 10}
+        fill={fill}
+        opacity={0.15}
+      />
+    </>
+  )
+}
 
 export function ResumenView() {
   const [activeMetric, setActiveMetric] = useState<MetricKey>('revenue')
+  const [selectedCategory, setSelectedCategory] = useState<string>(donutData[0]?.name || '')
 
   const total = useMemo(
     () => ({
@@ -66,12 +111,25 @@ export function ResumenView() {
     []
   )
 
+  // Sort bar data descending by active metric
+  const sortedBarData = useMemo(
+    () => [...chartData].sort((a, b) => b[activeMetric] - a[activeMetric]),
+    [activeMetric]
+  )
+
+  // Get selected category data for donut center
+  const selectedCategoryData = donutData.find((d) => d.name === selectedCategory)
+  const selectedValue = selectedCategoryData?.value || 0
+
   return (
     <div className="space-y-6">
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {kpis.map((kpi) => (
-          <Card key={kpi.title}>
+          <Card
+            key={kpi.title}
+            className={kpi.isTarget ? 'ring-1 ring-primary' : ''}
+          >
             <CardHeader className="pb-1 pt-4 px-4">
               <CardTitle className="text-xs font-medium text-muted-foreground">{kpi.title}</CardTitle>
             </CardHeader>
@@ -85,8 +143,83 @@ export function ResumenView() {
         ))}
       </div>
 
+      {/* Revenue Evolution Trend Chart */}
+      <Card>
+        <CardHeader className="flex flex-col items-stretch border-b p-0 sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-4">
+            <CardTitle>Evolución Revenue 2024 → 2026</CardTitle>
+            <CardDescription>Ingresos y unidades por año</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent className="px-2 pt-4 sm:p-6">
+          <ChartContainer config={trendConfig} className="aspect-auto h-[250px] w-full">
+            <AreaChart
+              accessibilityLayer
+              data={trendData}
+              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#2b7fff" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#2b7fff" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorUnits" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8ec5ff" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#8ec5ff" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid vertical={false} className="stroke-border/50" />
+              <XAxis
+                dataKey="year"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    className="w-[180px]"
+                    labelFormatter={(v) => v}
+                    formatter={(value) => `$${value}M`}
+                  />
+                }
+              />
+              <Area
+                type="monotone"
+                dataKey="revenue"
+                stroke="#2b7fff"
+                strokeWidth={2}
+                fillOpacity={1}
+                fill="url(#colorRevenue)"
+                name="Ingresos (M)"
+              />
+              <Area
+                type="monotone"
+                dataKey="units"
+                stroke="#8ec5ff"
+                strokeWidth={2}
+                fillOpacity={1}
+                fill="url(#colorUnits)"
+                stackId="1"
+                name="Unidades"
+              />
+            </AreaChart>
+          </ChartContainer>
+        </CardContent>
+        <CardFooter className="flex-col items-start gap-2 text-sm pt-2">
+          <div className="flex gap-2 font-medium leading-none">
+            Crecimiento Target 2026 <span className="text-emerald-400">+7.4% vs 2025</span>
+          </div>
+          <div className="flex gap-2 text-xs text-muted-foreground">
+            De $5.047M (2025) a $5.421M (2026 target)
+          </div>
+        </CardFooter>
+      </Card>
+
+      {/* Bar Chart + Donut Chart */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Interactive Bar Chart — 2 cols */}
+        {/* Horizontal Bar Chart — 2 cols */}
         <Card className="xl:col-span-2 py-0">
           <CardHeader className="flex flex-col items-stretch border-b p-0 sm:flex-row">
             <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-4">
@@ -112,24 +245,23 @@ export function ResumenView() {
             </div>
           </CardHeader>
           <CardContent className="px-2 pt-4 sm:p-6">
-            <ChartContainer config={chartConfig} className="aspect-auto h-[350px] w-full">
+            <ChartContainer config={chartConfig} className="aspect-auto h-[400px] w-full">
               <BarChart
                 accessibilityLayer
-                data={chartData}
-                margin={{ top: 10, right: 10, left: 0, bottom: 80 }}
+                data={sortedBarData}
+                layout="vertical"
+                margin={{ top: 10, right: 100, left: 20, bottom: 10 }}
               >
-                <CartesianGrid vertical={false} className="stroke-border/50" />
-                <XAxis
+                <CartesianGrid horizontal={false} className="stroke-border/50" />
+                <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                <YAxis
+                  type="category"
                   dataKey="name"
-                  angle={-45}
-                  textAnchor="end"
-                  height={80}
                   tickLine={false}
                   axisLine={false}
-                  tickMargin={8}
                   tick={{ fontSize: 11 }}
+                  width={100}
                 />
-                <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
@@ -146,21 +278,47 @@ export function ResumenView() {
                 <Bar
                   dataKey={activeMetric}
                   fill={chartConfig[activeMetric].color}
-                  radius={[6, 6, 0, 0]}
-                />
+                  radius={[0, 6, 6, 0]}
+                >
+                  <LabelList
+                    dataKey="name"
+                    position="insideLeft"
+                    fill="currentColor"
+                    offset={8}
+                    fontSize={11}
+                  />
+                  <LabelList
+                    dataKey={activeMetric}
+                    position="right"
+                    fill="currentColor"
+                    formatter={(v) => activeMetric === 'revenue' ? `$${v}M` : v}
+                    fontSize={11}
+                  />
+                </Bar>
               </BarChart>
             </ChartContainer>
           </CardContent>
         </Card>
 
-        {/* Donut Chart — 1 col */}
+        {/* Interactive Donut Chart — 1 col */}
         <Card className="flex flex-col">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Distribución Revenue</CardTitle>
-            <CardDescription>Top 5 categorías + Otros</CardDescription>
+          <CardHeader className="items-center pb-4 border-b">
+            <CardTitle className="mb-3">Distribución Revenue</CardTitle>
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Seleccionar categoría" />
+              </SelectTrigger>
+              <SelectContent>
+                {donutData.map((d) => (
+                  <SelectItem key={d.name} value={d.name}>
+                    {d.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </CardHeader>
           <CardContent className="flex-1 pb-0">
-            <ChartContainer config={donutConfig} className="mx-auto aspect-square max-h-[300px]">
+            <ChartContainer config={donutConfig} className="mx-auto aspect-square max-h-[280px]">
               <PieChart accessibilityLayer>
                 <ChartTooltip
                   cursor={false}
@@ -170,22 +328,30 @@ export function ResumenView() {
                   data={donutData}
                   dataKey="value"
                   nameKey="name"
-                  innerRadius={70}
-                  strokeWidth={3}
+                  innerRadius={60}
+                  outerRadius={100}
+                  strokeWidth={2}
+                  activeIndex={donutData.findIndex((d) => d.name === selectedCategory)}
+                  activeShape={renderActiveShape}
+                  onMouseEnter={(_, index) => {
+                    if (donutData[index]) {
+                      setSelectedCategory(donutData[index].name)
+                    }
+                  }}
                 >
                   {donutData.map((_, i) => (
-                    <Cell key={i} fill={DONUT_COLORS[i]} />
+                    <Cell key={`cell-${i}`} fill={DONUT_COLORS[i]} />
                   ))}
                   <Label
                     content={({ viewBox }) => {
                       if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                         return (
                           <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                            <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-3xl font-bold">
-                              ${total.revenue}M
+                            <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-bold">
+                              ${selectedValue}M
                             </tspan>
-                            <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-muted-foreground text-sm">
-                              Total
+                            <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 20} className="fill-muted-foreground text-xs">
+                              {selectedCategory}
                             </tspan>
                           </text>
                         )
@@ -197,11 +363,17 @@ export function ResumenView() {
             </ChartContainer>
           </CardContent>
           {/* Legend */}
-          <div className="px-6 pb-4 grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+          <div className="px-6 pb-4 grid grid-cols-2 gap-x-2 gap-y-2 text-xs border-t pt-4">
             {donutData.map((d, i) => (
-              <div key={d.name} className="flex items-center gap-2">
+              <div
+                key={d.name}
+                className={`flex items-center gap-2 cursor-pointer px-2 py-1 rounded transition-colors ${
+                  selectedCategory === d.name ? 'bg-muted' : 'hover:bg-muted/50'
+                }`}
+                onClick={() => setSelectedCategory(d.name)}
+              >
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: DONUT_COLORS[i] }} />
-                <span className="text-muted-foreground truncate">{d.name}</span>
+                <span className="text-muted-foreground truncate flex-1">{d.name}</span>
                 <span className="ml-auto font-medium">${d.value}M</span>
               </div>
             ))}

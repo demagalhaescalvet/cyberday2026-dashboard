@@ -58,13 +58,23 @@ const prefChartConfig = {
 } satisfies ChartConfig
 
 function TierCard({ tier }: { tier: Tier }) {
+  const isRecommended = tier.installments === 24
+  const cardClasses = isRecommended ? 'ring-2 ring-primary' : ''
+
   return (
-    <Card>
+    <Card className={cardClasses}>
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg">{tier.name}</CardTitle>
-        {tier.notes && (
-          <CardDescription className="text-xs italic">{tier.notes}</CardDescription>
-        )}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1">
+            <CardTitle className="text-lg">{tier.name}</CardTitle>
+            {tier.notes && (
+              <CardDescription className="text-xs italic">{tier.notes}</CardDescription>
+            )}
+          </div>
+          {isRecommended && (
+            <Badge className="whitespace-nowrap">Recomendado</Badge>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-baseline justify-between">
@@ -318,6 +328,29 @@ function SKUPricingGrid() {
   )
 }
 
+function ExpandableSKUGrid() {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const skuList = useMemo(() => {
+    return Object.entries(skuGridData).map(([key, data]) => ({
+      skuCode: key,
+      ...(data as SKUItem),
+    }))
+  }, [])
+
+  return (
+    <div className="space-y-3">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm"
+      >
+        <span>{isExpanded ? '▼' : '▶'}</span>
+        Ver Grid de SKUs ({skuList.length})
+      </button>
+      {isExpanded && <SKUPricingGrid />}
+    </div>
+  )
+}
+
 export function BandasView() {
   const tiers = bandasData.tiers as Tier[]
 
@@ -337,8 +370,8 @@ export function BandasView() {
         <VolumeBonusesCard />
       </div>
 
-      {/* SKU Pricing Grid */}
-      <SKUPricingGrid />
+      {/* SKU Pricing Grid — Expandable */}
+      <ExpandableSKUGrid />
     </div>
   )
 }

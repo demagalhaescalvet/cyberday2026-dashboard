@@ -20,16 +20,22 @@ type ViewType = 'resumen' | 'mix' | 'bandas' | 'auditoria'
 
 interface NavItem {
   title: string
-  icon: string
   viewType: ViewType
 }
 
 const navItems: NavItem[] = [
-  { title: 'Resumen', icon: '📊', viewType: 'resumen' },
-  { title: 'Mix Ideal', icon: '🎯', viewType: 'mix' },
-  { title: 'Bandas & Cuotas', icon: '💳', viewType: 'bandas' },
-  { title: 'Auditoría Precios', icon: '🔍', viewType: 'auditoria' },
+  { title: 'Resumen', viewType: 'resumen' },
+  { title: 'Mix Ideal', viewType: 'mix' },
+  { title: 'Bandas & Cuotas', viewType: 'bandas' },
+  { title: 'Auditoría Precios', viewType: 'auditoria' },
 ]
+
+const viewSubtitles: Record<ViewType, string> = {
+  resumen: 'KPIs, tendencia de revenue y distribución por categoría',
+  mix: 'Distribución ideal de producto, categorías y SKUs',
+  bandas: 'Estrategia de financiamiento, cuotas y precios por SKU',
+  auditoria: 'Comparativa de precios cyber vs mercado',
+}
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('resumen')
@@ -48,6 +54,9 @@ function App() {
         return <ResumenView />
     }
   }
+
+  const currentTitle = navItems.find((item) => item.viewType === currentView)?.title
+  const currentSubtitle = viewSubtitles[currentView]
 
   return (
     <SidebarProvider>
@@ -77,7 +86,6 @@ function App() {
                         onClick={() => setCurrentView(item.viewType)}
                         className="cursor-pointer"
                       >
-                        <span className="mr-2">{item.icon}</span>
                         <span>{item.title}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -92,10 +100,10 @@ function App() {
           <div className="p-6 md:p-8">
             <div className="mb-8">
               <h1 className="text-3xl font-bold tracking-tight">
-                {navItems.find((item) => item.viewType === currentView)?.title}
+                {currentTitle}
               </h1>
               <p className="text-sm text-muted-foreground mt-2">
-                Dashboard de análisis de precios y ventas para CyberDay 2026
+                {currentSubtitle}
               </p>
             </div>
 

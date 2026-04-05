@@ -38,6 +38,8 @@ function getStatusLabel(status: string): string {
 }
 
 type StatusFilter = 'todos' | 'ok' | 'match' | 'warn'
+type SortColumn = 'product' | 'pvpMO' | 'cyberPlan' | 'marketLow' | 'discount' | 'diff'
+type SortDir = 'asc' | 'desc'
 
 interface PricingAuditData {
   total_products: number
@@ -48,6 +50,9 @@ interface PricingAuditData {
 export function AuditoriaView() {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeTab, setActiveTab] = useState<StatusFilter>('todos')
+  const [sortColumn, setSortColumn] = useState<SortColumn>('diff')
+  const [sortDir, setSortDir] = useState<SortDir>('desc')
+  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set())
 
   const data = pricingData as PricingAuditData
 
@@ -57,6 +62,61 @@ export function AuditoriaView() {
     if (searchQuery) filtered = filtered.filter((i) => i.product.toLowerCase().includes(searchQuery.toLowerCase()))
     return filtered
   }, [searchQuery, activeTab])
+
+  const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts]
+    sorted.sort((a, b) => {
+      let aVal: number | string = ''
+      let bVal: number | string = ''
+
+      if (sortColumn === 'product') {
+        aVal = a.product.toLowerCase()
+        bVal = b.product.toLowerCase()
+      } else if (sortColumn === 'pvpMO') {
+        aVal = a.pvpMO
+        bVal = b.pvpMO
+      } else if (sortColumn === 'cyberPlan') {
+        aVal = a.cyberPlan
+        bVal = b.cyberPlan
+      } else if (sortColumn === 'marketLow') {
+        aVal = a.marketLow
+        bVal = b.marketLow
+      } else if (sortColumn === 'discount') {
+        aVal = ((a.pvpMO - a.cyberPlan) / a.pvpMO) * 100
+        bVal = ((b.pvpMO - b.cyberPlan) / b.pvpMO) * 100
+      } else if (sortColumn === 'diff') {
+        aVal = a.cyberPlan - a.marketLow
+        bVal = b.cyberPlan - b.marketLow
+      }
+
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return sortDir === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
+      }
+      const numA = typeof aVal === 'number' ? aVal : 0
+      const numB = typeof bVal === 'number' ? bVal : 0
+      return sortDir === 'asc' ? numA - numB : numB - numA
+    })
+    return sorted
+  }, [filteredProducts, sortColumn, sortDir])
+
+  const toggleRowExpand = (index: number) => {
+    const newExpanded = new Set(expandedRows)
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index)
+    } else {
+      newExpanded.add(index)
+    }
+    setExpandedRows(newExpanded)
+  }
+
+  const handleHeaderClick = (column: SortColumn) => {
+    if (sortColumn === column) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortColumn(column)
+      setSortDir(column === 'product' ? 'asc' : 'desc')
+    }
+  }
 
   // Competitiveness score: % of products where cyber <= market
   const competitiveCount = data.products.filter((p) => p.cyberPlan <= p.marketLow).length
@@ -71,15 +131,20 @@ export function AuditoriaView() {
   const gaugeData = [{ value: competitivePct, fill: '#2b7fff' }]
   const gaugeConfig = { value: { label: 'Competitividad', color: '#2b7fff' } } satisfies ChartConfig
 
+  const renderSortIcon = (column: SortColumn) => {
+    if (sortColumn !== column) return null
+    return sortDir === 'asc' ? ' ▲' : ' ▼'
+  }
+
   return (
     <div className="space-y-6">
       {/* KPI Row */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        {/* Radial gauge */}
-        <Card className="flex flex-col items-center justify-center py-4">
-          <ChartContainer config={gaugeConfig} className="mx-auto aspect-square w-[140px] h-[140px]">
-            <RadialBarChart data={gaugeData} startAngle={180} endAngle={180 - (competitivePct / 100) * 360} outerRadius={55} innerRadius={45}>
-              <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
+        {/* Radial gauge - col-span-2 */}
+        <Card className="col-span-1 lg:col-span-2 flex flex-col items-center justify-center py-6">
+          <ChartContainer config={gaugeConfig} className="mx-auto aspect-square w-[180px] h-[180px]">
+            <RadialBarChart data={gaugeData} startAngle={180} endAngle={180 - (competitivePct / 100) * 360} outerRadius={70} innerRadius={55}>
+              <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[70, 55]} />
               <RadialBar dataKey="value" background cornerRadius={10} />
               <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
                 <Label
@@ -87,8 +152,9 @@ export function AuditoriaView() {
                     if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                       return (
                         <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                          <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-xl font-bold">{competitivePct}%</tspan>
-                          <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 16} className="fill-muted-foreground text-[10px]">competitivo</tspan>
+                          <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-bold">{competitivePct}%</tspan>
+                          <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 18} className="fill-muted-foreground text-xs">competitivo</tspan>
+                          <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 32} className="fill-muted-foreground text-[10px]">{competitiveCount}/{data.total_products} productos</tspan>
                         </text>
                       )
                     }
@@ -166,29 +232,49 @@ export function AuditoriaView() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="min-w-[180px]">Producto</TableHead>
-                      <TableHead className="text-right">PVP</TableHead>
-                      <TableHead className="text-right">Cyber</TableHead>
-                      <TableHead className="text-right">Mercado</TableHead>
-                      <TableHead className="text-right">Dcto</TableHead>
-                      <TableHead className="text-right">Δ Mercado</TableHead>
+                      <TableHead className="w-8" />
+                      <TableHead className="min-w-[180px] cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('product')}>
+                        Producto{renderSortIcon('product')}
+                      </TableHead>
+                      <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('pvpMO')}>
+                        PVP{renderSortIcon('pvpMO')}
+                      </TableHead>
+                      <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('cyberPlan')}>
+                        Cyber{renderSortIcon('cyberPlan')}
+                      </TableHead>
+                      <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('marketLow')}>
+                        Mercado{renderSortIcon('marketLow')}
+                      </TableHead>
+                      <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('discount')}>
+                        Dcto{renderSortIcon('discount')}
+                      </TableHead>
+                      <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('diff')}>
+                        Δ Mercado{renderSortIcon('diff')}
+                      </TableHead>
                       <TableHead className="w-[140px]">Comparación</TableHead>
-                      <TableHead>Tienda</TableHead>
                       <TableHead>Estado</TableHead>
-                      <TableHead>Nota</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredProducts.length > 0 ? (
-                      filteredProducts.map((item, index) => {
+                    {sortedProducts.length > 0 ? (
+                      sortedProducts.map((item, index) => {
                         const discount = ((item.pvpMO - item.cyberPlan) / item.pvpMO) * 100
                         const diff = item.cyberPlan - item.marketLow
                         const maxPrice = Math.max(item.cyberPlan, item.marketLow)
                         const cyberW = (item.cyberPlan / maxPrice) * 100
                         const marketW = (item.marketLow / maxPrice) * 100
+                        const isExpanded = expandedRows.has(index)
 
                         return (
-                          <TableRow key={index}>
+                          <TableRow key={`row-${index}`}>
+                            <TableCell className="w-8">
+                              <button
+                                onClick={() => toggleRowExpand(index)}
+                                className="text-muted-foreground hover:text-foreground transition-colors text-lg h-6 w-6 flex items-center justify-center"
+                              >
+                                {isExpanded ? '−' : '+'}
+                              </button>
+                            </TableCell>
                             <TableCell className="font-medium">{item.product}</TableCell>
                             <TableCell className="text-right font-mono text-xs">{formatPrice(item.pvpMO)}</TableCell>
                             <TableCell className="text-right font-mono text-xs">{formatPrice(item.cyberPlan)}</TableCell>
@@ -213,17 +299,54 @@ export function AuditoriaView() {
                                 </div>
                               </div>
                             </TableCell>
-                            <TableCell className="text-xs">{item.marketStore}</TableCell>
                             <TableCell>
                               <Badge className={getBadgeColor(item.status)}>{getStatusLabel(item.status)}</Badge>
                             </TableCell>
-                            <TableCell className="text-xs text-muted-foreground max-w-[150px] truncate">{item.note}</TableCell>
                           </TableRow>
                         )
                       })
-                    ) : (
+                    ) : null}
+                    {sortedProducts.length > 0 && sortedProducts.map((item, index) => {
+                      const isExpanded = expandedRows.has(index)
+                      if (!isExpanded) return null
+
+                      return (
+                        <TableRow key={`expanded-${index}`} className="bg-muted/40">
+                          <TableCell colSpan={9} className="px-6 py-4">
+                            <div className="space-y-3">
+                              <div className="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <p className="text-muted-foreground text-xs font-medium">Tienda</p>
+                                  <p className="text-foreground font-medium">{item.marketStore}</p>
+                                </div>
+                                <div>
+                                  <p className="text-muted-foreground text-xs font-medium">Nota</p>
+                                  <p className="text-foreground">{item.note || '—'}</p>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-muted-foreground text-xs font-medium mb-2">Comparación Detallada</p>
+                                <div className="space-y-2">
+                                  <div className="bg-background rounded h-3 overflow-hidden">
+                                    <div className="bg-blue-500 h-full transition-all" style={{ width: `${(item.cyberPlan / Math.max(item.cyberPlan, item.marketLow)) * 100}%` }} />
+                                  </div>
+                                  <div className="bg-background rounded h-3 overflow-hidden">
+                                    <div className="bg-violet-500 h-full transition-all" style={{ width: `${(item.marketLow / Math.max(item.cyberPlan, item.marketLow)) * 100}%` }} />
+                                  </div>
+                                  <div className="flex gap-4 text-xs text-muted-foreground">
+                                    <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-500" />CyberDay: {formatPrice(item.cyberPlan)}</span>
+                                    <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-violet-500" />Mercado: {formatPrice(item.marketLow)}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
+                    {sortedProducts.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={10} className="text-center text-muted-foreground py-8">
+                        <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
                           No se encontraron productos
                         </TableCell>
                       </TableRow>
@@ -232,7 +355,7 @@ export function AuditoriaView() {
                 </Table>
               </div>
               <p className="text-xs text-muted-foreground mt-3">
-                {filteredProducts.length} de {data.total_products} productos
+                {sortedProducts.length} de {data.total_products} productos
               </p>
             </TabsContent>
           </Tabs>
