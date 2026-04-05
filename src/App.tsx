@@ -73,15 +73,12 @@ function App() {
                   {navItems.map((item) => (
                     <SidebarMenuItem key={item.viewType}>
                       <SidebarMenuButton
-                        asChild
                         isActive={currentView === item.viewType}
                         onClick={() => setCurrentView(item.viewType)}
                         className="cursor-pointer"
                       >
-                        <button className="w-full text-left">
-                          <span className="mr-2">{item.icon}</span>
-                          <span>{item.title}</span>
-                        </button>
+                        <span className="mr-2">{item.icon}</span>
+                        <span>{item.title}</span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
