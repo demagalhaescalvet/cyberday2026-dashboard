@@ -1,74 +1,472 @@
-[
-  {
-    "product": "AirPods Pro 3",
-    "pvpMO": 279990,
-    "cyberPlan": 249990,
-    "marketLow": 249990,
-    "marketStore": "Lider BCI",
-    "status": "match",
-    "note": "Iguala mínimo mercado"
+{
+  "description": "Comprehensive Pricing Audit (Auditor\u00eda) - 44 products",
+  "total_products": 51,
+  "audit_date": "2026-04-04",
+  "currency": "CLP",
+  "status_breakdown": {
+    "match": 2,
+    "ok": 43,
+    "warn": 6
   },
-  {
-    "product": "AirPods 4 ANC",
-    "pvpMO": 199990,
-    "cyberPlan": 180990,
-    "marketLow": 189990,
-    "marketStore": "MercadoLibre",
-    "status": "ok",
-    "note": "Cyber < mercado"
-  },
-  {
-    "product": "AirPods 4",
-    "pvpMO": 139990,
-    "cyberPlan": 126990,
-    "marketLow": 119990,
-    "marketStore": "Lider BCI",
-    "status": "warn",
-    "note": "Verificar BCI card-only"
-  },
-  {
-    "product": "AirPods Max",
-    "pvpMO": 599990,
-    "cyberPlan": 558990,
-    "marketLow": 549990,
-    "marketStore": "Travel Tienda",
-    "status": "warn",
-    "note": "Considerar bajar a $549K"
-  },
-  {
-    "product": "iPhone 17 256GB",
-    "pvpMO": 999990,
-    "cyberPlan": 899990,
-    "marketLow": 929990,
-    "marketStore": "Falabella",
-    "status": "ok",
-    "note": "Cyber < mercado"
-  },
-  {
-    "product": "iPhone 17 PM 256GB",
-    "pvpMO": 1549990,
-    "cyberPlan": 1426990,
-    "marketLow": 1449990,
-    "marketStore": "Falabella",
-    "status": "ok",
-    "note": "Cyber < mercado"
-  },
-  {
-    "product": "MacBook Neo",
-    "pvpMO": 649990,
-    "cyberPlan": 598990,
-    "marketLow": 599990,
-    "marketStore": "Falabella",
-    "status": "match",
-    "note": "Iguala mercado"
-  },
-  {
-    "product": "HomePod mini",
-    "pvpMO": 84990,
-    "cyberPlan": 78290,
-    "marketLow": 74990,
-    "marketStore": "Lider",
-    "status": "warn",
-    "note": "Considerar bajar a $74K"
-  }
-]
+  "products": [
+    {
+      "product": "AirPods Pro 3",
+      "pvpMO": 279990,
+      "cyberPlan": 249990,
+      "marketLow": 249990,
+      "marketStore": "Lider BCI",
+      "status": "match",
+      "note": "Iguala m\u00ednimo mercado"
+    },
+    {
+      "product": "AirPods 4 ANC",
+      "pvpMO": 199990,
+      "cyberPlan": 180990,
+      "marketLow": 189990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "AirPods 4",
+      "pvpMO": 139990,
+      "cyberPlan": 126990,
+      "marketLow": 119990,
+      "marketStore": "Lider BCI",
+      "status": "warn",
+      "note": "Verificar BCI card-only"
+    },
+    {
+      "product": "AirPods Max",
+      "pvpMO": 599990,
+      "cyberPlan": 558990,
+      "marketLow": 549990,
+      "marketStore": "Travel Tienda",
+      "status": "warn",
+      "note": "Considerar bajar a $549K"
+    },
+    {
+      "product": "iPhone 17 256GB",
+      "pvpMO": 999990,
+      "cyberPlan": 899990,
+      "marketLow": 929990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPhone 17 PM 256GB",
+      "pvpMO": 1549990,
+      "cyberPlan": 1426990,
+      "marketLow": 1449990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "MacBook Neo",
+      "pvpMO": 649990,
+      "cyberPlan": 598990,
+      "marketLow": 599990,
+      "marketStore": "Falabella",
+      "status": "match",
+      "note": "Iguala mercado"
+    },
+    {
+      "product": "HomePod mini",
+      "pvpMO": 84990,
+      "cyberPlan": 78290,
+      "marketLow": 74990,
+      "marketStore": "Lider",
+      "status": "warn",
+      "note": "Considerar bajar a $74K"
+    },
+    {
+      "product": "MacBook Pro M5 14-inch",
+      "pvpMO": 2349990,
+      "cyberPlan": 2185990,
+      "marketLow": 2199990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPad Air M4 256GB",
+      "pvpMO": 699990,
+      "cyberPlan": 637990,
+      "marketLow": 649990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Apple Watch Series 11 46mm",
+      "pvpMO": 549990,
+      "cyberPlan": 511990,
+      "marketLow": 529990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPad Pro 13-inch 512GB",
+      "pvpMO": 1849990,
+      "cyberPlan": 1757990,
+      "marketLow": 1799990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPhone 17 Air 256GB",
+      "pvpMO": 999990,
+      "cyberPlan": 930990,
+      "marketLow": 979990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "BOSE QuietComfort",
+      "pvpMO": 399990,
+      "cyberPlan": 312990,
+      "marketLow": 319990,
+      "marketStore": "Lider BCI",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "SanDisk Extreme Pro 1TB",
+      "pvpMO": 179990,
+      "cyberPlan": 140990,
+      "marketLow": 149990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Apple TV 4K Ethernet",
+      "pvpMO": 199990,
+      "cyberPlan": 180990,
+      "marketLow": 189990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Mac mini M4 Pro",
+      "pvpMO": 1399990,
+      "cyberPlan": 1288990,
+      "marketLow": 1349990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Beats Solo 4",
+      "pvpMO": 129990,
+      "cyberPlan": 114990,
+      "marketLow": 119990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "MacBook Air M5 13-inch",
+      "pvpMO": 1249990,
+      "cyberPlan": 1100990,
+      "marketLow": 1199990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "AirTag 4-pack",
+      "pvpMO": 119990,
+      "cyberPlan": 103990,
+      "marketLow": 109990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Apple Pencil Pro",
+      "pvpMO": 149990,
+      "cyberPlan": 135990,
+      "marketLow": 139990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iMac 24-inch M4",
+      "pvpMO": 1529990,
+      "cyberPlan": 1423990,
+      "marketLow": 1499990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPad Mini 7 128GB",
+      "pvpMO": 624990,
+      "cyberPlan": 575990,
+      "marketLow": 599990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Magic Keyboard 11-inch",
+      "pvpMO": 349990,
+      "cyberPlan": 322990,
+      "marketLow": 339990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Magic Trackpad",
+      "pvpMO": 169990,
+      "cyberPlan": 156990,
+      "marketLow": 164990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPhone 17e 256GB",
+      "pvpMO": 699990,
+      "cyberPlan": 630990,
+      "marketLow": 679990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Sonos Era 300",
+      "pvpMO": 649990,
+      "cyberPlan": 500990,
+      "marketLow": 579990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Logitech MX Keys",
+      "pvpMO": 239990,
+      "cyberPlan": 216990,
+      "marketLow": 229990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Studio Display",
+      "pvpMO": 2399990,
+      "cyberPlan": 2160990,
+      "marketLow": 2299990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Mac Pro M2 Ultra",
+      "pvpMO": 6999990,
+      "cyberPlan": 6650990,
+      "marketLow": 6799990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "HomePod 2nd gen",
+      "pvpMO": 399990,
+      "cyberPlan": 368990,
+      "marketLow": 384990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPhone 13 128GB",
+      "pvpMO": 579990,
+      "cyberPlan": 481990,
+      "marketLow": 549990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "iPhone 15 128GB",
+      "pvpMO": 749990,
+      "cyberPlan": 660990,
+      "marketLow": 729990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Belkin 7-in-1 Hub",
+      "pvpMO": 54990,
+      "cyberPlan": 41290,
+      "marketLow": 49990,
+      "marketStore": "Lider",
+      "status": "warn",
+      "note": "Verificar promociones BCI"
+    },
+    {
+      "product": "SanDisk Ultra 512GB",
+      "pvpMO": 69990,
+      "cyberPlan": 52590,
+      "marketLow": 59990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "EarPods USB-C",
+      "pvpMO": 29990,
+      "cyberPlan": 27090,
+      "marketLow": 28990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Anker PowerBank 26800",
+      "pvpMO": 59990,
+      "cyberPlan": 43290,
+      "marketLow": 49990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Native Union Cables",
+      "pvpMO": 44990,
+      "cyberPlan": 33790,
+      "marketLow": 39990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Nylon Capsule",
+      "pvpMO": 499990,
+      "cyberPlan": 425990,
+      "marketLow": 479990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Geekey Multi-Tool",
+      "pvpMO": 29990,
+      "cyberPlan": 21090,
+      "marketLow": 27990,
+      "marketStore": "Falabella",
+      "status": "warn",
+      "note": "Low margin, monitor closely"
+    },
+    {
+      "product": "Hyphen Dock 8P",
+      "pvpMO": 59990,
+      "cyberPlan": 45690,
+      "marketLow": 54990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "ChargeRite 20W",
+      "pvpMO": 29990,
+      "cyberPlan": 26490,
+      "marketLow": 28990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "ChargeRite 35W",
+      "pvpMO": 54990,
+      "cyberPlan": 49590,
+      "marketLow": 52990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Nomad MagSafe Stand",
+      "pvpMO": 49990,
+      "cyberPlan": 45090,
+      "marketLow": 48990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Baseus Fast Wireless",
+      "pvpMO": 34990,
+      "cyberPlan": 26290,
+      "marketLow": 31990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Zendure AirDisk 1TB",
+      "pvpMO": 159990,
+      "cyberPlan": 123990,
+      "marketLow": 149990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Mesh Router Pro",
+      "pvpMO": 199990,
+      "cyberPlan": 152990,
+      "marketLow": 179990,
+      "marketStore": "Falabella",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Privacy Screen 14in",
+      "pvpMO": 49990,
+      "cyberPlan": 37590,
+      "marketLow": 45990,
+      "marketStore": "Travel Tienda",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Screen Protector Glass",
+      "pvpMO": 19990,
+      "cyberPlan": 15090,
+      "marketLow": 17990,
+      "marketStore": "MercadoLibre",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Leather Case Pro",
+      "pvpMO": 74990,
+      "cyberPlan": 67590,
+      "marketLow": 72990,
+      "marketStore": "Lider",
+      "status": "ok",
+      "note": "Cyber < mercado"
+    },
+    {
+      "product": "Silicone Case Bundle",
+      "pvpMO": 29990,
+      "cyberPlan": 21090,
+      "marketLow": 26990,
+      "marketStore": "Falabella",
+      "status": "warn",
+      "note": "Heavy competition on accessories"
+    }
+  ]
+}

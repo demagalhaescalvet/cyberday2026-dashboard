@@ -1,0 +1,21 @@
+{
+  "description": "Key Performance Indicators Summary",
+  "revenue_metrics": {
+    "2024_historical": "$4.553M",
+    "2025_actual": "$5.047M",
+    "2025_growth_vs_2024": "+10.9%",
+    "2026_target": "$5.421M",
+    "2026_growth_vs_2025": "+7.4%"
+  },
+  "unit_metrics": {
+    "2024_total_units": 11700,
+    "2025_total_units": 11800,
+    "2026_target_units": 12000,
+    "growth_2025_vs_2024": "+0.85%",
+    "growth_2026_target_vs_2025": "+1.69%"
+  },
+  "ticket_metrics": {
+    "average_ticket": "$290K",
+    "currency": "CLP"
+  }
+}

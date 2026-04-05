@@ -1,0 +1,108 @@
+{
+  "description": "Bandas & Cuotas - Financing Tiers for CyberDay 2026",
+  "currency": "CLP",
+  "financing_date": "2026-04-04",
+  "tiers": [
+    {
+      "name": "Sin Inter\u00e9s 3 Cuotas",
+      "installments": 3,
+      "interest_rate": 0,
+      "discount_percentage": 0,
+      "min_amount": 50000,
+      "max_amount": 500000,
+      "target_categories": [
+        "Audio 3P",
+        "Acc Apple",
+        "Prot 3P",
+        "Fundas 3P"
+      ],
+      "active": true
+    },
+    {
+      "name": "Sin Inter\u00e9s 6 Cuotas",
+      "installments": 6,
+      "interest_rate": 0,
+      "discount_percentage": 1.5,
+      "min_amount": 200000,
+      "max_amount": 1500000,
+      "target_categories": [
+        "Mac DT",
+        "iPad",
+        "Apple Watch",
+        "Audio Apple"
+      ],
+      "active": true
+    },
+    {
+      "name": "Sin Inter\u00e9s 12 Cuotas",
+      "installments": 12,
+      "interest_rate": 0,
+      "discount_percentage": 2.0,
+      "min_amount": 500000,
+      "max_amount": 3000000,
+      "target_categories": [
+        "Mac NB",
+        "iPad Pro",
+        "iMac"
+      ],
+      "active": true
+    },
+    {
+      "name": "24 Cuotas - Promoci\u00f3n BCI",
+      "installments": 24,
+      "interest_rate": 0,
+      "discount_percentage": 3.0,
+      "min_amount": 1000000,
+      "max_amount": 6000000,
+      "target_categories": [
+        "Mac NB",
+        "Mac DT",
+        "iPhone Pro",
+        "iPhone Pro Max"
+      ],
+      "active": true,
+      "notes": "V\u00e1lido solo con tarjetas BCI"
+    },
+    {
+      "name": "36 Cuotas - Lider Mastercard",
+      "installments": 36,
+      "interest_rate": 4.5,
+      "discount_percentage": 2.0,
+      "min_amount": 2000000,
+      "max_amount": 10000000,
+      "target_categories": [
+        "Mac NB",
+        "Mac DT",
+        "Mac Pro",
+        "Studio Display"
+      ],
+      "active": true,
+      "notes": "Solo Lider Mastercard, tasa especial"
+    }
+  ],
+  "discount_strategy": {
+    "by_payment_method": {
+      "cash": "No discount",
+      "debit_card": "0.5% discount",
+      "credit_card_3_installments": "0% discount",
+      "credit_card_6_installments": "1.5% discount",
+      "credit_card_12_installments": "2% discount",
+      "special_bci": "3% discount (24 cuotas)"
+    },
+    "volume_bonuses": {
+      "3_or_more_products": 1.0,
+      "5_or_more_products": 2.0,
+      "10_or_more_products": 3.0
+    }
+  },
+  "estimated_impact": {
+    "expected_conversion_rate": "25-30%",
+    "average_ticket_increase": "15-20%",
+    "installment_preference": {
+      "3_cuotas": "15%",
+      "6_cuotas": "35%",
+      "12_cuotas": "40%",
+      "24_plus_cuotas": "10%"
+    }
+  }
+}
