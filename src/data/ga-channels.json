@@ -1,0 +1,12 @@
+{
+  "channels": [
+    { "name": "Cross-network", "sessions2024": 101000, "sessions2025": 112000 },
+    { "name": "Direct", "sessions2024": 91000, "sessions2025": 91000 },
+    { "name": "Paid Search", "sessions2024": 20000, "sessions2025": 72000 },
+    { "name": "Organic Search", "sessions2024": 52000, "sessions2025": 60000 },
+    { "name": "Organic Social", "sessions2024": 32000, "sessions2025": 48000 },
+    { "name": "Email", "sessions2024": 48000, "sessions2025": 41000 },
+    { "name": "Paid Social", "sessions2024": 186, "sessions2025": 14000 },
+    { "name": "Referral", "sessions2024": 8200, "sessions2025": 11500 }
+  ]
+}

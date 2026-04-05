@@ -1,0 +1,43 @@
+{
+  "2024": {
+    "campaigns": [
+      { "name": "Cyber Apple 1", "recipients": 731000, "openRate": 43.5, "clickRate": 1.88, "conversions": 1571, "revenue": 789 },
+      { "name": "Cyber Terceros", "recipients": 729000, "openRate": 44.6, "clickRate": 1.43, "conversions": 1308, "revenue": 563 },
+      { "name": "Cyber Apple 2", "recipients": 726000, "openRate": 42.7, "clickRate": 1.12, "conversions": 1040, "revenue": 450 },
+      { "name": "Last Call iPhone", "recipients": 643000, "openRate": 28.1, "clickRate": 1.11, "conversions": 345, "revenue": 136 }
+    ],
+    "totals": {
+      "campaigns": 4,
+      "recipients": 2829000,
+      "avgOpenRate": 39.7,
+      "avgClickRate": 1.39,
+      "conversions": 4264,
+      "revenue": 1938
+    }
+  },
+  "2025": {
+    "campaigns": [
+      { "name": "Cyber Apple 1", "recipients": 1260000, "openRate": 38.3, "clickRate": 1.38, "conversions": 2855, "revenue": 1371 },
+      { "name": "Cyber Apple 2", "recipients": 288000, "openRate": 64.5, "clickRate": 1.58, "conversions": 563, "revenue": 256 },
+      { "name": "Cyber Terceros", "recipients": 153000, "openRate": 84.0, "clickRate": 3.03, "conversions": 517, "revenue": 224 },
+      { "name": "Cyber Boost", "recipients": 414000, "openRate": 33.6, "clickRate": 0.63, "conversions": 396, "revenue": 157 },
+      { "name": "Cyber Empresas", "recipients": 51000, "openRate": 49.4, "clickRate": 1.82, "conversions": 146, "revenue": 87 },
+      { "name": "Cupón Watch 1", "recipients": 3500, "openRate": 79.0, "clickRate": 4.20, "conversions": 25, "revenue": 10 },
+      { "name": "Cupón Watch 2", "recipients": 1100, "openRate": 79.0, "clickRate": 3.80, "conversions": 13, "revenue": 6 }
+    ],
+    "totals": {
+      "campaigns": 7,
+      "recipients": 2170600,
+      "avgOpenRate": 61.1,
+      "avgClickRate": 2.35,
+      "conversions": 4515,
+      "revenue": 2111
+    }
+  },
+  "yoy": {
+    "conversions": 5.9,
+    "revenue": 8.9,
+    "avgOpenRate": 53.9,
+    "avgClickRate": 69.1
+  }
+}

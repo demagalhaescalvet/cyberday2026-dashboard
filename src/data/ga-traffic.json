@@ -1,0 +1,41 @@
+{
+  "daily": {
+    "2024": {
+      "dates": ["3 Jun", "4 Jun", "5 Jun"],
+      "sessions": [185174, 112498, 98724],
+      "purchases": [4521, 2687, 2229],
+      "addToCarts": [12840, 7950, 6830],
+      "bounceRate": [29.1, 31.5, 35.2]
+    },
+    "2025": {
+      "dates": ["2 Jun", "3 Jun", "4 Jun"],
+      "sessions": [257302, 134820, 105560],
+      "purchases": [6312, 3845, 2787],
+      "addToCarts": [17450, 9820, 7340],
+      "bounceRate": [6.1, 6.8, 7.3]
+    }
+  },
+  "totals": {
+    "2024": {
+      "sessions": 396396,
+      "purchases": 9437,
+      "addToCarts": 27620,
+      "avgBounceRate": 31.9,
+      "conversionRate": 2.38
+    },
+    "2025": {
+      "sessions": 497682,
+      "purchases": 12944,
+      "addToCarts": 34610,
+      "avgBounceRate": 6.7,
+      "conversionRate": 2.60
+    }
+  },
+  "yoy": {
+    "sessions": 25.6,
+    "purchases": 37.2,
+    "addToCarts": 25.3,
+    "bounceRate": -79.0,
+    "conversionRate": 9.2
+  }
+}

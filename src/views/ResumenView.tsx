@@ -32,6 +32,9 @@ import orderMetrics from '@/data/order-metrics.json'
 import channelMix from '@/data/channel-mix.json'
 import hourlyDist from '@/data/hourly-distribution.json'
 import regionalData from '@/data/regional.json'
+import gaTraffic from '@/data/ga-traffic.json'
+import gaChannels from '@/data/ga-channels.json'
+import klaviyoCampaigns from '@/data/klaviyo-campaigns.json'
 
 // Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
@@ -1084,6 +1087,233 @@ export function ResumenView() {
               Top 3 (RM + Valparaíso + Bío Bío) = 81% del revenue total
             </div>
           </CardFooter>
+        </Card>
+      </div>
+
+      {/* ─── DIGITAL MARKETING SECTION ─── */}
+      {/* GA Web Traffic KPIs */}
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Sesiones Web</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{(gaTraffic.totals['2025'].sessions / 1000).toFixed(0)}K</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{gaTraffic.yoy.sessions.toFixed(1)}% vs 2024 ({(gaTraffic.totals['2024'].sessions / 1000).toFixed(0)}K)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Compras Online</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{gaTraffic.totals['2025'].purchases.toLocaleString()}</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{gaTraffic.yoy.purchases.toFixed(1)}% vs 2024 ({gaTraffic.totals['2024'].purchases.toLocaleString()})</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Bounce Rate</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{gaTraffic.totals['2025'].avgBounceRate}%</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">{gaTraffic.yoy.bounceRate}% vs 2024 ({gaTraffic.totals['2024'].avgBounceRate}%)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Tasa Conversión</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{gaTraffic.totals['2025'].conversionRate}%</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{gaTraffic.yoy.conversionRate.toFixed(1)}% vs 2024 ({gaTraffic.totals['2024'].conversionRate}%)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Add to Cart</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{(gaTraffic.totals['2025'].addToCarts / 1000).toFixed(1)}K</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{gaTraffic.yoy.addToCarts.toFixed(1)}% vs 2024 ({(gaTraffic.totals['2024'].addToCarts / 1000).toFixed(1)}K)</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* GA Channels & Klaviyo Performance */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        {/* GA Channel Acquisition */}
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Canales de Adquisición Web</CardTitle>
+            <CardDescription>Sesiones por canal — Google Analytics CyberDay 2024 vs 2025</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const channelData = gaChannels.channels
+                .map((ch) => ({
+                  name: ch.name,
+                  '2024': Math.round(ch.sessions2024 / 1000),
+                  '2025': Math.round(ch.sessions2025 / 1000),
+                  growth: ch.sessions2024 > 200 ? Math.round(((ch.sessions2025 - ch.sessions2024) / ch.sessions2024) * 100) : null,
+                }))
+                .sort((a, b) => b['2025'] - a['2025'])
+              return (
+                <ChartContainer
+                  config={{
+                    '2024': { label: '2024', color: '#8ec5ff' },
+                    '2025': { label: '2025', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[300px] w-full"
+                >
+                  <BarChart
+                    accessibilityLayer
+                    data={channelData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 70, left: 100, bottom: 10 }}
+                  >
+                    <CartesianGrid horizontal={false} className="stroke-border/50" />
+                    <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}K`} />
+                    <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={95} />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[200px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value) => `${value}K sesiones`}
+                        />
+                      }
+                    />
+                    <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} barSize={8} />
+                    <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} barSize={8}>
+                      <LabelList
+                        dataKey="growth"
+                        position="right"
+                        fill="currentColor"
+                        formatter={(v: number | null) => v !== null ? `${v > 0 ? '+' : ''}${v}%` : 'NEW'}
+                        fontSize={10}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              Paid Search <span className="text-emerald-400 font-medium">+268%</span> | Paid Social <span className="text-blue-400 font-medium">nuevo canal 2025</span>
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* Klaviyo Email Performance */}
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Email Marketing — Klaviyo</CardTitle>
+            <CardDescription>Revenue atribuido por campaña CyberDay ($M CLP)</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const emailData = [
+                ...klaviyoCampaigns['2025'].campaigns.map((c) => ({
+                  name: c.name,
+                  revenue: c.revenue,
+                  conversions: c.conversions,
+                  year: '2025',
+                })),
+              ].sort((a, b) => b.revenue - a.revenue)
+              return (
+                <ChartContainer
+                  config={{
+                    revenue: { label: 'Revenue ($M)', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[300px] w-full"
+                >
+                  <BarChart
+                    accessibilityLayer
+                    data={emailData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 80, left: 110, bottom: 10 }}
+                  >
+                    <CartesianGrid horizontal={false} className="stroke-border/50" />
+                    <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `$${v}M`} />
+                    <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} width={105} />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[220px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value, name, item) => {
+                            const d = item?.payload
+                            return `$${value}M (${d?.conversions?.toLocaleString()} conv.)`
+                          }}
+                        />
+                      }
+                    />
+                    <Bar dataKey="revenue" fill="#2b7fff" radius={[0, 6, 6, 0]}>
+                      {emailData.map((d, i) => (
+                        <Cell key={d.name} fill={CHART_COLORS[Math.min(i, CHART_COLORS.length - 1)]} />
+                      ))}
+                      <LabelList
+                        dataKey="revenue"
+                        position="right"
+                        fill="currentColor"
+                        formatter={(v: number) => `$${v}M`}
+                        fontSize={11}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              2025: <span className="font-medium text-foreground">$2,111M</span> atribuidos ({klaviyoCampaigns['2025'].totals.conversions.toLocaleString()} conv.)
+              vs 2024: <span className="font-medium text-foreground">$1,938M</span> ({klaviyoCampaigns['2024'].totals.conversions.toLocaleString()} conv.)
+              — <span className="text-emerald-400 font-medium">+8.9%</span> revenue
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* Email KPI Summary Row */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Campañas Email</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{klaviyoCampaigns['2025'].totals.campaigns}</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">vs {klaviyoCampaigns['2024'].totals.campaigns} en 2024 — más segmentación</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Avg Open Rate</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{klaviyoCampaigns['2025'].totals.avgOpenRate}%</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{klaviyoCampaigns.yoy.avgOpenRate}% vs 2024 ({klaviyoCampaigns['2024'].totals.avgOpenRate}%)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Avg Click Rate</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{klaviyoCampaigns['2025'].totals.avgClickRate}%</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{klaviyoCampaigns.yoy.avgClickRate}% vs 2024 ({klaviyoCampaigns['2024'].totals.avgClickRate}%)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Revenue Atribuido</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">${klaviyoCampaigns['2025'].totals.revenue}M</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+{klaviyoCampaigns.yoy.revenue}% vs 2024 (${klaviyoCampaigns['2024'].totals.revenue}M)</p>
+          </CardContent>
         </Card>
       </div>
     </div>
