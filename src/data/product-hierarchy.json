@@ -1,0 +1,3167 @@
+{
+  "grupos": [
+    {
+      "name": "iPhone",
+      "revenue2024": 2794,
+      "revenue2025": 2975,
+      "units2024": 3173,
+      "units2025": 3406,
+      "propiedades": [
+        {
+          "name": "iPhone 16",
+          "revenue2024": 0,
+          "revenue2025": 2280,
+          "units2024": 0,
+          "units2025": 2078,
+          "subpropiedades": [
+            {
+              "name": "iPh 16 Pro",
+              "revenue2024": 0,
+              "revenue2025": 1422,
+              "units2024": 0,
+              "units2025": 1362
+            },
+            {
+              "name": "iPh 16 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 649,
+              "units2024": 0,
+              "units2025": 485
+            },
+            {
+              "name": "iPh 16",
+              "revenue2024": 0,
+              "revenue2025": 165,
+              "units2024": 0,
+              "units2025": 178
+            },
+            {
+              "name": "iPh 16e",
+              "revenue2024": 0,
+              "revenue2025": 30,
+              "units2024": 0,
+              "units2025": 40
+            },
+            {
+              "name": "iPh 16 Plus",
+              "revenue2024": 0,
+              "revenue2025": 14,
+              "units2024": 0,
+              "units2025": 13
+            }
+          ]
+        },
+        {
+          "name": "iPhone 13",
+          "revenue2024": 281,
+          "revenue2025": 584,
+          "units2024": 464,
+          "units2025": 1188,
+          "subpropiedades": [
+            {
+              "name": "iPh 13",
+              "revenue2024": 281,
+              "revenue2025": 584,
+              "units2024": 464,
+              "units2025": 1188
+            }
+          ]
+        },
+        {
+          "name": "iPhone 15",
+          "revenue2024": 2248,
+          "revenue2025": 93,
+          "units2024": 2021,
+          "units2025": 115,
+          "subpropiedades": [
+            {
+              "name": "iPh 15",
+              "revenue2024": 135,
+              "revenue2025": 88,
+              "units2024": 146,
+              "units2025": 110
+            },
+            {
+              "name": "iPh 15 Plus",
+              "revenue2024": 11,
+              "revenue2025": 5,
+              "units2024": 10,
+              "units2025": 5
+            },
+            {
+              "name": "iPh 15 Pro",
+              "revenue2024": 1317,
+              "revenue2025": 0,
+              "units2024": 1262,
+              "units2025": 0
+            },
+            {
+              "name": "iPh 15 Pro Max",
+              "revenue2024": 785,
+              "revenue2025": 0,
+              "units2024": 603,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "iPhone 14",
+          "revenue2024": 45,
+          "revenue2025": 19,
+          "units2024": 53,
+          "units2025": 25,
+          "subpropiedades": [
+            {
+              "name": "iPh 14 Plus",
+              "revenue2024": 3,
+              "revenue2025": 13,
+              "units2024": 3,
+              "units2025": 17
+            },
+            {
+              "name": "iPh 14",
+              "revenue2024": 42,
+              "revenue2025": 6,
+              "units2024": 50,
+              "units2025": 8
+            }
+          ]
+        },
+        {
+          "name": "iPhone 11",
+          "revenue2024": 200,
+          "revenue2025": 0,
+          "units2024": 599,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "iPh 11",
+              "revenue2024": 200,
+              "revenue2025": 0,
+              "units2024": 599,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "iPhone 12",
+          "revenue2024": 18,
+          "revenue2025": 0,
+          "units2024": 33,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "iPh 12",
+              "revenue2024": 18,
+              "revenue2025": 0,
+              "units2024": 33,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "iPhone SE 3Gen",
+          "revenue2024": 2,
+          "revenue2025": 0,
+          "units2024": 3,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "iPh SE 3Gen",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio Apple",
+      "revenue2024": 434,
+      "revenue2025": 913,
+      "units2024": 2731,
+      "units2025": 6079,
+      "propiedades": [
+        {
+          "name": "AirPod",
+          "revenue2024": 189,
+          "revenue2025": 483,
+          "units2024": 1524,
+          "units2025": 4017,
+          "subpropiedades": [
+            {
+              "name": "AirPod",
+              "revenue2024": 189,
+              "revenue2025": 483,
+              "units2024": 1524,
+              "units2025": 4017
+            }
+          ]
+        },
+        {
+          "name": "AirPod Pro",
+          "revenue2024": 194,
+          "revenue2025": 355,
+          "units2024": 881,
+          "units2025": 1773,
+          "subpropiedades": [
+            {
+              "name": "AirPod Pro",
+              "revenue2024": 194,
+              "revenue2025": 355,
+              "units2024": 881,
+              "units2025": 1773
+            }
+          ]
+        },
+        {
+          "name": "AirPod Max",
+          "revenue2024": 14,
+          "revenue2025": 56,
+          "units2024": 25,
+          "units2025": 112,
+          "subpropiedades": [
+            {
+              "name": "AirPod Max",
+              "revenue2024": 14,
+              "revenue2025": 56,
+              "units2024": 25,
+              "units2025": 112
+            }
+          ]
+        },
+        {
+          "name": "HomePod",
+          "revenue2024": 18,
+          "revenue2025": 15,
+          "units2024": 74,
+          "units2025": 106,
+          "subpropiedades": [
+            {
+              "name": "HomePod",
+              "revenue2024": 18,
+              "revenue2025": 15,
+              "units2024": 74,
+              "units2025": 106
+            }
+          ]
+        },
+        {
+          "name": "In Ear",
+          "revenue2024": 16,
+          "revenue2025": 2,
+          "units2024": 130,
+          "units2025": 23,
+          "subpropiedades": [
+            {
+              "name": "In Ear",
+              "revenue2024": 16,
+              "revenue2025": 2,
+              "units2024": 130,
+              "units2025": 23
+            }
+          ]
+        },
+        {
+          "name": "On Ear",
+          "revenue2024": 0,
+          "revenue2025": 1,
+          "units2024": 0,
+          "units2025": 6,
+          "subpropiedades": [
+            {
+              "name": "On Ear",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 6
+            }
+          ]
+        },
+        {
+          "name": "Wired",
+          "revenue2024": 2,
+          "revenue2025": 1,
+          "units2024": 93,
+          "units2025": 39,
+          "subpropiedades": [
+            {
+              "name": "Wired",
+              "revenue2024": 2,
+              "revenue2025": 1,
+              "units2024": 93,
+              "units2025": 39
+            }
+          ]
+        },
+        {
+          "name": "Over Ear",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 4,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Over Ear",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Portatil",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Portatil",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notebook Apple",
+      "revenue2024": 903,
+      "revenue2025": 909,
+      "units2024": 861,
+      "units2025": 623,
+      "propiedades": [
+        {
+          "name": "MB Air 13",
+          "revenue2024": 576,
+          "revenue2025": 366,
+          "units2024": 668,
+          "units2025": 353,
+          "subpropiedades": [
+            {
+              "name": "MB Air 13 M2",
+              "revenue2024": 120,
+              "revenue2025": 223,
+              "units2024": 104,
+              "units2025": 248
+            },
+            {
+              "name": "MB Air 13 M4",
+              "revenue2024": 0,
+              "revenue2025": 143,
+              "units2024": 0,
+              "units2025": 105
+            },
+            {
+              "name": "MB Air 13 M1",
+              "revenue2024": 309,
+              "revenue2025": 0,
+              "units2024": 442,
+              "units2025": 0
+            },
+            {
+              "name": "MB Air 13 M1 CTO",
+              "revenue2024": 51,
+              "revenue2025": 0,
+              "units2024": 62,
+              "units2025": 0
+            },
+            {
+              "name": "MB Air 13 M2 CTO",
+              "revenue2024": 22,
+              "revenue2025": 0,
+              "units2024": 12,
+              "units2025": 0
+            },
+            {
+              "name": "MB Air 13 M3",
+              "revenue2024": 73,
+              "revenue2025": 0,
+              "units2024": 48,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "MB Pro 14",
+          "revenue2024": 125,
+          "revenue2025": 231,
+          "units2024": 60,
+          "units2025": 107,
+          "subpropiedades": [
+            {
+              "name": "MB Pro 14 M4",
+              "revenue2024": 0,
+              "revenue2025": 191,
+              "units2024": 0,
+              "units2025": 92
+            },
+            {
+              "name": "MB Pro 14 M3",
+              "revenue2024": 76,
+              "revenue2025": 40,
+              "units2024": 34,
+              "units2025": 15
+            },
+            {
+              "name": "MB Pro 14 M2",
+              "revenue2024": 45,
+              "revenue2025": 0,
+              "units2024": 25,
+              "units2025": 0
+            },
+            {
+              "name": "MB Pro 14 M3 CTO",
+              "revenue2024": 4,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "MB Pro 16",
+          "revenue2024": 64,
+          "revenue2025": 215,
+          "units2024": 30,
+          "units2025": 87,
+          "subpropiedades": [
+            {
+              "name": "MB Pro 16 M3",
+              "revenue2024": 16,
+              "revenue2025": 188,
+              "units2024": 5,
+              "units2025": 80
+            },
+            {
+              "name": "MB Pro 16 M4",
+              "revenue2024": 0,
+              "revenue2025": 24,
+              "units2024": 0,
+              "units2025": 6
+            },
+            {
+              "name": "MB Pro 16 M4 CTO",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 1
+            },
+            {
+              "name": "MB Pro 16 M2",
+              "revenue2024": 47,
+              "revenue2025": 0,
+              "units2024": 25,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "MB Air 15",
+          "revenue2024": 138,
+          "revenue2025": 91,
+          "units2024": 103,
+          "units2025": 74,
+          "subpropiedades": [
+            {
+              "name": "MB Air 15 M3",
+              "revenue2024": 32,
+              "revenue2025": 76,
+              "units2024": 18,
+              "units2025": 65
+            },
+            {
+              "name": "MB Air 15 M4",
+              "revenue2024": 0,
+              "revenue2025": 15,
+              "units2024": 0,
+              "units2025": 9
+            },
+            {
+              "name": "MB Air 15 M2",
+              "revenue2024": 105,
+              "revenue2025": 0,
+              "units2024": 84,
+              "units2025": 0
+            },
+            {
+              "name": "MB Air 15 M2 CTO",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "MB Pro 14 M4 CTO",
+          "revenue2024": 0,
+          "revenue2025": 5,
+          "units2024": 0,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "MB Pro 14",
+              "revenue2024": 0,
+              "revenue2025": 5,
+              "units2024": 0,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "iPad",
+      "revenue2024": 658,
+      "revenue2025": 572,
+      "units2024": 1546,
+      "units2025": 895,
+      "propiedades": [
+        {
+          "name": "Pro 12.9 6ª Gen",
+          "revenue2024": 2,
+          "revenue2025": 165,
+          "units2024": 1,
+          "units2025": 184,
+          "subpropiedades": [
+            {
+              "name": "Pro 12.9 6ª Gen",
+              "revenue2024": 2,
+              "revenue2025": 165,
+              "units2024": 1,
+              "units2025": 184
+            }
+          ]
+        },
+        {
+          "name": "11ª Gen",
+          "revenue2024": 0,
+          "revenue2025": 150,
+          "units2024": 0,
+          "units2025": 359,
+          "subpropiedades": [
+            {
+              "name": "11ª Gen",
+              "revenue2024": 0,
+              "revenue2025": 150,
+              "units2024": 0,
+              "units2025": 359
+            }
+          ]
+        },
+        {
+          "name": "Air M3",
+          "revenue2024": 0,
+          "revenue2025": 83,
+          "units2024": 0,
+          "units2025": 107,
+          "subpropiedades": [
+            {
+              "name": "Air M3",
+              "revenue2024": 0,
+              "revenue2025": 83,
+              "units2024": 0,
+              "units2025": 107
+            }
+          ]
+        },
+        {
+          "name": "Pro 11 4ª Gen",
+          "revenue2024": 2,
+          "revenue2025": 55,
+          "units2024": 1,
+          "units2025": 65,
+          "subpropiedades": [
+            {
+              "name": "Pro 11 4ª Gen",
+              "revenue2024": 2,
+              "revenue2025": 55,
+              "units2024": 1,
+              "units2025": 65
+            }
+          ]
+        },
+        {
+          "name": "Pro 11 M4",
+          "revenue2024": 26,
+          "revenue2025": 35,
+          "units2024": 19,
+          "units2025": 28,
+          "subpropiedades": [
+            {
+              "name": "Pro 11 M4",
+              "revenue2024": 26,
+              "revenue2025": 35,
+              "units2024": 19,
+              "units2025": 28
+            }
+          ]
+        },
+        {
+          "name": "Air 5",
+          "revenue2024": 44,
+          "revenue2025": 31,
+          "units2024": 69,
+          "units2025": 51,
+          "subpropiedades": [
+            {
+              "name": "Air 5",
+              "revenue2024": 44,
+              "revenue2025": 31,
+              "units2024": 69,
+              "units2025": 51
+            }
+          ]
+        },
+        {
+          "name": "10ª Gen",
+          "revenue2024": 317,
+          "revenue2025": 21,
+          "units2024": 710,
+          "units2025": 66,
+          "subpropiedades": [
+            {
+              "name": "10ª Gen",
+              "revenue2024": 317,
+              "revenue2025": 21,
+              "units2024": 710,
+              "units2025": 66
+            }
+          ]
+        },
+        {
+          "name": "Pro 13 M4",
+          "revenue2024": 21,
+          "revenue2025": 14,
+          "units2024": 10,
+          "units2025": 8,
+          "subpropiedades": [
+            {
+              "name": "Pro 13 M4",
+              "revenue2024": 21,
+              "revenue2025": 14,
+              "units2024": 10,
+              "units2025": 8
+            }
+          ]
+        },
+        {
+          "name": "mini 7",
+          "revenue2024": 0,
+          "revenue2025": 13,
+          "units2024": 0,
+          "units2025": 20,
+          "subpropiedades": [
+            {
+              "name": "mini 7",
+              "revenue2024": 0,
+              "revenue2025": 13,
+              "units2024": 0,
+              "units2025": 20
+            }
+          ]
+        },
+        {
+          "name": "9ª Gen",
+          "revenue2024": 185,
+          "revenue2025": 2,
+          "units2024": 662,
+          "units2025": 5,
+          "subpropiedades": [
+            {
+              "name": "9ª Gen",
+              "revenue2024": 185,
+              "revenue2025": 2,
+              "units2024": 662,
+              "units2025": 5
+            }
+          ]
+        },
+        {
+          "name": "Air M2",
+          "revenue2024": 59,
+          "revenue2025": 2,
+          "units2024": 71,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Air M2",
+              "revenue2024": 59,
+              "revenue2025": 2,
+              "units2024": 71,
+              "units2025": 2
+            }
+          ]
+        },
+        {
+          "name": "mini 6",
+          "revenue2024": 3,
+          "revenue2025": 0,
+          "units2024": 3,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "mini 6",
+              "revenue2024": 3,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apple Watch",
+      "revenue2024": 148,
+      "revenue2025": 196,
+      "units2024": 419,
+      "units2025": 585,
+      "propiedades": [
+        {
+          "name": "AW S10",
+          "revenue2024": 0,
+          "revenue2025": 108,
+          "units2024": 0,
+          "units2025": 277,
+          "subpropiedades": [
+            {
+              "name": "AW S10 42 mm",
+              "revenue2024": 0,
+              "revenue2025": 66,
+              "units2024": 0,
+              "units2025": 177
+            },
+            {
+              "name": "AW S10 46 mm",
+              "revenue2024": 0,
+              "revenue2025": 41,
+              "units2024": 0,
+              "units2025": 100
+            }
+          ]
+        },
+        {
+          "name": "AW SE",
+          "revenue2024": 59,
+          "revenue2025": 61,
+          "units2024": 231,
+          "units2025": 268,
+          "subpropiedades": [
+            {
+              "name": "AW SE 40 mm",
+              "revenue2024": 36,
+              "revenue2025": 41,
+              "units2024": 148,
+              "units2025": 194
+            },
+            {
+              "name": "AW SE 44 mm",
+              "revenue2024": 23,
+              "revenue2025": 19,
+              "units2024": 83,
+              "units2025": 74
+            }
+          ]
+        },
+        {
+          "name": "AW Ultra 2",
+          "revenue2024": 8,
+          "revenue2025": 16,
+          "units2024": 8,
+          "units2025": 17,
+          "subpropiedades": [
+            {
+              "name": "AW Ultra 2",
+              "revenue2024": 8,
+              "revenue2025": 16,
+              "units2024": 8,
+              "units2025": 17
+            }
+          ]
+        },
+        {
+          "name": "AW S10 Cell",
+          "revenue2024": 0,
+          "revenue2025": 9,
+          "units2024": 0,
+          "units2025": 13,
+          "subpropiedades": [
+            {
+              "name": "AW S10 Cell",
+              "revenue2024": 0,
+              "revenue2025": 9,
+              "units2024": 0,
+              "units2025": 13
+            }
+          ]
+        },
+        {
+          "name": "AW SE Cell",
+          "revenue2024": 6,
+          "revenue2025": 4,
+          "units2024": 16,
+          "units2025": 10,
+          "subpropiedades": [
+            {
+              "name": "AW SE Cell",
+              "revenue2024": 6,
+              "revenue2025": 4,
+              "units2024": 16,
+              "units2025": 10
+            }
+          ]
+        },
+        {
+          "name": "AW S8 Cell",
+          "revenue2024": 3,
+          "revenue2025": 0,
+          "units2024": 7,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "AW S8 Cell",
+              "revenue2024": 3,
+              "revenue2025": 0,
+              "units2024": 7,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "AW S9",
+          "revenue2024": 61,
+          "revenue2025": 0,
+          "units2024": 140,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "AW S9 41 mm",
+              "revenue2024": 24,
+              "revenue2025": 0,
+              "units2024": 58,
+              "units2025": 0
+            },
+            {
+              "name": "AW S9 45 mm",
+              "revenue2024": 37,
+              "revenue2025": 0,
+              "units2024": 82,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "AW S9 Cell",
+          "revenue2024": 11,
+          "revenue2025": 0,
+          "units2024": 17,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "AW S9 Cell",
+              "revenue2024": 11,
+              "revenue2025": 0,
+              "units2024": 17,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc Apple",
+      "revenue2024": 170,
+      "revenue2025": 163,
+      "units2024": 2406,
+      "units2025": 1684,
+      "propiedades": [
+        {
+          "name": "Pencil",
+          "revenue2024": 60,
+          "revenue2025": 71,
+          "units2024": 595,
+          "units2025": 614,
+          "subpropiedades": [
+            {
+              "name": "Pencil",
+              "revenue2024": 60,
+              "revenue2025": 71,
+              "units2024": 595,
+              "units2025": 614
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 17,
+          "revenue2025": 25,
+          "units2024": 51,
+          "units2025": 71,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad Air M3 ",
+              "revenue2024": 0,
+              "revenue2025": 7,
+              "units2024": 0,
+              "units2025": 22
+            },
+            {
+              "name": "Teclado iPad Pro 11 M4",
+              "revenue2024": 4,
+              "revenue2025": 6,
+              "units2024": 11,
+              "units2025": 16
+            },
+            {
+              "name": "Teclado iPad Pro 12.9",
+              "revenue2024": 1,
+              "revenue2025": 5,
+              "units2024": 2,
+              "units2025": 14
+            },
+            {
+              "name": "Teclado iPad Pro 13 M4",
+              "revenue2024": 3,
+              "revenue2025": 4,
+              "units2024": 6,
+              "units2025": 11
+            },
+            {
+              "name": "Teclado iPad Pro 11/ Air",
+              "revenue2024": 6,
+              "revenue2025": 2,
+              "units2024": 19,
+              "units2025": 6
+            },
+            {
+              "name": "Teclado iPad 10 Gen",
+              "revenue2024": 3,
+              "revenue2025": 1,
+              "units2024": 10,
+              "units2025": 2
+            },
+            {
+              "name": "Teclado iPad 9/8 Gen",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Apple TV",
+          "revenue2024": 20,
+          "revenue2025": 23,
+          "units2024": 135,
+          "units2025": 152,
+          "subpropiedades": [
+            {
+              "name": "Apple TV",
+              "revenue2024": 20,
+              "revenue2025": 23,
+              "units2024": 135,
+              "units2025": 152
+            }
+          ]
+        },
+        {
+          "name": "AirTag",
+          "revenue2024": 26,
+          "revenue2025": 14,
+          "units2024": 484,
+          "units2025": 236,
+          "subpropiedades": [
+            {
+              "name": "AirTag",
+              "revenue2024": 26,
+              "revenue2025": 14,
+              "units2024": 484,
+              "units2025": 236
+            }
+          ]
+        },
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 4,
+          "revenue2025": 9,
+          "units2024": 90,
+          "units2025": 103,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 16 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 4,
+              "units2024": 0,
+              "units2025": 34
+            },
+            {
+              "name": "Funda iPh 16 Pro",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 48
+            },
+            {
+              "name": "Funda iPh 16",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 13
+            },
+            {
+              "name": "Funda iPh 13",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPh 14",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 14 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 14 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 15",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPh 15 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 15 Pro",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 17,
+              "units2025": 4
+            },
+            {
+              "name": "Funda iPh 15 Pro Max",
+              "revenue2024": 3,
+              "revenue2025": 0,
+              "units2024": 61,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPh 16 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Mouse",
+          "revenue2024": 9,
+          "revenue2025": 8,
+          "units2024": 119,
+          "units2025": 98,
+          "subpropiedades": [
+            {
+              "name": "Mouse",
+              "revenue2024": 9,
+              "revenue2025": 8,
+              "units2024": 119,
+              "units2025": 98
+            }
+          ]
+        },
+        {
+          "name": "Cargador",
+          "revenue2024": 11,
+          "revenue2025": 7,
+          "units2024": 412,
+          "units2025": 216,
+          "subpropiedades": [
+            {
+              "name": "Cargador",
+              "revenue2024": 11,
+              "revenue2025": 7,
+              "units2024": 412,
+              "units2025": 216
+            }
+          ]
+        },
+        {
+          "name": "Cable",
+          "revenue2024": 8,
+          "revenue2025": 4,
+          "units2024": 334,
+          "units2025": 142,
+          "subpropiedades": [
+            {
+              "name": "Cable Lightning",
+              "revenue2024": 5,
+              "revenue2025": 3,
+              "units2024": 200,
+              "units2025": 110
+            },
+            {
+              "name": "Cable USB-C",
+              "revenue2024": 3,
+              "revenue2025": 1,
+              "units2024": 113,
+              "units2025": 23
+            },
+            {
+              "name": "Cable Apple Watch",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 13,
+              "units2025": 5
+            },
+            {
+              "name": "Cable Dock",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            },
+            {
+              "name": "Cable MagSafe",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 6,
+              "units2025": 4
+            }
+          ]
+        },
+        {
+          "name": "Funda iPad",
+          "revenue2024": 2,
+          "revenue2025": 2,
+          "units2024": 16,
+          "units2025": 21,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad Air M2",
+              "revenue2024": 1,
+              "revenue2025": 1,
+              "units2024": 6,
+              "units2025": 8
+            },
+            {
+              "name": "Funda iPad 10 Gen",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 2
+            },
+            {
+              "name": "Funda iPad 11 Gen",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 4
+            },
+            {
+              "name": "Funda iPad Air 4/5",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 2
+            },
+            {
+              "name": "Funda iPad Pro 11",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPad Pro 11 M4",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPad Pro 13 M4",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPad mini",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 3
+            }
+          ]
+        },
+        {
+          "name": "Teclado",
+          "revenue2024": 9,
+          "revenue2025": 1,
+          "units2024": 93,
+          "units2025": 4,
+          "subpropiedades": [
+            {
+              "name": "Teclado",
+              "revenue2024": 9,
+              "revenue2025": 1,
+              "units2024": 93,
+              "units2025": 4
+            }
+          ]
+        },
+        {
+          "name": "Adaptador",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 61,
+          "units2025": 19,
+          "subpropiedades": [
+            {
+              "name": "Adaptador",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 61,
+              "units2025": 19
+            }
+          ]
+        },
+        {
+          "name": "Banda",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 7,
+          "units2025": 4,
+          "subpropiedades": [
+            {
+              "name": "Banda",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 6,
+              "units2025": 1
+            },
+            {
+              "name": "Banda 49mm",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 3
+            }
+          ]
+        },
+        {
+          "name": "Cable USB-C",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Cable",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "In Ear",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "In Ear",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 16e",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Limpieza",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 3,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Limpieza",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Llavero",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Llavero",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Trackpad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Trackpad",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Wallet iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 4,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Wallet iPhone",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Desktop Apple",
+      "revenue2024": 250,
+      "revenue2025": 112,
+      "units2024": 271,
+      "units2025": 112,
+      "propiedades": [
+        {
+          "name": "Mac mini",
+          "revenue2024": 4,
+          "revenue2025": 52,
+          "units2024": 5,
+          "units2025": 72,
+          "subpropiedades": [
+            {
+              "name": "Mac mini M4",
+              "revenue2024": 0,
+              "revenue2025": 42,
+              "units2024": 0,
+              "units2025": 58
+            },
+            {
+              "name": "Mac mini",
+              "revenue2024": 3,
+              "revenue2025": 8,
+              "units2024": 4,
+              "units2025": 13
+            },
+            {
+              "name": "Mac mini CTO",
+              "revenue2024": 1,
+              "revenue2025": 1,
+              "units2024": 1,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "iMac 24 M4",
+          "revenue2024": 0,
+          "revenue2025": 31,
+          "units2024": 0,
+          "units2025": 18,
+          "subpropiedades": [
+            {
+              "name": "iMac 24 M4",
+              "revenue2024": 0,
+              "revenue2025": 28,
+              "units2024": 0,
+              "units2025": 17
+            },
+            {
+              "name": "iMac 24 M4 CTO",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "iMac 24 M3",
+          "revenue2024": 24,
+          "revenue2025": 25,
+          "units2024": 11,
+          "units2025": 20,
+          "subpropiedades": [
+            {
+              "name": "iMac 24 M3",
+              "revenue2024": 8,
+              "revenue2025": 25,
+              "units2024": 5,
+              "units2025": 20
+            },
+            {
+              "name": "iMac 24 M3 CTO",
+              "revenue2024": 15,
+              "revenue2025": 0,
+              "units2024": 6,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Mac Studio",
+          "revenue2024": 5,
+          "revenue2025": 2,
+          "units2024": 2,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Mac Studio",
+              "revenue2024": 5,
+              "revenue2025": 2,
+              "units2024": 2,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Monitor",
+          "revenue2024": 5,
+          "revenue2025": 2,
+          "units2024": 1,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Monitor",
+              "revenue2024": 5,
+              "revenue2025": 2,
+              "units2024": 1,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Soporte Mac Pro",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Soporte Mac Pro",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "iMac 24 M1",
+          "revenue2024": 202,
+          "revenue2025": 0,
+          "units2024": 242,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "iMac 24 M1",
+              "revenue2024": 202,
+              "revenue2025": 0,
+              "units2024": 242,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "iMac 27",
+          "revenue2024": 9,
+          "revenue2025": 0,
+          "units2024": 9,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "iMac 27",
+              "revenue2024": 9,
+              "revenue2025": 0,
+              "units2024": 9,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "#N/A",
+      "revenue2024": 15,
+      "revenue2025": 56,
+      "units2024": 455,
+      "units2025": 739,
+      "propiedades": [
+        {
+          "name": "#N/A",
+          "revenue2024": 15,
+          "revenue2025": 56,
+          "units2024": 455,
+          "units2025": 739,
+          "subpropiedades": [
+            {
+              "name": "#N/A",
+              "revenue2024": 15,
+              "revenue2025": 56,
+              "units2024": 455,
+              "units2025": 739
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audifonos",
+      "revenue2024": 27,
+      "revenue2025": 13,
+      "units2024": 269,
+      "units2025": 192,
+      "propiedades": [
+        {
+          "name": "In Ear",
+          "revenue2024": 12,
+          "revenue2025": 7,
+          "units2024": 130,
+          "units2025": 124,
+          "subpropiedades": [
+            {
+              "name": "In Ear",
+              "revenue2024": 12,
+              "revenue2025": 7,
+              "units2024": 130,
+              "units2025": 124
+            }
+          ]
+        },
+        {
+          "name": "Over Ear",
+          "revenue2024": 12,
+          "revenue2025": 6,
+          "units2024": 116,
+          "units2025": 58,
+          "subpropiedades": [
+            {
+              "name": "Over Ear",
+              "revenue2024": 12,
+              "revenue2025": 6,
+              "units2024": 116,
+              "units2025": 58
+            }
+          ]
+        },
+        {
+          "name": "On Ear",
+          "revenue2024": 3,
+          "revenue2025": 1,
+          "units2024": 23,
+          "units2025": 10,
+          "subpropiedades": [
+            {
+              "name": "On Ear",
+              "revenue2024": 3,
+              "revenue2025": 1,
+              "units2024": 23,
+              "units2025": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Parlantes",
+      "revenue2024": 50,
+      "revenue2025": 12,
+      "units2024": 244,
+      "units2025": 36,
+      "propiedades": [
+        {
+          "name": "No Portatil",
+          "revenue2024": 21,
+          "revenue2025": 10,
+          "units2024": 92,
+          "units2025": 25,
+          "subpropiedades": [
+            {
+              "name": "No Portatil",
+              "revenue2024": 21,
+              "revenue2025": 10,
+              "units2024": 92,
+              "units2025": 25
+            }
+          ]
+        },
+        {
+          "name": "Portatil",
+          "revenue2024": 10,
+          "revenue2025": 1,
+          "units2024": 107,
+          "units2025": 8,
+          "subpropiedades": [
+            {
+              "name": "Portatil",
+              "revenue2024": 10,
+              "revenue2025": 1,
+              "units2024": 107,
+              "units2025": 8
+            }
+          ]
+        },
+        {
+          "name": "Wi-Fi",
+          "revenue2024": 19,
+          "revenue2025": 1,
+          "units2024": 45,
+          "units2025": 3,
+          "subpropiedades": [
+            {
+              "name": "Wi-Fi",
+              "revenue2024": 19,
+              "revenue2025": 1,
+              "units2024": 45,
+              "units2025": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc Terceros",
+      "revenue2024": 13,
+      "revenue2025": 11,
+      "units2024": 829,
+      "units2025": 421,
+      "propiedades": [
+        {
+          "name": "Bateria",
+          "revenue2024": 2,
+          "revenue2025": 6,
+          "units2024": 58,
+          "units2025": 216,
+          "subpropiedades": [
+            {
+              "name": "Bateria",
+              "revenue2024": 2,
+              "revenue2025": 6,
+              "units2024": 58,
+              "units2025": 216
+            }
+          ]
+        },
+        {
+          "name": "Pencil",
+          "revenue2024": 9,
+          "revenue2025": 3,
+          "units2024": 578,
+          "units2025": 68,
+          "subpropiedades": [
+            {
+              "name": "Pencil",
+              "revenue2024": 9,
+              "revenue2025": 3,
+              "units2024": 578,
+              "units2025": 68
+            }
+          ]
+        },
+        {
+          "name": "Casco",
+          "revenue2024": 0,
+          "revenue2025": 1,
+          "units2024": 0,
+          "units2025": 28,
+          "subpropiedades": [
+            {
+              "name": "Casco",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 28
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 6,
+          "units2025": 5,
+          "subpropiedades": [
+            {
+              "name": "Base",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 6,
+              "units2025": 5
+            }
+          ]
+        },
+        {
+          "name": "Camara",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 4,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Camara",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Correa",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 4,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Correa",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Disco duro",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Disco duro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Funda AirPod",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 15,
+          "subpropiedades": [
+            {
+              "name": "Funda Airpod",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 15
+            }
+          ]
+        },
+        {
+          "name": "Funda Airpod",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 30,
+          "units2025": 17,
+          "subpropiedades": [
+            {
+              "name": "Funda Airpod",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 30,
+              "units2025": 17
+            }
+          ]
+        },
+        {
+          "name": "Limpieza",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 8,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Limpieza",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 8,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Llavero",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 20,
+          "units2025": 16,
+          "subpropiedades": [
+            {
+              "name": "Llavero",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 20,
+              "units2025": 16
+            }
+          ]
+        },
+        {
+          "name": "Loop",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 68,
+          "units2025": 10,
+          "subpropiedades": [
+            {
+              "name": "Loop",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 68,
+              "units2025": 10
+            }
+          ]
+        },
+        {
+          "name": "Presentador",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Presentador",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 2
+            }
+          ]
+        },
+        {
+          "name": "Router",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 0,
+          "units2025": 3,
+          "subpropiedades": [
+            {
+              "name": "Router",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 3
+            }
+          ]
+        },
+        {
+          "name": "Selfie",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 5,
+          "units2025": 23,
+          "subpropiedades": [
+            {
+              "name": "Selfie",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 5,
+              "units2025": 23
+            }
+          ]
+        },
+        {
+          "name": "Sleeve",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 31,
+          "units2025": 13,
+          "subpropiedades": [
+            {
+              "name": "Sleeve",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 31,
+              "units2025": 13
+            }
+          ]
+        },
+        {
+          "name": "Soporte",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 10,
+          "units2025": 3,
+          "subpropiedades": [
+            {
+              "name": "Soporte",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 10,
+              "units2025": 3
+            }
+          ]
+        },
+        {
+          "name": "Transmisor",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 5,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Transmisor",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 5,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cargadores",
+      "revenue2024": 20,
+      "revenue2025": 9,
+      "units2024": 461,
+      "units2025": 253,
+      "propiedades": [
+        {
+          "name": "Cargador",
+          "revenue2024": 1,
+          "revenue2025": 7,
+          "units2024": 23,
+          "units2025": 211,
+          "subpropiedades": [
+            {
+              "name": "Cargador",
+              "revenue2024": 1,
+              "revenue2025": 7,
+              "units2024": 23,
+              "units2025": 211
+            }
+          ]
+        },
+        {
+          "name": "Base carga",
+          "revenue2024": 20,
+          "revenue2025": 2,
+          "units2024": 438,
+          "units2025": 42,
+          "subpropiedades": [
+            {
+              "name": "Base carga",
+              "revenue2024": 20,
+              "revenue2025": 2,
+              "units2024": 438,
+              "units2025": 42
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 16",
+      "revenue2024": 0,
+      "revenue2025": 5,
+      "units2024": 0,
+      "units2025": 108,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 5,
+          "units2024": 0,
+          "units2025": 108,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 16 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 3,
+              "units2024": 0,
+              "units2025": 36
+            },
+            {
+              "name": "Funda iPh 16 Pro",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 0,
+              "units2025": 57
+            },
+            {
+              "name": "Funda iPh 16",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 13
+            },
+            {
+              "name": "Funda iPh 16 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            },
+            {
+              "name": "Funda iPh 16e",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc Notebook",
+      "revenue2024": 10,
+      "revenue2025": 4,
+      "units2024": 256,
+      "units2025": 203,
+      "propiedades": [
+        {
+          "name": "Funda MacBook",
+          "revenue2024": 2,
+          "revenue2025": 1,
+          "units2024": 50,
+          "units2025": 64,
+          "subpropiedades": [
+            {
+              "name": "Funda dura",
+              "revenue2024": 2,
+              "revenue2025": 1,
+              "units2024": 50,
+              "units2025": 64
+            }
+          ]
+        },
+        {
+          "name": "Kit",
+          "revenue2024": 0,
+          "revenue2025": 1,
+          "units2024": 10,
+          "units2025": 59,
+          "subpropiedades": [
+            {
+              "name": "Kit",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 10,
+              "units2025": 59
+            }
+          ]
+        },
+        {
+          "name": "Mochila",
+          "revenue2024": 5,
+          "revenue2025": 1,
+          "units2024": 86,
+          "units2025": 48,
+          "subpropiedades": [
+            {
+              "name": "Mochila",
+              "revenue2024": 5,
+              "revenue2025": 1,
+              "units2024": 86,
+              "units2025": 48
+            }
+          ]
+        },
+        {
+          "name": "Sleeve",
+          "revenue2024": 1,
+          "revenue2025": 1,
+          "units2024": 47,
+          "units2025": 25,
+          "subpropiedades": [
+            {
+              "name": "Sleeve",
+              "revenue2024": 1,
+              "revenue2025": 1,
+              "units2024": 47,
+              "units2025": 25
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 6,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Base",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 6,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Maletin",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 8,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Maletin",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 8,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Soporte",
+          "revenue2024": 2,
+          "revenue2025": 0,
+          "units2024": 49,
+          "units2025": 5,
+          "subpropiedades": [
+            {
+              "name": "Soporte",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 49,
+              "units2025": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Adaptadores",
+      "revenue2024": 13,
+      "revenue2025": 3,
+      "units2024": 359,
+      "units2025": 77,
+      "propiedades": [
+        {
+          "name": "Hub",
+          "revenue2024": 13,
+          "revenue2025": 3,
+          "units2024": 355,
+          "units2025": 76,
+          "subpropiedades": [
+            {
+              "name": "Hub",
+              "revenue2024": 13,
+              "revenue2025": 3,
+              "units2024": 355,
+              "units2025": 76
+            }
+          ]
+        },
+        {
+          "name": "Adaptador",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 4,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Adaptador",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc Apple Watch",
+      "revenue2024": 1,
+      "revenue2025": 2,
+      "units2024": 59,
+      "units2025": 69,
+      "propiedades": [
+        {
+          "name": "Banda",
+          "revenue2024": 0,
+          "revenue2025": 1,
+          "units2024": 15,
+          "units2025": 24,
+          "subpropiedades": [
+            {
+              "name": "Banda",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 14,
+              "units2025": 24
+            },
+            {
+              "name": "Banda 49mm",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Bumper",
+          "revenue2024": 1,
+          "revenue2025": 1,
+          "units2024": 20,
+          "units2025": 45,
+          "subpropiedades": [
+            {
+              "name": "Bumper",
+              "revenue2024": 1,
+              "revenue2025": 1,
+              "units2024": 20,
+              "units2025": 45
+            }
+          ]
+        },
+        {
+          "name": "Base",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 23,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Base",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 23,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Lamina AW",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Lamina AW",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cables",
+      "revenue2024": 1,
+      "revenue2025": 2,
+      "units2024": 58,
+      "units2025": 69,
+      "propiedades": [
+        {
+          "name": "Cable",
+          "revenue2024": 1,
+          "revenue2025": 2,
+          "units2024": 58,
+          "units2025": 69,
+          "subpropiedades": [
+            {
+              "name": "Cable USB-C",
+              "revenue2024": 0,
+              "revenue2025": 2,
+              "units2024": 14,
+              "units2025": 49
+            },
+            {
+              "name": "Cable HDMI",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 5
+            },
+            {
+              "name": "Cable Lightning",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 38,
+              "units2025": 12
+            },
+            {
+              "name": "Cable Múltiple",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad Pro 11",
+      "revenue2024": 1,
+      "revenue2025": 1,
+      "units2024": 30,
+      "units2025": 16,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 0,
+          "revenue2025": 1,
+          "units2024": 10,
+          "units2025": 16,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad Pro 11",
+              "revenue2024": 0,
+              "revenue2025": 1,
+              "units2024": 10,
+              "units2025": 16
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 2,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPad Pro 11",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Sleeve",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 7,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Sleeve",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 7,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 11,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad Pro 11/ Air",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 11,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 15",
+      "revenue2024": 5,
+      "revenue2025": 1,
+      "units2024": 819,
+      "units2025": 33,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 4,
+          "revenue2025": 1,
+          "units2024": 172,
+          "units2025": 29,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 15",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 18,
+              "units2025": 4
+            },
+            {
+              "name": "Funda iPh 15 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 15 Pro",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 106,
+              "units2025": 11
+            },
+            {
+              "name": "Funda iPh 15 Pro Max",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 45,
+              "units2025": 14
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPhone",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 646,
+          "units2025": 4,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPh 15",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 5,
+              "units2025": 0
+            },
+            {
+              "name": "Lamina iPh 15 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 5,
+              "units2025": 0
+            },
+            {
+              "name": "Lamina iPh 15 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 616,
+              "units2025": 3
+            },
+            {
+              "name": "Lamina iPh 15 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 20,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Protector lentes",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Protector lentes",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Baterías",
+      "revenue2024": 1,
+      "revenue2025": 1,
+      "units2024": 12,
+      "units2025": 5,
+      "propiedades": [
+        {
+          "name": "Bateria",
+          "revenue2024": 1,
+          "revenue2025": 1,
+          "units2024": 12,
+          "units2025": 5,
+          "subpropiedades": [
+            {
+              "name": "Bateria",
+              "revenue2024": 1,
+              "revenue2025": 1,
+              "units2024": 12,
+              "units2025": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc Auto",
+      "revenue2024": 2,
+      "revenue2025": 0,
+      "units2024": 72,
+      "units2025": 8,
+      "propiedades": [
+        {
+          "name": "Cargador",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 3,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Cargador",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Cargador 12 V",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 8,
+          "units2025": 5,
+          "subpropiedades": [
+            {
+              "name": "Cargador 12 V",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 8,
+              "units2025": 5
+            }
+          ]
+        },
+        {
+          "name": "Soporte",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 61,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Soporte",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 61,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad 10 Gen",
+      "revenue2024": 5,
+      "revenue2025": 0,
+      "units2024": 103,
+      "units2025": 6,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 27,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad 10 Gen",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 27,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 7,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPad 10.9",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 7,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 4,
+          "revenue2025": 0,
+          "units2024": 69,
+          "units2025": 4,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad 10 Gen",
+              "revenue2024": 4,
+              "revenue2025": 0,
+              "units2024": 69,
+              "units2025": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad 10.2",
+      "revenue2024": 6,
+      "revenue2025": 0,
+      "units2024": 184,
+      "units2025": 8,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 31,
+          "units2025": 6,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad 9/8 Gen",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 31,
+              "units2025": 6
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPad",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 35,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPad",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 33,
+              "units2025": 2
+            },
+            {
+              "name": "Lamina iPad 9/8",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 5,
+          "revenue2025": 0,
+          "units2024": 118,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad 9/8 Gen",
+              "revenue2024": 5,
+              "revenue2025": 0,
+              "units2024": 118,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad Air",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 1,
+      "units2025": 7,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 7,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad 9/8 Gen",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPad Pro 11",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 0,
+              "units2025": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad Pro 12.9",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 6,
+      "units2025": 3,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 3,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad Pro 12.9",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 3
+            }
+          ]
+        },
+        {
+          "name": "Teclado iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 5,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Teclado iPad Pro 12.9",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 5,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPad mini",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 2,
+      "units2025": 0,
+      "propiedades": [
+        {
+          "name": "Funda iPad",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 2,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Funda iPad mini",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 11",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 48,
+      "units2025": 3,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 46,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 11",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 46,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 2,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPh 11/ Xr",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 12",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 3,
+      "units2025": 6,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 3,
+          "units2025": 6,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 12/ 12 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 3,
+              "units2025": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 13",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 8,
+      "units2025": 0,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 8,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 13 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 8,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone 14",
+      "revenue2024": 1,
+      "revenue2025": 0,
+      "units2024": 53,
+      "units2025": 31,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 45,
+          "units2025": 20,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh 14",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 19,
+              "units2025": 10
+            },
+            {
+              "name": "Funda iPh 14 Plus",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 9
+            },
+            {
+              "name": "Funda iPh 14 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 11,
+              "units2025": 0
+            },
+            {
+              "name": "Funda iPh 14 Pro Max",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 11,
+              "units2025": 1
+            }
+          ]
+        },
+        {
+          "name": "Lamina iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 6,
+          "units2025": 9,
+          "subpropiedades": [
+            {
+              "name": "Lamina iPh 14 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 4,
+              "units2025": 4
+            },
+            {
+              "name": "TCP iPh 13/ 13 Pro",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 5
+            }
+          ]
+        },
+        {
+          "name": "Protector lentes",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Protector lentes",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 2
+            }
+          ]
+        },
+        {
+          "name": "Wallet iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 1,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Wallet iPhone",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 1,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acc iPhone SE",
+      "revenue2024": 0,
+      "revenue2025": 0,
+      "units2024": 2,
+      "units2025": 0,
+      "propiedades": [
+        {
+          "name": "Funda iPhone",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 2,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Funda iPh SE",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 2,
+              "units2025": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Home Kit",
+      "revenue2024": 4,
+      "revenue2025": 0,
+      "units2024": 140,
+      "units2025": 8,
+      "propiedades": [
+        {
+          "name": "Camara",
+          "revenue2024": 2,
+          "revenue2025": 0,
+          "units2024": 52,
+          "units2025": 0,
+          "subpropiedades": [
+            {
+              "name": "Camara",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 52,
+              "units2025": 0
+            }
+          ]
+        },
+        {
+          "name": "Iluminacion",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 8,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Iluminacion",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 8,
+              "units2025": 2
+            }
+          ]
+        },
+        {
+          "name": "Kit",
+          "revenue2024": 2,
+          "revenue2025": 0,
+          "units2024": 63,
+          "units2025": 4,
+          "subpropiedades": [
+            {
+              "name": "Kit",
+              "revenue2024": 2,
+              "revenue2025": 0,
+              "units2024": 63,
+              "units2025": 4
+            }
+          ]
+        },
+        {
+          "name": "Sensor",
+          "revenue2024": 0,
+          "revenue2025": 0,
+          "units2024": 17,
+          "units2025": 2,
+          "subpropiedades": [
+            {
+              "name": "Sensor",
+              "revenue2024": 0,
+              "revenue2025": 0,
+              "units2024": 17,
+              "units2025": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Software Retail",
+      "revenue2024": 1,
+      "revenue2025": 0,
+      "units2024": 14,
+      "units2025": 1,
+      "propiedades": [
+        {
+          "name": "Software",
+          "revenue2024": 1,
+          "revenue2025": 0,
+          "units2024": 14,
+          "units2025": 1,
+          "subpropiedades": [
+            {
+              "name": "Software",
+              "revenue2024": 1,
+              "revenue2025": 0,
+              "units2024": 14,
+              "units2025": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
