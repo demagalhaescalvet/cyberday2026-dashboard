@@ -8,10 +8,13 @@ import { Badge } from '@/components/ui/badge'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
+import { Progress } from '@/components/ui/progress'
+import { InsightBanner } from '@/components/InsightBanner'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   AreaChart, Area, LabelList, LineChart, Line, Cell,
-  ReferenceLine, Legend,
+  ReferenceLine, Legend, PieChart, Pie, Label,
+  RadialBarChart, RadialBar, PolarGrid, PolarRadiusAxis,
 } from 'recharts'
 import multiYearData from '@/data/multi-year.json'
 import dailyCurve from '@/data/daily-curve.json'
@@ -28,6 +31,9 @@ import sensitivityData from '@/data/sensitivity.json'
 import productHierarchy from '@/data/product-hierarchy.json'
 import priceVolumeData from '@/data/price-volume-decomposition.json'
 import newReturningData from '@/data/ga-new-returning.json'
+import deviceGap from '@/data/device-gap.json'
+import klaviyoFlows from '@/data/klaviyo-flows.json'
+import channelFunnel from '@/data/channel-funnel.json'
 
 // ─── Multicolor palette for clear visual differentiation ───
 const PALETTE = {
@@ -172,6 +178,15 @@ export function ResumenView() {
           </Card>
         ))}
       </div>
+
+      {/* ═══ INSIGHT: Overall narrative ═══ */}
+      <InsightBanner
+        variant="win"
+        headline="CyberDay 2025 superó los $5.000M por primera vez — pero el crecimiento es price-driven, no por volumen."
+        detail="Revenue +10.9% vs 2024, impulsado casi totalmente por ASP (+9.9%). Unidades prácticamente flat (+0.9%)."
+        metric="+$494M"
+        metricLabel="vs 2024"
+      />
 
       {/* ═══ ROW 1: Revenue Total + Mix Shift + Tendencia Top 5 ═══ */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
@@ -516,6 +531,13 @@ export function ResumenView() {
         </Card>
       </div>
 
+      {/* ═══ INSIGHT: Traffic narrative ═══ */}
+      <InsightBanner
+        variant="win"
+        headline="Tráfico web +80% YoY (357K sesiones), pero Paid Social tiene el peor add-to-cart rate (1%)."
+        detail="Referral tiene 19.1% de cart rate (3x promedio) — invertir más ahí. Paid Social necesita revisión de landing pages."
+      />
+
       {/* ═══ ROW 6: GA Channels + Klaviyo Email ═══ */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <Card>
@@ -713,7 +735,292 @@ export function ResumenView() {
         </Card>
       </div>
 
-      {/* ═══ ROW 8: Email KPIs + Channel/Order KPIs ═══ */}
+      {/* ═══ INSIGHT: Fidelization narrative ═══ */}
+      <InsightBanner
+        variant="insight"
+        headline="La base se fideliza: Returning visitors crecieron +114% YoY, de 36% a 42% del tráfico."
+        detail="Más usuarios vuelven, pero el revenue crece por precio. Oportunidad: convertir la lealtad en más unidades vendidas."
+      />
+
+      {/* ═══ ROW 8: Device Gap + Conversion Funnel ═══ */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {/* Device Revenue Gap */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">Brecha Mobile vs Desktop</CardTitle>
+            <CardDescription className="text-xs">Mobile = 77% del tráfico pero solo 28% del revenue</CardDescription>
+          </CardHeader>
+          <CardContent className="px-4 pt-4 pb-2">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Mobile gauge */}
+              <div className="text-center space-y-2">
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Mobile</p>
+                <ChartContainer config={{ mobile: { label: 'Mobile', color: PALETTE.amber } }} className="mx-auto aspect-square h-[120px]">
+                  <RadialBarChart data={[{ value: 77.3, fill: PALETTE.amber }]} startAngle={180} endAngle={0} outerRadius={55} innerRadius={45}>
+                    <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
+                    <RadialBar dataKey="value" background cornerRadius={10} />
+                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                      <Label
+                        content={({ viewBox }) => {
+                          if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                            return (
+                              <text x={viewBox.cx} y={(viewBox.cy || 0) - 5} textAnchor="middle" dominantBaseline="middle">
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 5} className="fill-foreground text-xl font-bold">77%</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[10px]">tráfico</tspan>
+                              </text>
+                            )
+                          }
+                        }}
+                      />
+                    </PolarRadiusAxis>
+                  </RadialBarChart>
+                </ChartContainer>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium">$176M (28%)</span></div>
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-red-400">0.16%</span></div>
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">18.5K</span></div>
+                </div>
+              </div>
+              {/* Desktop gauge */}
+              <div className="text-center space-y-2">
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Desktop</p>
+                <ChartContainer config={{ desktop: { label: 'Desktop', color: PALETTE.blue } }} className="mx-auto aspect-square h-[120px]">
+                  <RadialBarChart data={[{ value: 20.4, fill: PALETTE.blue }]} startAngle={180} endAngle={0} outerRadius={55} innerRadius={45}>
+                    <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
+                    <RadialBar dataKey="value" background cornerRadius={10} />
+                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                      <Label
+                        content={({ viewBox }) => {
+                          if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                            return (
+                              <text x={viewBox.cx} y={(viewBox.cy || 0) - 5} textAnchor="middle" dominantBaseline="middle">
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 5} className="fill-foreground text-xl font-bold">20%</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[10px]">tráfico</tspan>
+                              </text>
+                            )
+                          }
+                        }}
+                      />
+                    </PolarRadiusAxis>
+                  </RadialBarChart>
+                </ChartContainer>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium text-emerald-400">$459M (72%)</span></div>
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-emerald-400">0.94%</span></div>
+                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">4.8K</span></div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="px-4 pb-3 pt-0">
+            <span className="text-xs text-muted-foreground">
+              Desktop convierte <span className="text-blue-400 font-medium">6x</span> mejor que mobile — cerrar esa brecha vale <span className="text-amber-400 font-medium">+$354M</span>
+            </span>
+          </CardFooter>
+        </Card>
+
+        {/* Conversion Funnel */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">Funnel de Conversión Web</CardTitle>
+            <CardDescription className="text-xs">Sesiones → Add to Cart → Compra — CyberDay 2025</CardDescription>
+          </CardHeader>
+          <CardContent className="px-4 pt-4 pb-2">
+            <div className="space-y-4">
+              {/* Funnel stages */}
+              {[
+                { label: 'Sesiones', value: 357135, pct: 100, color: PALETTE.sky },
+                { label: 'Add to Cart', value: 23578, pct: 6.6, color: PALETTE.blue },
+                { label: 'Compras', value: 1124, pct: 0.31, color: PALETTE.indigo },
+              ].map((stage, i) => (
+                <div key={stage.label} className="space-y-1.5">
+                  <div className="flex justify-between items-baseline">
+                    <span className="text-xs font-medium">{stage.label}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-xs text-muted-foreground">{stage.value.toLocaleString()}</span>
+                      <span className="text-xs font-semibold" style={{ color: stage.color }}>{stage.pct}%</span>
+                    </div>
+                  </div>
+                  <Progress value={Math.max(stage.pct, 1)} className="h-3" style={{ '--progress-color': stage.color } as React.CSSProperties} />
+                  {i < 2 && (
+                    <div className="flex justify-center">
+                      <span className="text-[10px] text-muted-foreground px-2 py-0.5 rounded bg-muted/50">
+                        {i === 0 ? '↓ 93.4% se pierde antes del carrito' : '↓ 95.2% abandona el carrito'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+              {/* Channel cart rates */}
+              <div className="pt-2 border-t">
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide mb-2">Add-to-Cart Rate por Canal</p>
+                <div className="grid grid-cols-3 gap-1">
+                  {[
+                    { ch: 'Referral', rate: 19.1 },
+                    { ch: 'Email', rate: 6.9 },
+                    { ch: 'Direct', rate: 5.7 },
+                    { ch: 'Paid Search', rate: 5.3 },
+                    { ch: 'Cross-net', rate: 5.2 },
+                    { ch: 'Paid Social', rate: 1.0 },
+                  ].map((c) => (
+                    <div key={c.ch} className="text-center px-1 py-1.5 rounded bg-muted/30">
+                      <p className="text-[9px] text-muted-foreground truncate">{c.ch}</p>
+                      <p className={`text-xs font-bold ${c.rate >= 5 ? 'text-emerald-400' : c.rate >= 2 ? 'text-amber-400' : 'text-red-400'}`}>{c.rate}%</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* ═══ INSIGHT: Mobile opportunity ═══ */}
+      <InsightBanner
+        variant="opportunity"
+        headline="Oportunidad mobile: 275K sesiones con solo 0.16% de conversión."
+        detail="Si mobile convirtiera al 50% del rate desktop (0.47%), el incremento sería de ~$354M en revenue."
+        metric="6x"
+        metricLabel="gap conversión"
+      />
+
+      {/* ═══ ROW 9: Klaviyo Flows (hidden revenue) + Channel Engagement ═══ */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {/* Klaviyo Flows Donut */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">Revenue Automatizado (Flows)</CardTitle>
+            <CardDescription className="text-xs">$20.8M en revenue invisible — no aparece en campañas</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-3 pb-2">
+            {(() => {
+              const flowData = klaviyoFlows.flows_by_type.map((f) => ({
+                name: f.type,
+                value: f.revenue_M,
+                fill: f.color,
+                recipients: f.recipients,
+                convRate: f.conv_rate,
+              }))
+              const flowConfig: ChartConfig = Object.fromEntries(
+                klaviyoFlows.flows_by_type.map((f) => [f.type, { label: f.type, color: f.color }])
+              )
+              return (
+                <ChartContainer config={flowConfig} className="mx-auto aspect-square h-[220px]">
+                  <PieChart>
+                    <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(v, name, item) => `$${v}M — ${item?.payload?.recipients?.toLocaleString()} recipients (${item?.payload?.convRate}% conv.)`} />} />
+                    <Pie data={flowData} dataKey="value" nameKey="name" innerRadius={55} outerRadius={85} strokeWidth={3}>
+                      {flowData.map((f) => (
+                        <Cell key={f.name} fill={f.fill} />
+                      ))}
+                      <Label
+                        content={({ viewBox }) => {
+                          if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                            return (
+                              <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 2} className="fill-foreground text-2xl font-bold">$20.8M</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 18} className="fill-muted-foreground text-[10px]">flow revenue</tspan>
+                              </text>
+                            )
+                          }
+                        }}
+                      />
+                    </Pie>
+                  </PieChart>
+                </ChartContainer>
+              )
+            })()}
+            {/* Legend */}
+            <div className="flex justify-center gap-4 mt-1 pb-1">
+              {klaviyoFlows.flows_by_type.map((f) => (
+                <div key={f.type} className="flex items-center gap-1.5">
+                  <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: f.color }} />
+                  <span className="text-[10px] text-muted-foreground">{f.type} ({f.share_pct}%)</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter className="px-4 pb-3 pt-0">
+            <span className="text-xs text-muted-foreground">
+              Trade-In = <span className="text-amber-400 font-medium">59% del flow revenue</span> con solo 23% de recipients — mayor ROI por email
+            </span>
+          </CardFooter>
+        </Card>
+
+        {/* Daily Revenue Storytelling — Peak Day Analysis */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">Anatomía del Peak Day</CardTitle>
+            <CardDescription className="text-xs">Domingo 1 Jun = $227M (35% del total) — ¿por qué?</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-3 pb-2">
+            {(() => {
+              const peakData = [
+                { day: 'Lun 26', revenue: 82, purchases: 123, sessions: 60, color: PALETTE.sky },
+                { day: 'Mar 27', revenue: 65, purchases: 115, sessions: 46, color: PALETTE.sky },
+                { day: 'Mié 28', revenue: 88, purchases: 132, sessions: 49, color: PALETTE.sky },
+                { day: 'Jue 29', revenue: 71, purchases: 106, sessions: 40, color: PALETTE.sky },
+                { day: 'Vie 30', revenue: 59, purchases: 99, sessions: 45, color: PALETTE.sky },
+                { day: 'Sáb 31', revenue: 47, purchases: 86, sessions: 35, color: PALETTE.sky },
+                { day: 'Dom 1', revenue: 227, purchases: 463, sessions: 83, color: PALETTE.rose },
+              ]
+              const peakConfig: ChartConfig = {
+                revenue: { label: 'Revenue ($M)', color: PALETTE.blue },
+              }
+              return (
+                <div className="space-y-3">
+                  <ChartContainer config={peakConfig} className="aspect-auto h-[180px] w-full">
+                    <BarChart accessibilityLayer data={peakData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                      <CartesianGrid vertical={false} className="stroke-border/50" />
+                      <XAxis dataKey="day" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                      <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                      <ChartTooltip content={<ChartTooltipContent className="w-[180px]" formatter={(v, name, item) => `$${v}M — ${item?.payload?.purchases} compras`} />} />
+                      <Bar dataKey="revenue" radius={[6, 6, 0, 0]}>
+                        {peakData.map((d, i) => (
+                          <Cell key={d.day} fill={d.color} />
+                        ))}
+                        <LabelList dataKey="revenue" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={9} fontWeight={600} />
+                      </Bar>
+                    </BarChart>
+                  </ChartContainer>
+                  <div className="grid grid-cols-3 gap-2 px-2">
+                    <div className="text-center p-2 rounded bg-rose-500/5 border border-rose-500/20">
+                      <p className="text-[10px] text-muted-foreground">Peak Day</p>
+                      <p className="text-sm font-bold text-rose-400">463</p>
+                      <p className="text-[9px] text-muted-foreground">compras (41%)</p>
+                    </div>
+                    <div className="text-center p-2 rounded bg-blue-500/5 border border-blue-500/20">
+                      <p className="text-[10px] text-muted-foreground">Sesiones</p>
+                      <p className="text-sm font-bold text-blue-400">83K</p>
+                      <p className="text-[9px] text-muted-foreground">+37% vs promedio</p>
+                    </div>
+                    <div className="text-center p-2 rounded bg-emerald-500/5 border border-emerald-500/20">
+                      <p className="text-[10px] text-muted-foreground">Conv. Rate</p>
+                      <p className="text-sm font-bold text-emerald-400">0.56%</p>
+                      <p className="text-[9px] text-muted-foreground">1.8x vs semana</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="px-4 pb-3 pt-0">
+            <span className="text-xs text-muted-foreground">
+              Hipótesis: último día + stock limitado + campañas email de urgencia = <span className="text-rose-400 font-medium">FOMO effect</span>
+            </span>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* ═══ INSIGHT: Automation narrative ═══ */}
+      <InsightBanner
+        variant="action"
+        headline="$20.8M en flows automatizados completamente invisibles en campañas. Trade-In es el flow con mejor ROI."
+        detail="Los flows tienen 1.3% conv. rate vs campañas. Para CyberDay 2026: escalar Trade-In a más modelos y crear flows de abandono de carrito."
+        metric="$20.8M"
+        metricLabel="flow revenue"
+      />
+
+      {/* ═══ ROW 10: Email KPIs + Channel/Order KPIs ═══ */}
       <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2">
         {[
           { t: 'Campañas Email', v: String(klaviyoCampaigns['2025'].totals.campaigns), s: `vs ${klaviyoCampaigns['2024'].totals.campaigns} en 2024`, d: '+' },
@@ -735,7 +1042,7 @@ export function ResumenView() {
         ))}
       </div>
 
-      {/* ═══ ROW 9: Launch Tracker + Sensitivity ═══ */}
+      {/* ═══ ROW 11: Launch Tracker + Sensitivity ═══ */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="border-b px-4 py-3">

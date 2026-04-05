@@ -1,0 +1,50 @@
+{
+  "description": "Klaviyo automated flow revenue — CyberDay 2025 window (May 26 - Jun 8)",
+  "total_flow_revenue_CLP": 20822400,
+  "total_flow_revenue_M": 20.8,
+  "total_recipients": 5217,
+  "total_conversions": 46,
+  "avg_open_rate": 58.7,
+  "flows_by_type": [
+    {
+      "type": "Trade-In iPhone",
+      "flows": ["Interesados Trade In iPhone", "Interesados Trade In iPhone v2"],
+      "recipients": 1192,
+      "conversions": 20,
+      "revenue_CLP": 12254760,
+      "revenue_M": 12.3,
+      "share_pct": 58.9,
+      "conv_rate": 1.34,
+      "color": "#f59e0b"
+    },
+    {
+      "type": "Post Compra Web",
+      "flows": ["Post Compra en Web iPhone 16 Pro", "Post Compra en Web iPhone 16 Pro Max", "Post Compra en Web iPhone 16", "Post Compra en Web iPhone 16 Plus"],
+      "recipients": 1906,
+      "conversions": 22,
+      "revenue_CLP": 5987690,
+      "revenue_M": 6.0,
+      "share_pct": 28.8,
+      "conv_rate": 1.15,
+      "color": "#2b7fff"
+    },
+    {
+      "type": "Post Compra Tienda",
+      "flows": ["Post Compra en Tienda iPhone 16 Pro Max", "Post Compra en Tienda iPhone 16 Pro", "Post Compra en Tienda iPhone 16", "Post Compra en Tienda iPhone 16 Plus"],
+      "recipients": 2105,
+      "conversions": 4,
+      "revenue_CLP": 2579950,
+      "revenue_M": 2.6,
+      "share_pct": 12.4,
+      "conv_rate": 0.19,
+      "color": "#10b981"
+    }
+  ],
+  "channel_comparison": {
+    "campaigns_revenue_M": 127.9,
+    "flows_revenue_M": 20.8,
+    "flows_share_of_email_pct": 14.0,
+    "flows_invisible_in_current_dashboard": true
+  },
+  "top_flow_insight": "Trade-In flows generate 59% of flow revenue with only 23% of recipients — highest ROI per email sent"
+}

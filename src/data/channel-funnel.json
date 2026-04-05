@@ -1,0 +1,23 @@
+{
+  "description": "Channel conversion funnel — CyberDay 2025 from GA4",
+  "channels": [
+    { "name": "Cross-network", "sessions": 66282, "addToCarts": 3477, "cartRate": 5.2, "purchases": 0, "revenue_M": 0 },
+    { "name": "Referral", "sessions": 64765, "addToCarts": 12362, "cartRate": 19.1, "purchases": 0, "revenue_M": 0 },
+    { "name": "Unassigned", "sessions": 63483, "addToCarts": 721, "cartRate": 1.1, "purchases": 1124, "revenue_M": 639 },
+    { "name": "Direct", "sessions": 53063, "addToCarts": 3022, "cartRate": 5.7, "purchases": 0, "revenue_M": 0 },
+    { "name": "Organic Search", "sessions": 33266, "addToCarts": 1517, "cartRate": 4.6, "purchases": 0, "revenue_M": 0 },
+    { "name": "Organic Social", "sessions": 31522, "addToCarts": 339, "cartRate": 1.1, "purchases": 0, "revenue_M": 0 },
+    { "name": "Paid Search", "sessions": 18178, "addToCarts": 964, "cartRate": 5.3, "purchases": 0, "revenue_M": 0 },
+    { "name": "Paid Social", "sessions": 16060, "addToCarts": 157, "cartRate": 1.0, "purchases": 0, "revenue_M": 0 },
+    { "name": "Email", "sessions": 13638, "addToCarts": 936, "cartRate": 6.9, "purchases": 0, "revenue_M": 0 }
+  ],
+  "funnel_summary": {
+    "total_sessions": 357135,
+    "total_addToCarts": 23578,
+    "total_purchases": 1124,
+    "session_to_cart_pct": 6.6,
+    "cart_to_purchase_pct": 4.8,
+    "overall_conv_pct": 0.31
+  },
+  "insight": "Referral has 19% add-to-cart rate (3x average) but 0 tracked purchases — likely attribution gap. Paid Social has lowest engagement at 1.0% cart rate despite 16K sessions."
+}
