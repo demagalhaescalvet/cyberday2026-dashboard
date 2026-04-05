@@ -140,28 +140,28 @@ export function MixIdealView() {
       {/* Compact KPI Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-3">
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Categorías</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Categorías</p>
           <p className="text-xl font-bold mt-1">{categories.length}</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Unidades Total</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Unidades Total</p>
           <p className="text-xl font-bold mt-1">{totalUnits.toLocaleString()}</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Revenue Total</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Revenue Total</p>
           <p className="text-xl font-bold mt-1">${totalRevenue}M</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Top Categoría</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Top Categoría</p>
           <p className="text-xl font-bold mt-1">{topCategory.name}</p>
           <p className="text-xs text-muted-foreground">${topCategory.revenue}M</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Concentración Top 3</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Concentración Top 3</p>
           <p className="text-xl font-bold mt-1">{concentrationPct.toFixed(1)}%</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">ASP Más Alto</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">ASP Más Alto</p>
           <p className="text-xl font-bold mt-1">{clpFormatter.format(highestAspCategory.asp)}</p>
           <p className="text-xs text-muted-foreground">{highestAspCategory.name}</p>
         </Card>
@@ -207,11 +207,11 @@ export function MixIdealView() {
             <CardTitle className="text-sm">Top 5 — Multidimensional</CardTitle>
             <CardDescription className="text-xs">Units, Revenue, ASP, Elasticidad (normalizados)</CardDescription>
           </CardHeader>
-          <CardContent className="flex-1 flex justify-center items-center px-2 pb-2">
+          <CardContent className="flex-1 flex flex-col justify-center items-center px-2 pb-2">
             <ChartContainer config={radarConfig} className="w-full aspect-square max-w-[340px]">
               <RadarChart data={radarTop5} accessibilityLayer>
                 <PolarGrid strokeDasharray="3 3" />
-                <PolarAngleAxis dataKey="name" tick={{ fontSize: 10 }} />
+                <PolarAngleAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v}/100`} />} />
                 <Radar name="Units" dataKey="units" stroke={RADAR_COLORS.units} fill={RADAR_COLORS.units} fillOpacity={0.2} />
                 <Radar name="Revenue" dataKey="revenue" stroke={RADAR_COLORS.revenue} fill={RADAR_COLORS.revenue} fillOpacity={0.2} />
@@ -220,6 +220,7 @@ export function MixIdealView() {
                 <ChartLegend content={<ChartLegendContent />} />
               </RadarChart>
             </ChartContainer>
+            <p className="text-[11px] text-muted-foreground text-center mt-1 px-2">Perfil ideal: alto Revenue + alta Elasticidad = margen para descuento CyberDay</p>
           </CardContent>
         </Card>
       </div>

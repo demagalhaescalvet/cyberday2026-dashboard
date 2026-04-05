@@ -136,35 +136,35 @@ export function AuditoriaView() {
       {/* Compact KPI Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3">
         <Card className="p-3 col-span-2 sm:col-span-1">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Competitividad</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Competitividad</p>
           <p className="text-2xl font-bold mt-1">{competitivePct}%</p>
           <div className="h-2 w-full rounded-full bg-muted mt-1.5 overflow-hidden">
             <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${competitivePct}%` }} />
           </div>
-          <p className="text-[10px] text-muted-foreground mt-1">{competitiveCount}/{data.total_products} precio ≤ mercado</p>
+          <p className="text-[11px] text-muted-foreground mt-1">{competitiveCount}/{data.total_products} precio ≤ mercado</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Productos</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Productos</p>
           <p className="text-2xl font-bold mt-1">{data.total_products}</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Dcto Promedio</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">Dcto Promedio</p>
           <p className="text-2xl font-bold mt-1">{avgDiscount}%</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-emerald-400 uppercase tracking-wider">OK</p>
+          <p className="text-[11px] font-medium text-emerald-400 uppercase tracking-wider">OK</p>
           <p className="text-2xl font-bold text-emerald-400 mt-1">{data.status_breakdown.ok}</p>
-          <p className="text-[10px] text-muted-foreground">{((data.status_breakdown.ok / data.total_products) * 100).toFixed(0)}%</p>
+          <p className="text-[11px] text-muted-foreground">{((data.status_breakdown.ok / data.total_products) * 100).toFixed(0)}%</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-blue-400 uppercase tracking-wider">Iguala</p>
+          <p className="text-[11px] font-medium text-blue-400 uppercase tracking-wider">Iguala</p>
           <p className="text-2xl font-bold text-blue-400 mt-1">{data.status_breakdown.match}</p>
-          <p className="text-[10px] text-muted-foreground">{((data.status_breakdown.match / data.total_products) * 100).toFixed(0)}%</p>
+          <p className="text-[11px] text-muted-foreground">{((data.status_breakdown.match / data.total_products) * 100).toFixed(0)}%</p>
         </Card>
         <Card className="p-3">
-          <p className="text-[10px] font-medium text-amber-400 uppercase tracking-wider">Revisar</p>
+          <p className="text-[11px] font-medium text-amber-400 uppercase tracking-wider">Revisar</p>
           <p className="text-2xl font-bold text-amber-400 mt-1">{data.status_breakdown.warn}</p>
-          <p className="text-[10px] text-muted-foreground">{((data.status_breakdown.warn / data.total_products) * 100).toFixed(0)}%</p>
+          <p className="text-[11px] text-muted-foreground">{((data.status_breakdown.warn / data.total_products) * 100).toFixed(0)}%</p>
         </Card>
       </div>
 
@@ -319,7 +319,7 @@ export function AuditoriaView() {
                                     />
                                     <div className="absolute right-0 top-0 h-full w-0.5 bg-foreground/50" />
                                   </div>
-                                  <p className="text-[10px] text-muted-foreground mt-0.5">{((item.cyberPlan / item.marketLow) * 100).toFixed(0)}% del mercado</p>
+                                  <p className="text-[11px] text-muted-foreground mt-0.5">{((item.cyberPlan / item.marketLow) * 100).toFixed(0)}% del mercado</p>
                                 </div>
                               </TableCell>
                               <TableCell>

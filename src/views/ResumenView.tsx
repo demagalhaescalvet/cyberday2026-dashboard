@@ -168,9 +168,9 @@ export function ResumenView() {
         {kpis.map((kpi) => (
           <Card key={kpi.title} className="py-0">
             <CardContent className="px-3 py-3">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{kpi.title}</p>
+              <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">{kpi.title}</p>
               <div className="text-lg font-bold tracking-tight mt-0.5">{kpi.value}</div>
-              <p className={`text-[10px] mt-0.5 ${
+              <p className={`text-[11px] mt-0.5 ${
                 kpi.delta?.startsWith('+') ? 'text-emerald-400 font-medium' :
                 kpi.delta?.startsWith('-') ? 'text-red-400 font-medium' :
                 'text-muted-foreground'
@@ -192,6 +192,8 @@ export function ResumenView() {
         detail="Revenue +10.9% vs 2024, impulsado casi totalmente por ASP (+9.9%). Unidades prácticamente flat (+0.9%)."
         metric="+$494M"
         metricLabel="vs 2024"
+        ctaLabel="Ver por qué"
+        ctaTarget="por-que"
       />
 
       {/* ═══ ROW 1: Revenue Total + Mix Shift + Tendencia Top 5 ═══ */}
@@ -293,10 +295,10 @@ export function ResumenView() {
                     <ChartTooltip content={<ChartTooltipContent className="w-[160px]" formatter={(v) => `$${v}M`} />} />
                     <ChartLegend content={<ChartLegendContent />} />
                     <Bar dataKey="2024" fill={YEAR_COLORS['2024']} radius={[6, 6, 0, 0]}>
-                      <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={10} />
+                      <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} />
                     </Bar>
                     <Bar dataKey="2025" fill={YEAR_COLORS['2025']} radius={[6, 6, 0, 0]}>
-                      <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={10} />
+                      <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} />
                     </Bar>
                   </BarChart>
                 </ChartContainer>
@@ -333,7 +335,7 @@ export function ResumenView() {
                     <ChartLegend content={<ChartLegendContent />} />
                     <Bar dataKey="ASP 2024" fill={YEAR_COLORS['2024']} radius={[0, 6, 6, 0]} barSize={7} />
                     <Bar dataKey="ASP 2025" fill={YEAR_COLORS['2025']} radius={[0, 6, 6, 0]} barSize={7}>
-                      <LabelList dataKey="change" position="right" fill="currentColor" formatter={(v: number) => `${v > 0 ? '+' : ''}${v}%`} fontSize={9} />
+                      <LabelList dataKey="change" position="right" fill="currentColor" formatter={(v: number) => `${v > 0 ? '+' : ''}${v}%`} fontSize={11} />
                     </Bar>
                   </BarChart>
                 </ChartContainer>
@@ -367,7 +369,7 @@ export function ResumenView() {
               />
               <Bar dataKey="growth" radius={[0, 6, 6, 0]}>
                 {growthData.map((d) => (<Cell key={d.name} fill={d.growth >= 0 ? PALETTE.emerald : PALETTE.rose} />))}
-                <LabelList dataKey="growth" position="right" fill="currentColor" formatter={(v: number) => `${v > 0 ? '+' : ''}${v}%`} fontSize={10} />
+                <LabelList dataKey="growth" position="right" fill="currentColor" formatter={(v: number) => `${v > 0 ? '+' : ''}${v}%`} fontSize={11} />
               </Bar>
             </BarChart>
           </ChartContainer>
@@ -411,7 +413,7 @@ export function ResumenView() {
                   <ChartLegend content={<ChartLegendContent />} />
                   <Bar dataKey="revenue2024" name="2024" fill={YEAR_COLORS['2024']} radius={[0, 6, 6, 0]} barSize={7} />
                   <Bar dataKey="revenue2025" name="2025" fill={YEAR_COLORS['2025']} radius={[0, 6, 6, 0]} barSize={7}>
-                    <LabelList dataKey="revenue2025" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={9} />
+                    <LabelList dataKey="revenue2025" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} />
                   </Bar>
                 </BarChart>
               </ChartContainer>
@@ -527,7 +529,7 @@ export function ResumenView() {
                     <ChartLegend content={<ChartLegendContent />} />
                     <Bar dataKey="2024" fill={YEAR_COLORS['2024']} radius={[0, 6, 6, 0]} barSize={7} />
                     <Bar dataKey="2025" fill={YEAR_COLORS['2025']} radius={[0, 6, 6, 0]} barSize={7}>
-                      <LabelList dataKey="2025" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={9} />
+                      <LabelList dataKey="2025" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} />
                     </Bar>
                   </BarChart>
                 </ChartContainer>
@@ -547,6 +549,8 @@ export function ResumenView() {
         variant="win"
         headline="Tráfico web +80% YoY (357K sesiones), pero Paid Social tiene el peor add-to-cart rate (1%)."
         detail="Referral tiene 19.1% de cart rate (3x promedio) — invertir más ahí. Paid Social necesita revisión de landing pages."
+        ctaLabel="Ver qué hacer"
+        ctaTarget="que-hacer"
       />
 
       {/* ═══ ROW 6: GA Channels + Klaviyo Email ═══ */}
@@ -607,7 +611,7 @@ export function ResumenView() {
                     <ChartTooltip content={<ChartTooltipContent className="w-[200px]" formatter={(v, n, item) => `$${v}M (${item?.payload?.conversions?.toLocaleString()} conv.)`} />} />
                     <Bar dataKey="revenue" radius={[0, 6, 6, 0]}>
                       {emailData.map((_, i) => (<Cell key={i} fill={CAT_COLORS[i % CAT_COLORS.length]} />))}
-                      <LabelList dataKey="revenue" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={10} />
+                      <LabelList dataKey="revenue" position="right" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} />
                     </Bar>
                   </BarChart>
                 </ChartContainer>
@@ -656,7 +660,7 @@ export function ResumenView() {
                       {stacked.map((e, i) => (
                         <Cell key={i} fill={e.fill} />
                       ))}
-                      <LabelList dataKey="label" position="top" fill="currentColor" fontSize={10} fontWeight={600} />
+                      <LabelList dataKey="label" position="top" fill="currentColor" fontSize={11} fontWeight={600} />
                     </Bar>
                   </BarChart>
                 </ChartContainer>
@@ -696,10 +700,10 @@ export function ResumenView() {
                       <ChartTooltip content={<ChartTooltipContent className="w-[160px]" formatter={(v) => `${v}K sesiones`} />} />
                       <ChartLegend content={<ChartLegendContent />} />
                       <Bar dataKey="2024" fill={YEAR_COLORS['2024']} radius={[6, 6, 0, 0]} barSize={28}>
-                        <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={10} />
+                        <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={11} />
                       </Bar>
                       <Bar dataKey="2025" fill={YEAR_COLORS['2025']} radius={[6, 6, 0, 0]} barSize={28}>
-                        <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={10} fontWeight={600} />
+                        <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={11} fontWeight={600} />
                       </Bar>
                     </BarChart>
                   </ChartContainer>
@@ -707,13 +711,17 @@ export function ResumenView() {
                   <div className="grid grid-cols-2 gap-3 px-2">
                     {newReturningData.composition.map((yr) => (
                       <div key={yr.year} className="space-y-1">
-                        <p className="text-[10px] font-medium text-muted-foreground text-center">{yr.year}</p>
-                        <div className="flex h-3 rounded-full overflow-hidden">
-                          <div className="bg-sky-400" style={{ width: `${yr.New}%` }} title={`New ${yr.New}%`} />
-                          <div className="bg-blue-500" style={{ width: `${yr.Returning}%` }} title={`Returning ${yr.Returning}%`} />
+                        <p className="text-[11px] font-medium text-muted-foreground text-center">{yr.year}</p>
+                        <div className="relative flex h-5 rounded-full overflow-hidden" role="img" aria-label={`${yr.year}: New ${yr.New}%, Returning ${yr.Returning}%`}>
+                          <div className="bg-sky-400 flex items-center justify-center" style={{ width: `${yr.New}%` }}>
+                            {yr.New >= 20 && <span className="text-[10px] font-semibold text-sky-950">{yr.New}%</span>}
+                          </div>
+                          <div className="bg-blue-500 flex items-center justify-center" style={{ width: `${yr.Returning}%` }}>
+                            {yr.Returning >= 20 && <span className="text-[10px] font-semibold text-blue-950">{yr.Returning}%</span>}
+                          </div>
                           <div className="bg-muted" style={{ width: `${100 - yr.New - yr.Returning}%` }} />
                         </div>
-                        <div className="flex justify-between text-[9px] text-muted-foreground">
+                        <div className="flex justify-between text-[11px] text-muted-foreground">
                           <span>New {yr.New}%</span>
                           <span>Ret. {yr.Returning}%</span>
                         </div>
@@ -751,7 +759,7 @@ export function ResumenView() {
             <div className="grid grid-cols-2 gap-4">
               {/* Mobile gauge */}
               <div className="text-center space-y-2">
-                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Mobile</p>
+                <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">Mobile</p>
                 <ChartContainer config={{ mobile: { label: 'Mobile', color: PALETTE.amber } }} className="mx-auto aspect-square h-[120px]">
                   <RadialBarChart data={[{ value: 77.3, fill: PALETTE.amber }]} startAngle={180} endAngle={0} outerRadius={55} innerRadius={45}>
                     <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
@@ -763,7 +771,7 @@ export function ResumenView() {
                             return (
                               <text x={viewBox.cx} y={(viewBox.cy || 0) - 5} textAnchor="middle" dominantBaseline="middle">
                                 <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 5} className="fill-foreground text-xl font-bold">77%</tspan>
-                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[10px]">tráfico</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[11px]">tráfico</tspan>
                               </text>
                             )
                           }
@@ -773,14 +781,14 @@ export function ResumenView() {
                   </RadialBarChart>
                 </ChartContainer>
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium">$176M (28%)</span></div>
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-red-400">0.16%</span></div>
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">18.5K</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium">$176M (28%)</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-red-400">0.16%</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">18.5K</span></div>
                 </div>
               </div>
               {/* Desktop gauge */}
               <div className="text-center space-y-2">
-                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">Desktop</p>
+                <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">Desktop</p>
                 <ChartContainer config={{ desktop: { label: 'Desktop', color: PALETTE.blue } }} className="mx-auto aspect-square h-[120px]">
                   <RadialBarChart data={[{ value: 20.4, fill: PALETTE.blue }]} startAngle={180} endAngle={0} outerRadius={55} innerRadius={45}>
                     <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
@@ -792,7 +800,7 @@ export function ResumenView() {
                             return (
                               <text x={viewBox.cx} y={(viewBox.cy || 0) - 5} textAnchor="middle" dominantBaseline="middle">
                                 <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 5} className="fill-foreground text-xl font-bold">20%</tspan>
-                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[10px]">tráfico</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 14} className="fill-muted-foreground text-[11px]">tráfico</tspan>
                               </text>
                             )
                           }
@@ -802,9 +810,9 @@ export function ResumenView() {
                   </RadialBarChart>
                 </ChartContainer>
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium text-emerald-400">$459M (72%)</span></div>
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-emerald-400">0.94%</span></div>
-                  <div className="flex justify-between text-[10px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">4.8K</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Revenue</span><span className="font-medium text-emerald-400">$459M (72%)</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Conversión</span><span className="font-medium text-emerald-400">0.94%</span></div>
+                  <div className="flex justify-between text-[11px]"><span className="text-muted-foreground">Add to Cart</span><span className="font-medium">4.8K</span></div>
                 </div>
               </div>
             </div>
@@ -838,10 +846,10 @@ export function ResumenView() {
                       <span className="text-xs font-semibold" style={{ color: stage.color }}>{stage.pct}%</span>
                     </div>
                   </div>
-                  <Progress value={Math.max(stage.pct, 1)} className="h-3" style={{ '--progress-color': stage.color } as React.CSSProperties} />
+                  <Progress value={Math.max(stage.pct, 1)} className="h-3" aria-label={`${stage.label}: ${stage.value.toLocaleString()} (${stage.pct}%)`} style={{ '--progress-color': stage.color } as React.CSSProperties} />
                   {i < 2 && (
                     <div className="flex justify-center">
-                      <span className="text-[10px] text-muted-foreground px-2 py-0.5 rounded bg-muted/50">
+                      <span className="text-[11px] text-muted-foreground px-2 py-0.5 rounded bg-muted/50">
                         {i === 0 ? '↓ 93.4% se pierde antes del carrito' : '↓ 95.2% abandona el carrito'}
                       </span>
                     </div>
@@ -850,7 +858,7 @@ export function ResumenView() {
               ))}
               {/* Channel cart rates */}
               <div className="pt-2 border-t">
-                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide mb-2">Add-to-Cart Rate por Canal</p>
+                <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide mb-2">Add-to-Cart Rate por Canal</p>
                 <div className="grid grid-cols-3 gap-1">
                   {[
                     { ch: 'Referral', rate: 19.1 },
@@ -861,7 +869,7 @@ export function ResumenView() {
                     { ch: 'Paid Social', rate: 1.0 },
                   ].map((c) => (
                     <div key={c.ch} className="text-center px-1 py-1.5 rounded bg-muted/30">
-                      <p className="text-[9px] text-muted-foreground truncate">{c.ch}</p>
+                      <p className="text-[11px] text-muted-foreground truncate">{c.ch}</p>
                       <p className={`text-xs font-bold ${c.rate >= 5 ? 'text-emerald-400' : c.rate >= 2 ? 'text-amber-400' : 'text-red-400'}`}>{c.rate}%</p>
                     </div>
                   ))}
@@ -920,7 +928,7 @@ export function ResumenView() {
                             return (
                               <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
                                 <tspan x={viewBox.cx} y={(viewBox.cy || 0) - 2} className="fill-foreground text-2xl font-bold">$20.8M</tspan>
-                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 18} className="fill-muted-foreground text-[10px]">flow revenue</tspan>
+                                <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 18} className="fill-muted-foreground text-[11px]">flow revenue</tspan>
                               </text>
                             )
                           }
@@ -936,7 +944,7 @@ export function ResumenView() {
               {klaviyoFlows.flows_by_type.map((f) => (
                 <div key={f.type} className="flex items-center gap-1.5">
                   <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: f.color }} />
-                  <span className="text-[10px] text-muted-foreground">{f.type} ({f.share_pct}%)</span>
+                  <span className="text-[11px] text-muted-foreground">{f.type} ({f.share_pct}%)</span>
                 </div>
               ))}
             </div>
@@ -980,25 +988,25 @@ export function ResumenView() {
                         {peakData.map((d, i) => (
                           <Cell key={d.day} fill={d.color} />
                         ))}
-                        <LabelList dataKey="revenue" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={9} fontWeight={600} />
+                        <LabelList dataKey="revenue" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={11} fontWeight={600} />
                       </Bar>
                     </BarChart>
                   </ChartContainer>
                   <div className="grid grid-cols-3 gap-2 px-2">
                     <div className="text-center p-2 rounded bg-rose-500/5 border border-rose-500/20">
-                      <p className="text-[10px] text-muted-foreground">Peak Day</p>
+                      <p className="text-[11px] text-muted-foreground">Peak Day</p>
                       <p className="text-sm font-bold text-rose-400">463</p>
-                      <p className="text-[9px] text-muted-foreground">compras (41%)</p>
+                      <p className="text-[11px] text-muted-foreground">compras (41%)</p>
                     </div>
                     <div className="text-center p-2 rounded bg-blue-500/5 border border-blue-500/20">
-                      <p className="text-[10px] text-muted-foreground">Sesiones</p>
+                      <p className="text-[11px] text-muted-foreground">Sesiones</p>
                       <p className="text-sm font-bold text-blue-400">83K</p>
-                      <p className="text-[9px] text-muted-foreground">+37% vs promedio</p>
+                      <p className="text-[11px] text-muted-foreground">+37% vs promedio</p>
                     </div>
                     <div className="text-center p-2 rounded bg-emerald-500/5 border border-emerald-500/20">
-                      <p className="text-[10px] text-muted-foreground">Conv. Rate</p>
+                      <p className="text-[11px] text-muted-foreground">Conv. Rate</p>
                       <p className="text-sm font-bold text-emerald-400">0.56%</p>
-                      <p className="text-[9px] text-muted-foreground">1.8x vs semana</p>
+                      <p className="text-[11px] text-muted-foreground">1.8x vs semana</p>
                     </div>
                   </div>
                 </div>
@@ -1036,9 +1044,9 @@ export function ResumenView() {
         ].map((k) => (
           <Card key={k.t} className="py-0">
             <CardContent className="px-3 py-3">
-              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{k.t}</p>
+              <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">{k.t}</p>
               <div className="text-lg font-bold tracking-tight mt-0.5">{k.v}</div>
-              <p className={`text-[10px] mt-0.5 ${k.d === '+' ? 'text-emerald-400 font-medium' : k.d === '-' ? 'text-red-400 font-medium' : 'text-muted-foreground'}`}>{k.s}</p>
+              <p className={`text-[11px] mt-0.5 ${k.d === '+' ? 'text-emerald-400 font-medium' : k.d === '-' ? 'text-red-400 font-medium' : 'text-muted-foreground'}`}>{k.s}</p>
             </CardContent>
           </Card>
         ))}
