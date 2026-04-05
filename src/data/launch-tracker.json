@@ -1,0 +1,86 @@
+{
+  "description": "Product launch tracker — daily sales rate vs CyberDay target for key products",
+  "reference_date": "2026-04-04",
+  "products": [
+    {
+      "product": "MacBook Neo",
+      "launchDate": "4-Mar-26",
+      "days": 29,
+      "sales": 861,
+      "dailyRate": 29.7,
+      "cyberTarget": 800,
+      "multiplier": 5.6,
+      "confidence": "Alta"
+    },
+    {
+      "product": "iPh 17 Pro Max",
+      "launchDate": "19-Sep-25",
+      "days": 196,
+      "sales": 3241,
+      "dailyRate": 16.5,
+      "cyberTarget": 650,
+      "multiplier": 8.2,
+      "confidence": "Alta"
+    },
+    {
+      "product": "iPh 17 Pro",
+      "launchDate": "19-Sep-25",
+      "days": 196,
+      "sales": 1678,
+      "dailyRate": 8.6,
+      "cyberTarget": 409,
+      "multiplier": 9.9,
+      "confidence": "Media-Alta"
+    },
+    {
+      "product": "AirPods Pro 3",
+      "launchDate": "19-Sep-25",
+      "days": 196,
+      "sales": 2890,
+      "dailyRate": 14.7,
+      "cyberTarget": 1220,
+      "multiplier": 17.3,
+      "confidence": "Alta"
+    },
+    {
+      "product": "iPh 17e",
+      "launchDate": "2-Mar-26",
+      "days": 31,
+      "sales": 567,
+      "dailyRate": 18.3,
+      "cyberTarget": 250,
+      "multiplier": 2.8,
+      "confidence": "Alta"
+    },
+    {
+      "product": "iPad Air M4",
+      "launchDate": "2-Mar-26",
+      "days": 31,
+      "sales": 412,
+      "dailyRate": 13.3,
+      "cyberTarget": 320,
+      "multiplier": 5.0,
+      "confidence": "Alta"
+    },
+    {
+      "product": "Watch SE 3",
+      "launchDate": "19-Sep-25",
+      "days": 196,
+      "sales": 1890,
+      "dailyRate": 9.6,
+      "cyberTarget": 420,
+      "multiplier": 9.1,
+      "confidence": "Alta"
+    },
+    {
+      "product": "iPhone Air",
+      "launchDate": "19-Sep-25",
+      "days": 196,
+      "sales": 445,
+      "dailyRate": 2.3,
+      "cyberTarget": 120,
+      "multiplier": 10.9,
+      "confidence": "Media"
+    }
+  ]
+}

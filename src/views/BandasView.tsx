@@ -11,6 +11,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } f
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
+import priceBandsData from '@/data/price-bands.json'
 
 type Tier = {
   name: string
@@ -328,6 +329,101 @@ function SKUPricingGrid() {
   )
 }
 
+function PriceBandsDistribution() {
+  const data = priceBandsData as {
+    bands: Array<{ band: string; u26: number; r26: number; pct: number; products: string }>
+    insights: { dominant_band: string; growing_band: string; volume_band: string }
+    recommendations: string[]
+  }
+
+  const bands = data.bands
+  const totalUnits = bands.reduce((sum, b) => sum + b.u26, 0)
+  const totalRevenue = bands.reduce((sum, b) => sum + b.r26, 0)
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Distribución por Banda de Precio</CardTitle>
+        <CardDescription>Unidades, revenue y productos representativos por rango CLP</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Table Section */}
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead>Banda</TableHead>
+                <TableHead className="text-right">Uds 2026</TableHead>
+                <TableHead className="text-right">Rev ($M)</TableHead>
+                <TableHead className="text-right">% Units</TableHead>
+                <TableHead>Productos</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {bands.map((band) => (
+                <TableRow key={band.band}>
+                  <TableCell className="font-medium">{band.band}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">
+                    {band.u26.toLocaleString()}
+                  </TableCell>
+                  <TableCell className="text-right font-mono text-sm">
+                    ${band.r26}M
+                  </TableCell>
+                  <TableCell className="text-right font-mono text-sm">
+                    {band.pct}%
+                  </TableCell>
+                  <TableCell className="text-xs text-muted-foreground">{band.products}</TableCell>
+                </TableRow>
+              ))}
+              {/* Total Row */}
+              <TableRow className="border-t-2 border-border font-semibold bg-muted/50 hover:bg-muted/50">
+                <TableCell>Total</TableCell>
+                <TableCell className="text-right font-mono">
+                  {totalUnits.toLocaleString()}
+                </TableCell>
+                <TableCell className="text-right font-mono">
+                  ${totalRevenue}M
+                </TableCell>
+                <TableCell className="text-right font-mono">100%</TableCell>
+                <TableCell />
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+
+        {/* Insights Cards Grid */}
+        <div className="grid gap-3 md:grid-cols-3">
+          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-blue-500">
+            <p className="text-xs font-semibold text-muted-foreground">Banda Dominante</p>
+            <p className="text-sm leading-snug">{data.insights.dominant_band}</p>
+          </div>
+          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-amber-500">
+            <p className="text-xs font-semibold text-muted-foreground">Banda en Crecimiento</p>
+            <p className="text-sm leading-snug">{data.insights.growing_band}</p>
+          </div>
+          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-emerald-500">
+            <p className="text-xs font-semibold text-muted-foreground">Banda de Volumen</p>
+            <p className="text-sm leading-snug">{data.insights.volume_band}</p>
+          </div>
+        </div>
+
+        {/* Recommendations Section */}
+        <div className="border-t border-border pt-4">
+          <h4 className="font-semibold text-sm mb-3">Recomendaciones</h4>
+          <ul className="space-y-2">
+            {data.recommendations.map((rec, idx) => (
+              <li key={idx} className="flex gap-3 text-sm">
+                <span className="text-muted-foreground font-semibold min-w-6">{idx + 1}.</span>
+                <span>{rec}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 function ExpandableSKUGrid() {
   const [isExpanded, setIsExpanded] = useState(false)
   const skuList = useMemo(() => {
@@ -369,6 +465,9 @@ export function BandasView() {
         <EstimatedImpactCard />
         <VolumeBonusesCard />
       </div>
+
+      {/* Price Bands Distribution */}
+      <PriceBandsDistribution />
 
       {/* SKU Pricing Grid — Expandable */}
       <ExpandableSKUGrid />

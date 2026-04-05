@@ -5,6 +5,15 @@ import type { PieSectorShapeProps } from 'recharts/types/polar/Pie'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   PieChart, Pie, Label, Cell, Sector,
@@ -12,6 +21,8 @@ import {
 } from 'recharts'
 import revenueData from '@/data/revenue.json'
 import unitsData from '@/data/units.json'
+import launchData from '@/data/launch-tracker.json'
+import sensitivityData from '@/data/sensitivity.json'
 
 // Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
@@ -378,6 +389,104 @@ export function ResumenView() {
               </div>
             ))}
           </div>
+        </Card>
+      </div>
+
+      {/* Launch Tracker & Sensitivity Analysis Tables */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        {/* Section 1: Launch Tracker Table */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Tracker de Lanzamientos</CardTitle>
+            <CardDescription>Velocidad de ventas vs target CyberDay</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Producto</TableHead>
+                  <TableHead>Lanzamiento</TableHead>
+                  <TableHead className="text-right">Ventas</TableHead>
+                  <TableHead className="text-right">Rate/día</TableHead>
+                  <TableHead className="text-right">Target Cyber</TableHead>
+                  <TableHead className="text-right">Multiplicador</TableHead>
+                  <TableHead>Confianza</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {launchData.products
+                  .sort((a, b) => a.multiplier - b.multiplier)
+                  .map((product) => {
+                    const confidenceColor =
+                      product.confidence === 'Alta'
+                        ? 'bg-emerald-400/20 text-emerald-600 dark:text-emerald-400'
+                        : product.confidence === 'Media-Alta'
+                          ? 'bg-amber-400/20 text-amber-600 dark:text-amber-400'
+                          : 'bg-amber-400/20 text-amber-600 dark:text-amber-400'
+                    return (
+                      <TableRow key={product.product}>
+                        <TableCell className="font-medium">{product.product}</TableCell>
+                        <TableCell>{product.launchDate}</TableCell>
+                        <TableCell className="text-right">${product.sales.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">${product.dailyRate.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">${product.cyberTarget.toLocaleString()}</TableCell>
+                        <TableCell className="text-right font-semibold">{product.multiplier.toFixed(1)}x</TableCell>
+                        <TableCell>
+                          <Badge className={confidenceColor}>{product.confidence}</Badge>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* Section 2: Sensitivity Analysis Table */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Análisis de Sensibilidad</CardTitle>
+            <CardDescription>Escenarios pesimista/optimista — impacto en revenue ($M)</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Variable</TableHead>
+                  <TableHead>Pesimista</TableHead>
+                  <TableHead className="text-right">Δ Pes.</TableHead>
+                  <TableHead>Optimista</TableHead>
+                  <TableHead className="text-right">Δ Opt.</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sensitivityData.scenarios.map((scenario) => (
+                  <TableRow key={scenario.variable}>
+                    <TableCell className="font-medium flex items-center gap-2">
+                      {scenario.variable}
+                      {scenario.applied && <span className="text-lg">✅</span>}
+                    </TableCell>
+                    <TableCell>{scenario.pessimistic}</TableCell>
+                    <TableCell
+                      className={`text-right font-medium ${
+                        scenario.pessDelta < 0 ? 'text-red-500' : 'text-emerald-400'
+                      }`}
+                    >
+                      {scenario.pessDelta > 0 ? '+' : ''}{scenario.pessDelta.toFixed(2)}
+                    </TableCell>
+                    <TableCell>{scenario.optimistic}</TableCell>
+                    <TableCell
+                      className={`text-right font-medium ${
+                        scenario.optDelta < 0 ? 'text-red-500' : 'text-emerald-400'
+                      }`}
+                    >
+                      {scenario.optDelta > 0 ? '+' : ''}{scenario.optDelta.toFixed(2)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
         </Card>
       </div>
     </div>

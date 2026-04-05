@@ -1,0 +1,55 @@
+{
+  "description": "Price band distribution — units, revenue, and representative products per CLP price range",
+  "bands": [
+    {
+      "band": "< $420K",
+      "u26": 7050,
+      "r26": 1025,
+      "pct": 41.6,
+      "products": "16e, AirPods, HomePod, Watch SE, iPad A16, AirTag, Acc"
+    },
+    {
+      "band": "$420K–$840K",
+      "u26": 5480,
+      "r26": 1975,
+      "pct": 32.4,
+      "products": "17e, iPh 17, iPh Air, Neo, MBA M4, iPad Air, Watch S11"
+    },
+    {
+      "band": "$840K–$1.3M",
+      "u26": 2800,
+      "r26": 2252,
+      "pct": 16.5,
+      "products": "iPh Pro, PM 256GB, MBA M5, iPad Pro 11\""
+    },
+    {
+      "band": "$1.3M–$2.1M",
+      "u26": 1350,
+      "r26": 1378,
+      "pct": 8.0,
+      "products": "PM 512GB+, MBP 14\""
+    },
+    {
+      "band": "> $2.1M",
+      "u26": 250,
+      "r26": 381,
+      "pct": 1.5,
+      "products": "MBP M5 Max, Mac Studio, Mac Pro, PM 2TB"
+    }
+  ],
+  "insights": {
+    "dominant_band": "$840K–$1.3M: Banda dominante 2026 (29% rev) — iPhone Pro/PM",
+    "growing_band": "$420K–$600K: Crece fuerte (iPh 17e, MacBook Neo, iPh 17)",
+    "volume_band": "$100K–$200K: Fuerte volumen — AirPods Pro, Watch SE, iPad"
+  },
+  "installment_trends": {
+    "24_cuotas": "Líder estable ~31% (ticket alto financiado)",
+    "36_cuotas": "3.6%→3.2% — exclusivo iPhone (Pro, PM, Standard, Air; excluye 16e/17e)",
+    "debito": "Estable ~28% (accesorios, productos bajo $200K)"
+  },
+  "recommendations": [
+    "Santander: Asegurar 24 y 36 cuotas s/i sobre $800K",
+    "Promo visible: Badge CyberDay en categorías clave",
+    "MacBook Neo: Mayor inversión en visibilidad (producto nuevo)"
+  ]
+}

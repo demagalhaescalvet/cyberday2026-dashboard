@@ -1,0 +1,41 @@
+{
+  "description": "Sensitivity analysis — pessimistic/optimistic scenarios for key CyberDay 2026 variables",
+  "scenarios": [
+    {
+      "variable": "MacBook Neo adopción",
+      "pessimistic": "430u (3x rate)",
+      "pessDelta": -171,
+      "optimistic": "1,100u (8x + promo)",
+      "optDelta": 139
+    },
+    {
+      "variable": "iPh PM:Pro ratio",
+      "pessimistic": "✅ Ajustado",
+      "pessDelta": 0,
+      "optimistic": "650:380 (1.7:1)",
+      "optDelta": 0,
+      "applied": true
+    },
+    {
+      "variable": "Promo Santander s/Neo",
+      "pessimistic": "70% usa promo",
+      "pessDelta": -68,
+      "optimistic": "30% usa promo",
+      "optDelta": -20
+    },
+    {
+      "variable": "iPhone Air tracción",
+      "pessimistic": "Solo 60u",
+      "pessDelta": -48,
+      "optimistic": "200u",
+      "optDelta": 64
+    },
+    {
+      "variable": "CVR Mobile mejora",
+      "pessimistic": "CVR 1.11%",
+      "pessDelta": -151,
+      "optimistic": "CVR 1.8%",
+      "optDelta": 185
+    }
+  ]
+}
