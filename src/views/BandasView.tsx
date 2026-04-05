@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from '@/components/ui/chart'
 import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
@@ -34,6 +34,8 @@ type SKUItem = {
   dcto: number
 }
 
+const TIER_COLORS = ['#f59e0b', '#10b981', '#2b7fff', '#8b5cf6', '#f43f5e', '#06b6d4']
+
 const clpFormatter = new Intl.NumberFormat('es-CL', {
   style: 'currency', currency: 'CLP', minimumFractionDigits: 0,
 })
@@ -48,7 +50,6 @@ function getDiscountBadgeColor(discountPercent: number): string {
   return 'bg-muted text-muted-foreground'
 }
 
-// Installment preference data for horizontal bar chart
 const installmentPrefs = [
   { cuotas: '3 cuotas', pct: 15 },
   { cuotas: '6 cuotas', pct: 35 },
@@ -60,58 +61,51 @@ const prefChartConfig = {
   pct: { label: 'Preferencia', color: '#2b7fff' },
 } satisfies ChartConfig
 
-function TierCard({ tier }: { tier: Tier }) {
+function TierCard({ tier, index }: { tier: Tier; index: number }) {
   const isRecommended = tier.installments === 24
   const cardClasses = isRecommended ? 'ring-2 ring-primary' : ''
+  const accentColor = TIER_COLORS[index % TIER_COLORS.length]
 
   return (
     <Card className={cardClasses}>
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 pt-4 px-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1">
-            <CardTitle className="text-lg">{tier.name}</CardTitle>
+            <CardTitle className="text-base">{tier.name}</CardTitle>
             {tier.notes && (
               <CardDescription className="text-xs italic">{tier.notes}</CardDescription>
             )}
           </div>
-          {isRecommended && (
-            <Badge className="whitespace-nowrap">Recomendado</Badge>
-          )}
+          {isRecommended && <Badge className="whitespace-nowrap">Recomendado</Badge>}
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 px-4 pb-4">
         <div className="flex items-baseline justify-between">
           <span className="text-sm text-muted-foreground">Cuotas</span>
-          <span className="text-4xl font-bold text-primary">{tier.installments}</span>
+          <span className="text-3xl font-bold" style={{ color: accentColor }}>{tier.installments}</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 text-sm">
+        <div className="grid grid-cols-2 gap-2 text-sm">
           <div>
-            <p className="text-muted-foreground text-xs">Tasa de Interés</p>
+            <p className="text-muted-foreground text-xs">Tasa</p>
             <p className="font-semibold">{tier.interest_rate}%</p>
           </div>
           <div>
-            <p className="text-muted-foreground text-xs">Descuento</p>
+            <p className="text-muted-foreground text-xs">Dcto</p>
             <p className="font-semibold">{tier.discount_percentage}%</p>
           </div>
         </div>
 
-        <div className="space-y-2 border-t border-border pt-3">
-          <div className="text-xs">
-            <p className="text-muted-foreground">Monto Mín/Máx</p>
-            <p className="font-mono text-sm">
-              {formatCLP(tier.min_amount)} - {formatCLP(tier.max_amount)}
-            </p>
-          </div>
+        <div className="space-y-1 border-t border-border pt-2 text-xs">
+          <p className="text-muted-foreground">Monto Mín/Máx</p>
+          <p className="font-mono text-sm">{formatCLP(tier.min_amount)} - {formatCLP(tier.max_amount)}</p>
         </div>
 
-        <div className="space-y-2 border-t border-border pt-3">
+        <div className="space-y-1 border-t border-border pt-2">
           <p className="text-xs text-muted-foreground">Categorías</p>
           <div className="flex flex-wrap gap-1">
             {tier.target_categories.map((cat) => (
-              <Badge key={cat} variant="secondary" className="text-xs">
-                {cat}
-              </Badge>
+              <Badge key={cat} variant="secondary" className="text-xs">{cat}</Badge>
             ))}
           </div>
         </div>
@@ -132,10 +126,10 @@ function PaymentMethodsTable() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Descuentos por Método de Pago</CardTitle>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Descuentos por Método de Pago</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 pb-2">
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
@@ -146,8 +140,8 @@ function PaymentMethodsTable() {
           <TableBody>
             {paymentMethods.map((item) => (
               <TableRow key={item.method}>
-                <TableCell className="font-medium">{item.method}</TableCell>
-                <TableCell className="text-right font-semibold">{item.discount}</TableCell>
+                <TableCell className="font-medium text-sm">{item.method}</TableCell>
+                <TableCell className="text-right font-semibold text-sm">{item.discount}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -159,30 +153,25 @@ function PaymentMethodsTable() {
 
 function VolumeBonusesCard() {
   const bonuses = [
-    { threshold: '3+ productos', percentage: 1.0 },
-    { threshold: '5+ productos', percentage: 2.0 },
-    { threshold: '10+ productos', percentage: 3.0 },
+    { threshold: '3+ productos', percentage: 1.0, color: '#10b981' },
+    { threshold: '5+ productos', percentage: 2.0, color: '#2b7fff' },
+    { threshold: '10+ productos', percentage: 3.0, color: '#8b5cf6' },
   ]
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Bonificaciones por Volumen</CardTitle>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Bonificaciones por Volumen</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 px-4 pb-4">
         {bonuses.map((bonus) => (
-          <div key={bonus.threshold} className="space-y-2">
+          <div key={bonus.threshold} className="space-y-1.5">
             <div className="flex justify-between text-sm">
               <span className="font-medium">{bonus.threshold}</span>
-              <span className="font-semibold text-emerald-400">
-                +{bonus.percentage}%
-              </span>
+              <span className="font-semibold" style={{ color: bonus.color }}>+{bonus.percentage}%</span>
             </div>
             <div className="h-2 w-full rounded-full bg-muted">
-              <div
-                className="h-full rounded-full bg-emerald-500 transition-all"
-                style={{ width: `${Math.min((bonus.percentage / 3) * 100, 100)}%` }}
-              />
+              <div className="h-full rounded-full transition-all" style={{ width: `${Math.min((bonus.percentage / 3) * 100, 100)}%`, backgroundColor: bonus.color }} />
             </div>
           </div>
         ))}
@@ -194,51 +183,30 @@ function VolumeBonusesCard() {
 function EstimatedImpactCard() {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Impacto Estimado</CardTitle>
-        <CardDescription>Proyección basada en historial CyberDay</CardDescription>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Impacto Estimado</CardTitle>
+        <CardDescription className="text-xs">Proyección basada en historial CyberDay</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="grid grid-cols-2 gap-4">
+      <CardContent className="space-y-4 px-4 pb-4">
+        <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
             <p className="text-xs text-muted-foreground">Conversión Esperada</p>
-            <p className="text-3xl font-bold text-primary">25-30%</p>
+            <p className="text-2xl font-bold text-emerald-500">25-30%</p>
           </div>
           <div className="space-y-1">
             <p className="text-xs text-muted-foreground">Aumento Ticket</p>
-            <p className="text-3xl font-bold text-primary">15-20%</p>
+            <p className="text-2xl font-bold text-blue-500">15-20%</p>
           </div>
         </div>
 
-        <div className="border-t border-border pt-4">
-          <p className="text-sm font-semibold mb-3">Preferencia de Cuotas</p>
-          <ChartContainer config={prefChartConfig} className="h-[160px] w-full">
-            <BarChart
-              accessibilityLayer
-              data={installmentPrefs}
-              layout="vertical"
-              margin={{ top: 0, right: 16, left: 0, bottom: 0 }}
-            >
+        <div className="border-t border-border pt-3">
+          <p className="text-sm font-semibold mb-2">Preferencia de Cuotas</p>
+          <ChartContainer config={prefChartConfig} className="h-[140px] w-full">
+            <BarChart accessibilityLayer data={installmentPrefs} layout="vertical" margin={{ top: 0, right: 16, left: 0, bottom: 0 }}>
               <CartesianGrid horizontal={false} className="stroke-border/50" />
-              <YAxis
-                dataKey="cuotas"
-                type="category"
-                tickLine={false}
-                axisLine={false}
-                width={80}
-                tick={{ fontSize: 11 }}
-              />
-              <XAxis
-                type="number"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(v) => `${v}%`}
-              />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent formatter={(v) => `${v}%`} />}
-              />
+              <YAxis dataKey="cuotas" type="category" tickLine={false} axisLine={false} width={75} tick={{ fontSize: 10 }} />
+              <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v}%`} />} />
               <Bar dataKey="pct" fill="#2b7fff" radius={[0, 6, 6, 0]} />
             </BarChart>
           </ChartContainer>
@@ -261,30 +229,21 @@ function SKUPricingGrid() {
   const filteredSKUs = useMemo(() => {
     if (!searchTerm) return skuList
     const term = searchTerm.toLowerCase()
-    return skuList.filter(
-      (sku) =>
-        sku.skuCode.toLowerCase().includes(term) ||
-        sku.realSku.toLowerCase().includes(term)
-    )
+    return skuList.filter((sku) => sku.skuCode.toLowerCase().includes(term) || sku.realSku.toLowerCase().includes(term))
   }, [skuList, searchTerm])
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pb-2 pt-4 px-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <CardTitle>Grid de SKUs — Precios CyberDay</CardTitle>
-            <CardDescription>{filteredSKUs.length} de {skuList.length} SKUs</CardDescription>
+            <CardTitle className="text-sm">Grid de SKUs — Precios CyberDay</CardTitle>
+            <CardDescription className="text-xs">{filteredSKUs.length} de {skuList.length} SKUs</CardDescription>
           </div>
-          <Input
-            placeholder="Buscar por SKU o código real..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="max-w-[250px] h-8 text-sm"
-          />
+          <Input placeholder="Buscar por SKU..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="max-w-[220px] h-8 text-sm" />
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 pb-2">
         <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
           <Table>
             <TableHeader>
@@ -300,27 +259,15 @@ function SKUPricingGrid() {
               {filteredSKUs.map((sku) => (
                 <TableRow key={sku.skuCode}>
                   <TableCell className="font-mono text-sm font-medium">{sku.skuCode}</TableCell>
-                  <TableCell className="font-mono text-xs text-muted-foreground">
-                    {sku.realSku}
-                  </TableCell>
-                  <TableCell className="text-right text-sm">
-                    <span className="text-muted-foreground line-through">
-                      {formatCLP(sku.pvp)}
-                    </span>
-                  </TableCell>
+                  <TableCell className="font-mono text-xs text-muted-foreground">{sku.realSku}</TableCell>
+                  <TableCell className="text-right text-sm"><span className="text-muted-foreground line-through">{formatCLP(sku.pvp)}</span></TableCell>
                   <TableCell className="text-right font-semibold">{formatCLP(sku.cyberPrice)}</TableCell>
-                  <TableCell className="text-right">
-                    <Badge className={getDiscountBadgeColor(sku.dcto)}>
-                      {(sku.dcto * 100).toFixed(0)}%
-                    </Badge>
-                  </TableCell>
+                  <TableCell className="text-right"><Badge className={getDiscountBadgeColor(sku.dcto)}>{(sku.dcto * 100).toFixed(0)}%</Badge></TableCell>
                 </TableRow>
               ))}
               {filteredSKUs.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
-                    No se encontraron SKUs
-                  </TableCell>
+                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">No se encontraron SKUs</TableCell>
                 </TableRow>
               )}
             </TableBody>
@@ -344,12 +291,11 @@ function PriceBandsDistribution() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Distribución por Banda de Precio</CardTitle>
-        <CardDescription>Unidades, revenue y productos representativos por rango CLP</CardDescription>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Distribución por Banda de Precio</CardTitle>
+        <CardDescription className="text-xs">Unidades, revenue y productos representativos por rango CLP</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Table Section */}
+      <CardContent className="space-y-4 px-2 pb-3">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
@@ -364,28 +310,17 @@ function PriceBandsDistribution() {
             <TableBody>
               {bands.map((band) => (
                 <TableRow key={band.band}>
-                  <TableCell className="font-medium">{band.band}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">
-                    {band.u26.toLocaleString()}
-                  </TableCell>
-                  <TableCell className="text-right font-mono text-sm">
-                    ${band.r26}M
-                  </TableCell>
-                  <TableCell className="text-right font-mono text-sm">
-                    {band.pct}%
-                  </TableCell>
+                  <TableCell className="font-medium text-sm">{band.band}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{band.u26.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">${band.r26}M</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{band.pct}%</TableCell>
                   <TableCell className="text-xs text-muted-foreground">{band.products}</TableCell>
                 </TableRow>
               ))}
-              {/* Total Row */}
               <TableRow className="border-t-2 border-border font-semibold bg-muted/50 hover:bg-muted/50">
                 <TableCell>Total</TableCell>
-                <TableCell className="text-right font-mono">
-                  {totalUnits.toLocaleString()}
-                </TableCell>
-                <TableCell className="text-right font-mono">
-                  ${totalRevenue}M
-                </TableCell>
+                <TableCell className="text-right font-mono">{totalUnits.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">${totalRevenue}M</TableCell>
                 <TableCell className="text-right font-mono">100%</TableCell>
                 <TableCell />
               </TableRow>
@@ -393,29 +328,29 @@ function PriceBandsDistribution() {
           </Table>
         </div>
 
-        {/* Insights Cards Grid */}
+        {/* Insights */}
         <div className="grid gap-3 md:grid-cols-3">
-          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-blue-500">
+          <div className="rounded-lg border border-border bg-background p-3 space-y-1 border-l-4 border-l-blue-500">
             <p className="text-xs font-semibold text-muted-foreground">Banda Dominante</p>
             <p className="text-sm leading-snug">{data.insights.dominant_band}</p>
           </div>
-          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-amber-500">
+          <div className="rounded-lg border border-border bg-background p-3 space-y-1 border-l-4 border-l-amber-500">
             <p className="text-xs font-semibold text-muted-foreground">Banda en Crecimiento</p>
             <p className="text-sm leading-snug">{data.insights.growing_band}</p>
           </div>
-          <div className="rounded-lg border border-border bg-background p-3 space-y-2 border-l-4 border-l-emerald-500">
+          <div className="rounded-lg border border-border bg-background p-3 space-y-1 border-l-4 border-l-emerald-500">
             <p className="text-xs font-semibold text-muted-foreground">Banda de Volumen</p>
             <p className="text-sm leading-snug">{data.insights.volume_band}</p>
           </div>
         </div>
 
-        {/* Recommendations Section */}
-        <div className="border-t border-border pt-4">
-          <h4 className="font-semibold text-sm mb-3">Recomendaciones</h4>
-          <ul className="space-y-2">
+        {/* Recommendations */}
+        <div className="border-t border-border pt-3">
+          <h4 className="font-semibold text-sm mb-2">Recomendaciones</h4>
+          <ul className="space-y-1.5">
             {data.recommendations.map((rec, idx) => (
               <li key={idx} className="flex gap-3 text-sm">
-                <span className="text-muted-foreground font-semibold min-w-6">{idx + 1}.</span>
+                <span className="text-muted-foreground font-semibold min-w-5">{idx + 1}.</span>
                 <span>{rec}</span>
               </li>
             ))}
@@ -452,15 +387,10 @@ function DetailedBandsTable() {
     r2026: rows.reduce((sum, r) => sum + r.r2026, 0),
   }
 
-  // Find max values for unit and revenue columns
-  const maxU2024 = Math.max(...rows.map(r => r.u2024))
-  const maxU2025 = Math.max(...rows.map(r => r.u2025))
   const maxU2026 = Math.max(...rows.map(r => r.u2026))
-  const maxR2024 = Math.max(...rows.map(r => r.r2024))
-  const maxR2025 = Math.max(...rows.map(r => r.r2025))
-  const maxR2026 = Math.max(...rows.map(r => r.r2026))
+  const maxU2026Idx = rows.findIndex(r => r.u2026 === maxU2026)
 
-  const getUnitBackgroundColor = (value: number, max: number): string => {
+  const getUnitBg = (value: number, max: number) => {
     const pct = (value / max) * 100
     if (pct < 25) return ''
     if (pct < 50) return 'bg-blue-500/10'
@@ -468,7 +398,7 @@ function DetailedBandsTable() {
     return 'bg-blue-500/30'
   }
 
-  const getRevenueBackgroundColor = (value: number, max: number): string => {
+  const getRevBg = (value: number, max: number) => {
     const pct = (value / max) * 100
     if (pct < 25) return ''
     if (pct < 50) return 'bg-emerald-500/10'
@@ -476,27 +406,30 @@ function DetailedBandsTable() {
     return 'bg-emerald-500/30'
   }
 
-  // Find row with highest 2026 units
-  const maxU2026Idx = rows.findIndex(r => r.u2026 === maxU2026)
+  const maxU2024 = Math.max(...rows.map(r => r.u2024))
+  const maxU2025 = Math.max(...rows.map(r => r.u2025))
+  const maxR2024 = Math.max(...rows.map(r => r.r2024))
+  const maxR2025 = Math.max(...rows.map(r => r.r2025))
+  const maxR2026 = Math.max(...rows.map(r => r.r2026))
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Distribución Detallada por Banda de Precio</CardTitle>
-        <CardDescription>12 bandas de precio con unidades y revenue para 2024, 2025 y 2026</CardDescription>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Distribución Detallada por Banda de Precio</CardTitle>
+        <CardDescription className="text-xs">12 bandas — unidades y revenue 2024/2025/2026</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 pb-2">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead>Banda</TableHead>
-                <TableHead className="text-right">Uds 2024</TableHead>
-                <TableHead className="text-right">Uds 2025</TableHead>
-                <TableHead className="text-right">Uds 2026</TableHead>
-                <TableHead className="text-right">Rev 2024 ($M)</TableHead>
-                <TableHead className="text-right">Rev 2025 ($M)</TableHead>
-                <TableHead className="text-right">Rev 2026 ($M)</TableHead>
+                <TableHead className="text-right">Uds 24</TableHead>
+                <TableHead className="text-right">Uds 25</TableHead>
+                <TableHead className="text-right">Uds 26</TableHead>
+                <TableHead className="text-right">Rev 24</TableHead>
+                <TableHead className="text-right">Rev 25</TableHead>
+                <TableHead className="text-right">Rev 26</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -504,13 +437,13 @@ function DetailedBandsTable() {
                 const isBolded = idx === maxU2026Idx
                 return (
                   <TableRow key={row.band} className={isBolded ? 'font-bold' : ''}>
-                    <TableCell className={`font-medium ${isBolded ? 'font-bold' : ''}`}>{row.band}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2024, maxU2024)} ${isBolded ? 'font-bold' : ''}`}>{row.u2024.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2025, maxU2025)} ${isBolded ? 'font-bold' : ''}`}>{row.u2025.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2026, maxU2026)} ${isBolded ? 'font-bold' : ''}`}>{row.u2026.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2024, maxR2024)} ${isBolded ? 'font-bold' : ''}`}>{row.r2024.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2025, maxR2025)} ${isBolded ? 'font-bold' : ''}`}>{row.r2025.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2026, maxR2026)} ${isBolded ? 'font-bold' : ''}`}>{row.r2026.toLocaleString()}</TableCell>
+                    <TableCell className="font-medium text-sm">{row.band}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBg(row.u2024, maxU2024)}`}>{row.u2024.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBg(row.u2025, maxU2025)}`}>{row.u2025.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBg(row.u2026, maxU2026)}`}>{row.u2026.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevBg(row.r2024, maxR2024)}`}>{row.r2024.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevBg(row.r2025, maxR2025)}`}>{row.r2025.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevBg(row.r2026, maxR2026)}`}>{row.r2026.toLocaleString()}</TableCell>
                   </TableRow>
                 )
               })}
@@ -537,116 +470,41 @@ function InstallmentDistributionChart() {
     units_by_year: { '2024': number[]; '2025': number[]; '2026_target': number[] }
   }
 
-  // Transform data: rows per year with each tier as a column
   const areaData = [
-    {
-      year: '2024',
-      'Sin Cuotas': data.units_by_year['2024'][0],
-      '3 Cuotas': data.units_by_year['2024'][1],
-      '6 Cuotas': data.units_by_year['2024'][2],
-      '12 Cuotas': data.units_by_year['2024'][3],
-      '24 Cuotas': data.units_by_year['2024'][4],
-      '36+ Cuotas': data.units_by_year['2024'][5],
-    },
-    {
-      year: '2025',
-      'Sin Cuotas': data.units_by_year['2025'][0],
-      '3 Cuotas': data.units_by_year['2025'][1],
-      '6 Cuotas': data.units_by_year['2025'][2],
-      '12 Cuotas': data.units_by_year['2025'][3],
-      '24 Cuotas': data.units_by_year['2025'][4],
-      '36+ Cuotas': data.units_by_year['2025'][5],
-    },
-    {
-      year: '2026',
-      'Sin Cuotas': data.units_by_year['2026_target'][0],
-      '3 Cuotas': data.units_by_year['2026_target'][1],
-      '6 Cuotas': data.units_by_year['2026_target'][2],
-      '12 Cuotas': data.units_by_year['2026_target'][3],
-      '24 Cuotas': data.units_by_year['2026_target'][4],
-      '36+ Cuotas': data.units_by_year['2026_target'][5],
-    },
+    { year: '2024', 'Sin Cuotas': data.units_by_year['2024'][0], '3 Cuotas': data.units_by_year['2024'][1], '6 Cuotas': data.units_by_year['2024'][2], '12 Cuotas': data.units_by_year['2024'][3], '24 Cuotas': data.units_by_year['2024'][4], '36+ Cuotas': data.units_by_year['2024'][5] },
+    { year: '2025', 'Sin Cuotas': data.units_by_year['2025'][0], '3 Cuotas': data.units_by_year['2025'][1], '6 Cuotas': data.units_by_year['2025'][2], '12 Cuotas': data.units_by_year['2025'][3], '24 Cuotas': data.units_by_year['2025'][4], '36+ Cuotas': data.units_by_year['2025'][5] },
+    { year: '2026', 'Sin Cuotas': data.units_by_year['2026_target'][0], '3 Cuotas': data.units_by_year['2026_target'][1], '6 Cuotas': data.units_by_year['2026_target'][2], '12 Cuotas': data.units_by_year['2026_target'][3], '24 Cuotas': data.units_by_year['2026_target'][4], '36+ Cuotas': data.units_by_year['2026_target'][5] },
   ]
 
   const chartConfig = {
-    'Sin Cuotas': { label: 'Sin Cuotas', color: '#e0edff' },
-    '3 Cuotas': { label: '3 Cuotas', color: '#8ec5ff' },
-    '6 Cuotas': { label: '6 Cuotas', color: '#5ba3ff' },
-    '12 Cuotas': { label: '12 Cuotas', color: '#2b7fff' },
-    '24 Cuotas': { label: '24 Cuotas', color: '#155dfc' },
-    '36+ Cuotas': { label: '36+ Cuotas', color: '#193cb8' },
+    'Sin Cuotas': { label: 'Sin Cuotas', color: TIER_COLORS[0] },
+    '3 Cuotas': { label: '3 Cuotas', color: TIER_COLORS[1] },
+    '6 Cuotas': { label: '6 Cuotas', color: TIER_COLORS[2] },
+    '12 Cuotas': { label: '12 Cuotas', color: TIER_COLORS[3] },
+    '24 Cuotas': { label: '24 Cuotas', color: TIER_COLORS[4] },
+    '36+ Cuotas': { label: '36+ Cuotas', color: TIER_COLORS[5] },
   } satisfies ChartConfig
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Distribución por Tipo de Cuota</CardTitle>
-        <CardDescription>Composición de tiers de cuotas por año (2024, 2025, 2026)</CardDescription>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Distribución por Tipo de Cuota</CardTitle>
+        <CardDescription className="text-xs">Composición de tiers de cuotas por año (2024→2026)</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[320px] w-full">
-          <AreaChart
-            accessibilityLayer
-            data={areaData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-            stackOffset="expand"
-          >
+      <CardContent className="px-2 pb-2">
+        <ChartContainer config={chartConfig} className="h-[280px] w-full">
+          <AreaChart accessibilityLayer data={areaData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} stackOffset="expand">
             <CartesianGrid className="stroke-border/50" />
-            <XAxis
-              dataKey="year"
-              tickLine={false}
-              axisLine={false}
-              tick={{ fontSize: 11 }}
-            />
-            <YAxis
-              tickLine={false}
-              axisLine={false}
-              tick={{ fontSize: 11 }}
-              tickFormatter={(v) => `${v}%`}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v}%`} />} />
-            <Area
-              type="monotone"
-              dataKey="Sin Cuotas"
-              fill="#e0edff"
-              stroke="#e0edff"
-              stackId="a"
-            />
-            <Area
-              type="monotone"
-              dataKey="3 Cuotas"
-              fill="#8ec5ff"
-              stroke="#8ec5ff"
-              stackId="a"
-            />
-            <Area
-              type="monotone"
-              dataKey="6 Cuotas"
-              fill="#5ba3ff"
-              stroke="#5ba3ff"
-              stackId="a"
-            />
-            <Area
-              type="monotone"
-              dataKey="12 Cuotas"
-              fill="#2b7fff"
-              stroke="#2b7fff"
-              stackId="a"
-            />
-            <Area
-              type="monotone"
-              dataKey="24 Cuotas"
-              fill="#155dfc"
-              stroke="#155dfc"
-              stackId="a"
-            />
-            <Area
-              type="monotone"
-              dataKey="36+ Cuotas"
-              fill="#193cb8"
-              stroke="#193cb8"
-              stackId="a"
-            />
+            <XAxis dataKey="year" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+            <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${Math.round(v * 100)}%`} />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Area type="monotone" dataKey="Sin Cuotas" fill={TIER_COLORS[0]} stroke={TIER_COLORS[0]} stackId="a" fillOpacity={0.8} />
+            <Area type="monotone" dataKey="3 Cuotas" fill={TIER_COLORS[1]} stroke={TIER_COLORS[1]} stackId="a" fillOpacity={0.8} />
+            <Area type="monotone" dataKey="6 Cuotas" fill={TIER_COLORS[2]} stroke={TIER_COLORS[2]} stackId="a" fillOpacity={0.8} />
+            <Area type="monotone" dataKey="12 Cuotas" fill={TIER_COLORS[3]} stroke={TIER_COLORS[3]} stackId="a" fillOpacity={0.8} />
+            <Area type="monotone" dataKey="24 Cuotas" fill={TIER_COLORS[4]} stroke={TIER_COLORS[4]} stackId="a" fillOpacity={0.8} />
+            <Area type="monotone" dataKey="36+ Cuotas" fill={TIER_COLORS[5]} stroke={TIER_COLORS[5]} stackId="a" fillOpacity={0.8} />
+            <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
       </CardContent>
@@ -664,29 +522,30 @@ function InstallmentMixHeatmap() {
 
   const tiers = ['Sin Cuotas', '3 Cuotas', '6 Cuotas', '12 Cuotas', '24 Cuotas', '36+ Cuotas']
 
-  const getHeatmapStyle = (pct: number): React.CSSProperties => {
+  const getHeatmapStyle = (pct: number, tierIdx: number): React.CSSProperties => {
     if (pct === 0) return {}
-    if (pct < 5) return { backgroundColor: 'rgba(43, 127, 255, 0.08)' }
-    if (pct < 15) return { backgroundColor: 'rgba(43, 127, 255, 0.18)' }
-    if (pct < 30) return { backgroundColor: 'rgba(43, 127, 255, 0.32)' }
-    if (pct < 45) return { backgroundColor: 'rgba(43, 127, 255, 0.48)' }
-    return { backgroundColor: 'rgba(43, 127, 255, 0.65)' }
+    const color = TIER_COLORS[tierIdx]
+    const opacity = pct < 5 ? 0.12 : pct < 15 ? 0.25 : pct < 30 ? 0.4 : pct < 45 ? 0.55 : 0.7
+    return { backgroundColor: `${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}` }
   }
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Mix de Cuotas por Banda de Precio</CardTitle>
-        <CardDescription>Distribución porcentual de cada tier por banda de precio</CardDescription>
+      <CardHeader className="pb-2 pt-4 px-4">
+        <CardTitle className="text-sm">Mix de Cuotas por Banda de Precio</CardTitle>
+        <CardDescription className="text-xs">Distribución porcentual por tier y banda</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 pb-2">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead>Banda</TableHead>
-                {tiers.map((tier) => (
-                  <TableHead key={tier} className="text-center text-xs">{tier}</TableHead>
+                {tiers.map((tier, i) => (
+                  <TableHead key={tier} className="text-center text-xs">
+                    <span className="inline-block w-2 h-2 rounded-full mr-1" style={{ backgroundColor: TIER_COLORS[i] }} />
+                    {tier}
+                  </TableHead>
                 ))}
               </TableRow>
             </TableHeader>
@@ -695,11 +554,7 @@ function InstallmentMixHeatmap() {
                 <TableRow key={band}>
                   <TableCell className="font-medium text-sm">{band}</TableCell>
                   {data.mix_by_price_band.percentages[bandIdx].map((percentage, tierIdx) => (
-                    <TableCell
-                      key={`${band}-${tierIdx}`}
-                      className="text-center font-mono text-sm"
-                      style={getHeatmapStyle(percentage)}
-                    >
+                    <TableCell key={`${band}-${tierIdx}`} className="text-center font-mono text-sm" style={getHeatmapStyle(percentage, tierIdx)}>
                       {percentage}%
                     </TableCell>
                   ))}
@@ -718,10 +573,7 @@ function ExpandableDetailedBandsTable() {
 
   return (
     <div className="space-y-3">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm"
-      >
+      <button onClick={() => setIsExpanded(!isExpanded)} className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm">
         <span>{isExpanded ? '▼' : '▶'}</span>
         Ver distribución detallada (12 bandas)
       </button>
@@ -732,19 +584,11 @@ function ExpandableDetailedBandsTable() {
 
 function ExpandableSKUGrid() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const skuList = useMemo(() => {
-    return Object.entries(skuGridData).map(([key, data]) => ({
-      skuCode: key,
-      ...(data as SKUItem),
-    }))
-  }, [])
+  const skuList = useMemo(() => Object.entries(skuGridData).map(([key, data]) => ({ skuCode: key, ...(data as SKUItem) })), [])
 
   return (
     <div className="space-y-3">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm"
-      >
+      <button onClick={() => setIsExpanded(!isExpanded)} className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm">
         <span>{isExpanded ? '▼' : '▶'}</span>
         Ver Grid de SKUs ({skuList.length})
       </button>
@@ -757,19 +601,25 @@ export function BandasView() {
   const tiers = bandasData.tiers as Tier[]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Financing Tiers */}
       <div className="grid auto-rows-max gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {tiers.map((tier) => (
-          <TierCard key={tier.name} tier={tier} />
+        {tiers.map((tier, idx) => (
+          <TierCard key={tier.name} tier={tier} index={idx} />
         ))}
       </div>
 
-      {/* Payment Methods + Impact */}
+      {/* Payment Methods + Impact + Volume — 3 columns */}
       <div className="grid gap-4 lg:grid-cols-3">
         <PaymentMethodsTable />
         <EstimatedImpactCard />
         <VolumeBonusesCard />
+      </div>
+
+      {/* Two-column: Price Bands + Installment Distribution */}
+      <div className="grid lg:grid-cols-2 gap-4">
+        <InstallmentDistributionChart />
+        <InstallmentMixHeatmap />
       </div>
 
       {/* Price Bands Distribution */}
@@ -777,12 +627,6 @@ export function BandasView() {
 
       {/* Detailed Bands Table — Expandable */}
       <ExpandableDetailedBandsTable />
-
-      {/* Installment Distribution Chart */}
-      <InstallmentDistributionChart />
-
-      {/* Installment Mix Heatmap */}
-      <InstallmentMixHeatmap />
 
       {/* SKU Pricing Grid — Expandable */}
       <ExpandableSKUGrid />
