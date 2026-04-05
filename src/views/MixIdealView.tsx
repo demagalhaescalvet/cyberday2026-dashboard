@@ -112,8 +112,10 @@ export function MixIdealView() {
     return [...categories]
       .sort((a, b) => b.revenue - a.revenue)
       .map(cat => {
-        const units2025 = (multiYearData.units['2025'] as any)?.[cat.name] || 0
-        const units2026 = (multiYearData.units['2026_target'] as any)?.[cat.name] || 0
+        // multiYearData.units is indexed by array position matching multiYearData.categories
+        const catIdx = multiYearData.categories.indexOf(cat.name)
+        const units2025 = catIdx >= 0 ? (multiYearData.units['2025'][catIdx] || 0) : 0
+        const units2026 = catIdx >= 0 ? (multiYearData.units['2026_target'][catIdx] || 0) : 0
         const growthPct = units2025 > 0 ? ((units2026 - units2025) / units2025) * 100 : 0
         return {
           name: cat.name,
