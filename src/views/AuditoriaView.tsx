@@ -76,8 +76,8 @@ export function AuditoriaView() {
       {/* KPI Row */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {/* Radial gauge */}
-        <Card className="row-span-2 lg:row-span-1 lg:col-span-1 flex flex-col items-center justify-center py-2">
-          <ChartContainer config={gaugeConfig} className="mx-auto aspect-square max-h-[120px]">
+        <Card className="flex flex-col items-center justify-center py-4">
+          <ChartContainer config={gaugeConfig} className="mx-auto aspect-square w-[140px] h-[140px]">
             <RadialBarChart data={gaugeData} startAngle={180} endAngle={180 - (competitivePct / 100) * 360} outerRadius={55} innerRadius={45}>
               <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[55, 45]} />
               <RadialBar dataKey="value" background cornerRadius={10} />
