@@ -12,6 +12,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
 import priceBandsData from '@/data/price-bands.json'
+import detailedBandsData from '@/data/price-bands-detailed.json'
+import installmentData from '@/data/installment-distribution.json'
 
 type Tier = {
   name: string
@@ -424,6 +426,197 @@ function PriceBandsDistribution() {
   )
 }
 
+function DetailedBandsTable() {
+  const data = detailedBandsData as {
+    bands: string[]
+    units: { '2024': number[]; '2025': number[]; '2026_target': number[] }
+    revenue_millions: { '2024': number[]; '2025': number[]; '2026_target': number[] }
+  }
+
+  const rows = data.bands.map((band, idx) => ({
+    band,
+    u2024: data.units['2024'][idx],
+    u2025: data.units['2025'][idx],
+    u2026: data.units['2026_target'][idx],
+    r2024: data.revenue_millions['2024'][idx],
+    r2025: data.revenue_millions['2025'][idx],
+    r2026: data.revenue_millions['2026_target'][idx],
+  }))
+
+  const totals = {
+    u2024: rows.reduce((sum, r) => sum + r.u2024, 0),
+    u2025: rows.reduce((sum, r) => sum + r.u2025, 0),
+    u2026: rows.reduce((sum, r) => sum + r.u2026, 0),
+    r2024: rows.reduce((sum, r) => sum + r.r2024, 0),
+    r2025: rows.reduce((sum, r) => sum + r.r2025, 0),
+    r2026: rows.reduce((sum, r) => sum + r.r2026, 0),
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Distribución Detallada por Banda de Precio</CardTitle>
+        <CardDescription>12 bandas de precio con unidades y revenue para 2024, 2025 y 2026</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead>Banda</TableHead>
+                <TableHead className="text-right">Uds 2024</TableHead>
+                <TableHead className="text-right">Uds 2025</TableHead>
+                <TableHead className="text-right">Uds 2026</TableHead>
+                <TableHead className="text-right">Rev 2024 ($M)</TableHead>
+                <TableHead className="text-right">Rev 2025 ($M)</TableHead>
+                <TableHead className="text-right">Rev 2026 ($M)</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.band}>
+                  <TableCell className="font-medium">{row.band}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.u2024.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.u2025.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.u2026.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.r2024.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.r2025.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{row.r2026.toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow className="border-t-2 border-border font-semibold bg-muted/50 hover:bg-muted/50">
+                <TableCell>Total</TableCell>
+                <TableCell className="text-right font-mono">{totals.u2024.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">{totals.u2025.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">{totals.u2026.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">{totals.r2024.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">{totals.r2025.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-mono">{totals.r2026.toLocaleString()}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+function InstallmentDistributionChart() {
+  const data = installmentData as {
+    tiers: string[]
+    units_by_year: { '2024': number[]; '2025': number[]; '2026_target': number[] }
+  }
+
+  const chartData = data.tiers.map((tier, idx) => ({
+    tier,
+    '2024': data.units_by_year['2024'][idx],
+    '2025': data.units_by_year['2025'][idx],
+    '2026': data.units_by_year['2026_target'][idx],
+  }))
+
+  const chartConfig = {
+    '2024': { label: '2024', color: '#8ec5ff' },
+    '2025': { label: '2025', color: '#2b7fff' },
+    '2026': { label: '2026', color: '#155dfc' },
+  } satisfies ChartConfig
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Distribución por Tipo de Cuota</CardTitle>
+        <CardDescription>Unidades por tier de cuotas (2024, 2025, 2026)</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig} className="h-[320px] w-full">
+          <BarChart
+            accessibilityLayer
+            data={chartData}
+            layout="vertical"
+            margin={{ top: 0, right: 16, left: 100, bottom: 0 }}
+          >
+            <CartesianGrid horizontal={false} className="stroke-border/50" />
+            <YAxis
+              dataKey="tier"
+              type="category"
+              tickLine={false}
+              axisLine={false}
+              width={95}
+              tick={{ fontSize: 11 }}
+            />
+            <XAxis
+              type="number"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 11 }}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} />
+            <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} />
+            <Bar dataKey="2026" fill="#155dfc" radius={[0, 6, 6, 0]} />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}
+
+function InstallmentMixHeatmap() {
+  const data = installmentData as {
+    mix_by_price_band: {
+      bands: string[]
+      percentages: number[][]
+    }
+  }
+
+  const tiers = ['Sin Cuotas', '3 Cuotas', '6 Cuotas', '12 Cuotas', '24 Cuotas', '36+ Cuotas']
+
+  const getBackgroundColor = (percentage: number): string => {
+    if (percentage === 0) return 'bg-background'
+    if (percentage < 5) return 'bg-blue-100/40'
+    if (percentage < 15) return 'bg-blue-200/50'
+    if (percentage < 30) return 'bg-blue-400/40'
+    return 'bg-blue-600/50'
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Mix de Cuotas por Banda de Precio</CardTitle>
+        <CardDescription>Distribución porcentual de cada tier por banda de precio</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead>Banda</TableHead>
+                {tiers.map((tier) => (
+                  <TableHead key={tier} className="text-center text-xs">{tier}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.mix_by_price_band.bands.map((band, bandIdx) => (
+                <TableRow key={band}>
+                  <TableCell className="font-medium text-sm">{band}</TableCell>
+                  {data.mix_by_price_band.percentages[bandIdx].map((percentage, tierIdx) => (
+                    <TableCell
+                      key={`${band}-${tierIdx}`}
+                      className={`text-center font-mono text-sm ${getBackgroundColor(percentage)}`}
+                    >
+                      {percentage}%
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 function ExpandableSKUGrid() {
   const [isExpanded, setIsExpanded] = useState(false)
   const skuList = useMemo(() => {
@@ -468,6 +661,15 @@ export function BandasView() {
 
       {/* Price Bands Distribution */}
       <PriceBandsDistribution />
+
+      {/* Detailed Bands Table */}
+      <DetailedBandsTable />
+
+      {/* Installment Distribution Chart */}
+      <InstallmentDistributionChart />
+
+      {/* Installment Mix Heatmap */}
+      <InstallmentMixHeatmap />
 
       {/* SKU Pricing Grid — Expandable */}
       <ExpandableSKUGrid />

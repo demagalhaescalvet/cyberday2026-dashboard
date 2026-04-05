@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
@@ -10,6 +11,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } f
 import { PieChart, Pie, Cell, Label } from 'recharts'
 import type { ProductMixCategory } from '@/types/product-mix'
 import productMixData from '@/data/product-mix.json'
+import elasticityData from '@/data/elasticity.json'
+import multiYearData from '@/data/multi-year.json'
 
 const CHART_COLORS = ['#2b7fff', '#155dfc', '#1447e6', '#193cb8', '#8ec5ff', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#64748b']
 
@@ -324,6 +327,89 @@ export function MixIdealView() {
                 </TableBody>
               </Table>
             </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Elasticity & Discount Matrix */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle>Elasticidad & Matriz de Descuentos</CardTitle>
+          <CardDescription>Coeficiente de elasticidad y tiers de descuento por categoría</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Categoría</TableHead>
+                  <TableHead className="text-right">Elasticidad</TableHead>
+                  <TableHead className="text-right">Dcto Conservador</TableHead>
+                  <TableHead className="text-right">Dcto Base</TableHead>
+                  <TableHead className="text-right">Dcto Agresivo</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {Object.entries(elasticityData.categories).map(([categoryName, data]) => {
+                  const elasticity = (data as any).elasticity
+                  let elasticityColor = 'bg-amber-100 text-amber-900'
+                  if (elasticity < 0.8) {
+                    elasticityColor = 'bg-emerald-100 text-emerald-900'
+                  } else if (elasticity > 1.2) {
+                    elasticityColor = 'bg-red-100 text-red-900'
+                  }
+
+                  return (
+                    <TableRow key={categoryName}>
+                      <TableCell className="font-medium">{categoryName}</TableCell>
+                      <TableCell className="text-right">
+                        <Badge variant="outline" className={elasticityColor}>
+                          {elasticity.toFixed(2)}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">{((data as any).dctoCons * 100).toFixed(0)}%</TableCell>
+                      <TableCell className="text-right">{((data as any).dctoBase * 100).toFixed(0)}%</TableCell>
+                      <TableCell className="text-right">{((data as any).dctoAggr * 100).toFixed(0)}%</TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Year-over-Year Units Growth */}
+      <div className="grid grid-cols-3 gap-4">
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Unidades 2024</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2024']).toLocaleString()}</p>
+            <p className="text-xs text-muted-foreground mt-1">Baseline year</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Unidades 2025</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2025']).toLocaleString()}</p>
+            <p className="text-xs text-green-600 mt-1">
+              +{(((multiYearData.totals.units['2025'] - multiYearData.totals.units['2024']) / multiYearData.totals.units['2024']) * 100).toFixed(1)}% YoY
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Target Unidades 2026</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2026_target']).toLocaleString()}</p>
+            <p className="text-xs text-green-600 mt-1">
+              +{(((multiYearData.totals.units['2026_target'] - multiYearData.totals.units['2025']) / multiYearData.totals.units['2025']) * 100).toFixed(1)}% YoY
+            </p>
           </CardContent>
         </Card>
       </div>

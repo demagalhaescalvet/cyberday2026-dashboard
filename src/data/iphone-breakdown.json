@@ -1,0 +1,31 @@
+{
+  "description": "iPhone sub-model unit and revenue breakdown",
+  "models": [
+    "Pro",
+    "Pro Max",
+    "Air",
+    "Standard",
+    "Budget"
+  ],
+  "units_2024": [
+    1107,
+    660,
+    0,
+    568,
+    2
+  ],
+  "units_2025": [
+    1195,
+    545,
+    0,
+    708,
+    25
+  ],
+  "revenue_2026": [
+    429,
+    776,
+    96,
+    437,
+    490
+  ]
+}

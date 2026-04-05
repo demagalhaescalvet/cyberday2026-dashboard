@@ -23,6 +23,8 @@ import revenueData from '@/data/revenue.json'
 import unitsData from '@/data/units.json'
 import launchData from '@/data/launch-tracker.json'
 import sensitivityData from '@/data/sensitivity.json'
+import multiYearData from '@/data/multi-year.json'
+import iphoneBreakdown from '@/data/iphone-breakdown.json'
 
 // Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
@@ -226,6 +228,72 @@ export function ResumenView() {
             De $5.047M (2025) a $5.421M (2026 target)
           </div>
         </CardFooter>
+      </Card>
+
+      {/* Year-over-Year Category Comparison */}
+      <Card>
+        <CardHeader className="flex flex-col items-stretch border-b p-0 sm:flex-row">
+          <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-4">
+            <CardTitle>Comparación Categorías por Año</CardTitle>
+            <CardDescription>Revenue 2024 vs 2025 vs 2026 Target (Top 8)</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent className="px-2 pt-4 sm:p-6">
+          {(() => {
+            // Build comparison data for top 8 categories by 2025 revenue
+            const comparisonData = multiYearData.categories.map((cat, i) => ({
+              name: cat,
+              '2024': multiYearData.revenue['2024'][i] || 0,
+              '2025': multiYearData.revenue['2025'][i] || 0,
+              '2026': multiYearData.revenue['2026_target'][i] || 0,
+            }))
+
+            const top8 = [...comparisonData]
+              .sort((a, b) => b['2025'] - a['2025'])
+              .slice(0, 8)
+
+            return (
+              <ChartContainer
+                config={{
+                  '2024': { label: '2024', color: '#8ec5ff' },
+                  '2025': { label: '2025', color: '#2b7fff' },
+                  '2026': { label: '2026 Target', color: '#155dfc' },
+                } satisfies ChartConfig}
+                className="aspect-auto h-[350px] w-full"
+              >
+                <BarChart
+                  accessibilityLayer
+                  data={top8}
+                  layout="vertical"
+                  margin={{ top: 10, right: 30, left: 100, bottom: 10 }}
+                >
+                  <CartesianGrid horizontal={false} className="stroke-border/50" />
+                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    width={100}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        className="w-[160px]"
+                        labelFormatter={(v) => v}
+                        formatter={(value) => `$${value}M`}
+                      />
+                    }
+                  />
+                  <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} />
+                  <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} />
+                  <Bar dataKey="2026" fill="#155dfc" radius={[0, 6, 6, 0]} />
+                </BarChart>
+              </ChartContainer>
+            )
+          })()}
+        </CardContent>
       </Card>
 
       {/* Bar Chart + Donut Chart */}
@@ -489,6 +557,53 @@ export function ResumenView() {
           </CardContent>
         </Card>
       </div>
+
+      {/* iPhone Model Breakdown */}
+      <Card>
+        <CardHeader>
+          <CardTitle>iPhone - Desglose de Modelos</CardTitle>
+          <CardDescription>Unidades 2024/2025 y Revenue 2026 Target</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Modelo</TableHead>
+                <TableHead className="text-right">Unidades 2024</TableHead>
+                <TableHead className="text-right">Unidades 2025</TableHead>
+                <TableHead className="text-right">Crecimiento %</TableHead>
+                <TableHead className="text-right">Revenue 2026</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {iphoneBreakdown.models.map((model, i) => {
+                const units2024 = iphoneBreakdown.units_2024[i] || 0
+                const units2025 = iphoneBreakdown.units_2025[i] || 0
+                const revenue2026 = iphoneBreakdown.revenue_2026[i] || 0
+                const growth = units2024 > 0 ? ((units2025 - units2024) / units2024) * 100 : 0
+
+                return (
+                  <TableRow key={model}>
+                    <TableCell className="font-medium">iPhone {model}</TableCell>
+                    <TableCell className="text-right">{units2024.toLocaleString()}</TableCell>
+                    <TableCell className="text-right">{units2025.toLocaleString()}</TableCell>
+                    <TableCell className="text-right">
+                      <span
+                        className={`font-medium ${
+                          growth > 0 ? 'text-emerald-400' : growth < 0 ? 'text-red-500' : 'text-muted-foreground'
+                        }`}
+                      >
+                        {growth > 0 ? '+' : ''}{growth.toFixed(1)}%
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right font-semibold">${revenue2026}M</TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   )
 }
