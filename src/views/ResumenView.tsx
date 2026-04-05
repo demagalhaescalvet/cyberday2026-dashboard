@@ -6,7 +6,7 @@ import revenueData from '@/data/revenue.json'
 const chartConfig = {
   revenue: {
     label: 'Ingresos',
-    color: 'var(--chart-1)',
+    color: '#2b7fff',
   },
 } satisfies ChartConfig
 
@@ -110,7 +110,7 @@ export function ResumenView() {
                 formatter={(value) => `$${value}M`}
               />
               <Legend />
-              <Bar dataKey="revenue" fill="var(--chart-1)" name="Ingresos (M)" radius={[8, 8, 0, 0]} />
+              <Bar dataKey="revenue" fill="#2b7fff" name="Ingresos (M)" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ChartContainer>
         </CardContent>
