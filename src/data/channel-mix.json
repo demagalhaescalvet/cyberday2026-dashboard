@@ -1,0 +1,26 @@
+{
+  "2024": {
+    "Web": {
+      "revenue": 3479,
+      "units": 9759,
+      "pct": 62.9
+    },
+    "Click & Go": {
+      "revenue": 2056,
+      "units": 6135,
+      "pct": 37.1
+    }
+  },
+  "2025": {
+    "Web": {
+      "revenue": 3685,
+      "units": 9490,
+      "pct": 61.8
+    },
+    "Click & Go": {
+      "revenue": 2277,
+      "units": 6196,
+      "pct": 38.2
+    }
+  }
+}

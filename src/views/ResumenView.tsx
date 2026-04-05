@@ -26,6 +26,10 @@ import launchData from '@/data/launch-tracker.json'
 import sensitivityData from '@/data/sensitivity.json'
 import multiYearData from '@/data/multi-year.json'
 import iphoneBreakdown from '@/data/iphone-breakdown.json'
+import dailyCurve from '@/data/daily-curve.json'
+import aspComparison from '@/data/asp-comparison.json'
+import orderMetrics from '@/data/order-metrics.json'
+import channelMix from '@/data/channel-mix.json'
 
 // Hex colors for the 5 chart slots
 const CHART_COLORS = ['#8ec5ff', '#2b7fff', '#155dfc', '#1447e6', '#193cb8']
@@ -331,6 +335,166 @@ export function ResumenView() {
               Mac NB pasa de 13.5% → 19.9% | iPhone Pro cae de 23.7% → 7.9%
             </div>
           </CardFooter>
+        </Card>
+      </div>
+
+      {/* Daily Revenue Curve — Shape of CyberDay */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Curva Diaria de Revenue</CardTitle>
+            <CardDescription>Distribución por día del evento — Día 1 concentra &gt;50%</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const curveData = dailyCurve['2024'].days.map((day, i) => ({
+                day,
+                '2024': dailyCurve['2024'].revenue[i],
+                '2025': dailyCurve['2025'].revenue[i],
+              }))
+              return (
+                <ChartContainer
+                  config={{
+                    '2024': { label: '2024', color: '#8ec5ff' },
+                    '2025': { label: '2025', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[250px] w-full"
+                >
+                  <BarChart
+                    accessibilityLayer
+                    data={curveData}
+                    margin={{ top: 20, right: 30, left: 0, bottom: 10 }}
+                  >
+                    <CartesianGrid vertical={false} className="stroke-border/50" />
+                    <XAxis dataKey="day" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+                    <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[180px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value) => `$${value}M`}
+                        />
+                      }
+                    />
+                    <Bar dataKey="2024" fill="#8ec5ff" radius={[6, 6, 0, 0]}>
+                      <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={10} />
+                    </Bar>
+                    <Bar dataKey="2025" fill="#2b7fff" radius={[6, 6, 0, 0]}>
+                      <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `$${v}M`} fontSize={10} />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              Día 1: <span className="font-medium text-foreground">54% (2024)</span> → <span className="font-medium text-foreground">51% (2025)</span> del revenue total
+            </div>
+          </CardFooter>
+        </Card>
+
+        {/* ASP Comparison by Category */}
+        <Card>
+          <CardHeader className="border-b px-6 py-4">
+            <CardTitle>Ticket Promedio por Categoría</CardTitle>
+            <CardDescription>ASP 2024 vs 2025 (CLP miles) — explica divergencia revenue vs unidades</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-4 sm:p-6">
+            {(() => {
+              const aspData = aspComparison.categories.map((cat, i) => ({
+                name: cat,
+                asp2024: aspComparison.asp_2024[i],
+                asp2025: aspComparison.asp_2025[i],
+                change: Math.round(((aspComparison.asp_2025[i] - aspComparison.asp_2024[i]) / aspComparison.asp_2024[i]) * 100),
+              })).sort((a, b) => b.asp2025 - a.asp2025)
+              return (
+                <ChartContainer
+                  config={{
+                    asp2024: { label: 'ASP 2024', color: '#8ec5ff' },
+                    asp2025: { label: 'ASP 2025', color: '#2b7fff' },
+                  } satisfies ChartConfig}
+                  className="aspect-auto h-[250px] w-full"
+                >
+                  <BarChart
+                    accessibilityLayer
+                    data={aspData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 70, left: 90, bottom: 10 }}
+                  >
+                    <CartesianGrid horizontal={false} className="stroke-border/50" />
+                    <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `$${v}K`} />
+                    <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={85} />
+                    <ChartTooltip
+                      content={
+                        <ChartTooltipContent
+                          className="w-[200px]"
+                          labelFormatter={(v) => v}
+                          formatter={(value, name) => `$${value}K`}
+                        />
+                      }
+                    />
+                    <Bar dataKey="asp2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} barSize={8} />
+                    <Bar dataKey="asp2025" fill="#2b7fff" radius={[0, 6, 6, 0]} barSize={8}>
+                      <LabelList
+                        dataKey="change"
+                        position="right"
+                        fill="currentColor"
+                        formatter={(v: number) => `${v > 0 ? '+' : ''}${v}%`}
+                        fontSize={10}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="flex-col items-start gap-1 text-sm pt-0 px-6 pb-4">
+            <div className="text-xs text-muted-foreground">
+              Mac NB <span className="text-emerald-400 font-medium">+39%</span> | iPad <span className="text-emerald-400 font-medium">+50%</span> | Audio <span className="text-red-400 font-medium">-6%</span>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* Channel & Order KPIs */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Órdenes 2025</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{orderMetrics['2025'].total_orders.toLocaleString()}</div>
+            <p className="text-xs mt-1 text-emerald-400 font-medium">+10.5% vs 2024 ({orderMetrics['2024'].total_orders.toLocaleString()})</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">AOV 2025</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">${orderMetrics['2025'].aov}K</div>
+            <p className="text-xs mt-1 text-red-400 font-medium">-2.6% vs 2024 (${orderMetrics['2024'].aov}K)</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Canal Web 2025</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{channelMix['2025'].Web.pct}%</div>
+            <p className="text-xs mt-1 text-muted-foreground">${channelMix['2025'].Web.revenue.toLocaleString()}M revenue</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-1 pt-4 px-4">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Click & Go 2025</CardTitle>
+          </CardHeader>
+          <CardContent className="px-4 pb-4">
+            <div className="text-2xl font-bold tracking-tight">{channelMix['2025']['Click & Go'].pct}%</div>
+            <p className="text-xs mt-1 text-muted-foreground">${channelMix['2025']['Click & Go'].revenue.toLocaleString()}M revenue</p>
+          </CardContent>
         </Card>
       </div>
 
