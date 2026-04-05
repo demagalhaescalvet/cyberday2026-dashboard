@@ -1,0 +1,31 @@
+{
+  "description": "Revenue growth decomposition: Price (ASP) vs Volume (Units) contribution",
+  "metrics": {
+    "2024": { "revenue_M": 4553, "units": 11700, "asp_K": 389 },
+    "2025": { "revenue_M": 5047, "units": 11800, "asp_K": 428 }
+  },
+  "growth": {
+    "revenue_pct": 10.9,
+    "units_pct": 0.85,
+    "asp_pct": 9.9
+  },
+  "decomposition": {
+    "description": "How much of the $494M revenue growth came from each driver",
+    "total_delta_M": 494,
+    "volume_contribution_M": 39,
+    "volume_contribution_pct": 7.9,
+    "price_contribution_M": 455,
+    "price_contribution_pct": 92.1
+  },
+  "waterfall_data": [
+    { "name": "Revenue 2024", "value": 4553, "type": "base" },
+    { "name": "Volumen (+0.9%)", "value": 39, "type": "volume" },
+    { "name": "Precio / ASP (+9.9%)", "value": 455, "type": "price" },
+    { "name": "Revenue 2025", "value": 5047, "type": "total" }
+  ],
+  "comparison_data": [
+    { "metric": "Revenue", "growth": 10.9, "category": "revenue" },
+    { "metric": "Unidades", "growth": 0.85, "category": "volume" },
+    { "metric": "ASP (Ticket)", "growth": 9.9, "category": "price" }
+  ]
+}

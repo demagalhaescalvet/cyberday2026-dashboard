@@ -26,6 +26,8 @@ import klaviyoCampaigns from '@/data/klaviyo-campaigns.json'
 import launchData from '@/data/launch-tracker.json'
 import sensitivityData from '@/data/sensitivity.json'
 import productHierarchy from '@/data/product-hierarchy.json'
+import priceVolumeData from '@/data/price-volume-decomposition.json'
+import newReturningData from '@/data/ga-new-returning.json'
 
 // ─── Multicolor palette for clear visual differentiation ───
 const PALETTE = {
@@ -588,7 +590,130 @@ export function ResumenView() {
         </Card>
       </div>
 
-      {/* ═══ ROW 7: Email KPIs + Channel/Order KPIs ═══ */}
+      {/* ═══ ROW 7: Growth Decomposition + New vs Returning ═══ */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {/* Waterfall: Price vs Volume */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">Descomposición del Crecimiento</CardTitle>
+            <CardDescription className="text-xs">Revenue +10.9% → ¿precio o volumen?</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-3 pb-2">
+            {(() => {
+              // Build waterfall
+              const waterfallData = [
+                { name: '2024', value: 4553, fill: YEAR_COLORS['2024'], display: 4553 },
+                { name: 'Volumen\n(+0.9%)', value: 39, fill: PALETTE.amber, display: 39 },
+                { name: 'Precio/ASP\n(+9.9%)', value: 455, fill: PALETTE.rose, display: 455 },
+                { name: '2025', value: 5047, fill: YEAR_COLORS['2025'], display: 5047 },
+              ]
+              // Stacked waterfall: invisible base + visible bar
+              const waterfallStacked = waterfallData.map((d, i) => {
+                if (i === 0) return { ...d, base: 0, bar: d.value }
+                if (i === waterfallData.length - 1) return { ...d, base: 0, bar: d.value }
+                const prevTotal = waterfallStacked ? waterfallData.slice(0, i).reduce((s, x, xi) => xi === 0 ? x.value : s + x.value, 0) : 0
+                return { ...d, base: prevTotal, bar: d.value }
+              })
+              // Manually compute bases
+              const stacked = [
+                { name: '2024', base: 0, bar: 4553, fill: YEAR_COLORS['2024'], label: '$4,553M' },
+                { name: 'Volumen (+0.9%)', base: 4553, bar: 39, fill: PALETTE.amber, label: '+$39M' },
+                { name: 'Precio/ASP (+9.9%)', base: 4592, bar: 455, fill: PALETTE.rose, label: '+$455M' },
+                { name: '2025', base: 0, bar: 5047, fill: YEAR_COLORS['2025'], label: '$5,047M' },
+              ]
+              const wfConfig: ChartConfig = {
+                base: { label: 'Base', color: 'transparent' },
+                bar: { label: 'Valor', color: PALETTE.blue },
+              }
+              return (
+                <ChartContainer config={wfConfig} className="aspect-auto h-[220px] w-full">
+                  <BarChart accessibilityLayer data={stacked} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                    <CartesianGrid vertical={false} className="stroke-border/50" />
+                    <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 10 }} />
+                    <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 10 }} domain={[0, 5500]} />
+                    <ChartTooltip content={<ChartTooltipContent className="w-[160px]" formatter={(v, name) => name === 'base' ? null : `$${v}M`} />} />
+                    <Bar dataKey="base" stackId="a" fill="transparent" radius={0} />
+                    <Bar dataKey="bar" stackId="a" radius={[6, 6, 0, 0]}>
+                      {stacked.map((e, i) => (
+                        <Cell key={i} fill={e.fill} />
+                      ))}
+                      <LabelList dataKey="label" position="top" fill="currentColor" fontSize={10} fontWeight={600} />
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="px-4 pb-3 pt-0">
+            <span className="text-xs text-muted-foreground">
+              <span className="text-rose-400 font-medium">92%</span> del crecimiento viene de precio · Solo <span className="text-amber-400 font-medium">8%</span> por volumen
+            </span>
+          </CardFooter>
+        </Card>
+
+        {/* New vs Returning visitors */}
+        <Card>
+          <CardHeader className="border-b px-4 py-3">
+            <CardTitle className="text-sm">New vs Returning Visitors</CardTitle>
+            <CardDescription className="text-xs">La base se está fidelizando — Returning +114% YoY</CardDescription>
+          </CardHeader>
+          <CardContent className="px-2 pt-3 pb-2">
+            {(() => {
+              const nrConfig: ChartConfig = {
+                '2024': { label: '2024', color: YEAR_COLORS['2024'] },
+                '2025': { label: '2025', color: YEAR_COLORS['2025'] },
+              }
+              const chartData = [
+                { type: 'New', '2024': Math.round(newReturningData['2024'].new / 1000), '2025': Math.round(newReturningData['2025'].new / 1000) },
+                { type: 'Returning', '2024': Math.round(newReturningData['2024'].returning / 1000), '2025': Math.round(newReturningData['2025'].returning / 1000) },
+              ]
+              return (
+                <div className="space-y-3">
+                  <ChartContainer config={nrConfig} className="aspect-auto h-[160px] w-full">
+                    <BarChart accessibilityLayer data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                      <CartesianGrid vertical={false} className="stroke-border/50" />
+                      <XAxis dataKey="type" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                      <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 10 }} tickFormatter={(v) => `${v}K`} />
+                      <ChartTooltip content={<ChartTooltipContent className="w-[160px]" formatter={(v) => `${v}K sesiones`} />} />
+                      <ChartLegend content={<ChartLegendContent />} />
+                      <Bar dataKey="2024" fill={YEAR_COLORS['2024']} radius={[6, 6, 0, 0]} barSize={28}>
+                        <LabelList dataKey="2024" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={10} />
+                      </Bar>
+                      <Bar dataKey="2025" fill={YEAR_COLORS['2025']} radius={[6, 6, 0, 0]} barSize={28}>
+                        <LabelList dataKey="2025" position="top" fill="currentColor" formatter={(v: number) => `${v}K`} fontSize={10} fontWeight={600} />
+                      </Bar>
+                    </BarChart>
+                  </ChartContainer>
+                  {/* Composition mini-bars */}
+                  <div className="grid grid-cols-2 gap-3 px-2">
+                    {newReturningData.composition.map((yr) => (
+                      <div key={yr.year} className="space-y-1">
+                        <p className="text-[10px] font-medium text-muted-foreground text-center">{yr.year}</p>
+                        <div className="flex h-3 rounded-full overflow-hidden">
+                          <div className="bg-sky-400" style={{ width: `${yr.New}%` }} title={`New ${yr.New}%`} />
+                          <div className="bg-blue-500" style={{ width: `${yr.Returning}%` }} title={`Returning ${yr.Returning}%`} />
+                          <div className="bg-muted" style={{ width: `${100 - yr.New - yr.Returning}%` }} />
+                        </div>
+                        <div className="flex justify-between text-[9px] text-muted-foreground">
+                          <span>New {yr.New}%</span>
+                          <span>Ret. {yr.Returning}%</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+          </CardContent>
+          <CardFooter className="px-4 pb-3 pt-0">
+            <span className="text-xs text-muted-foreground">
+              Returning <span className="text-emerald-400 font-medium">+114%</span> · New <span className="text-blue-400 font-medium">+72%</span> · Share Returning: 36% → 42%
+            </span>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* ═══ ROW 8: Email KPIs + Channel/Order KPIs ═══ */}
       <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2">
         {[
           { t: 'Campañas Email', v: String(klaviyoCampaigns['2025'].totals.campaigns), s: `vs ${klaviyoCampaigns['2024'].totals.campaigns} en 2024`, d: '+' },
@@ -610,7 +735,7 @@ export function ResumenView() {
         ))}
       </div>
 
-      {/* ═══ ROW 8: Launch Tracker + Sensitivity ═══ */}
+      {/* ═══ ROW 9: Launch Tracker + Sensitivity ═══ */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="border-b px-4 py-3">

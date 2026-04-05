@@ -1,0 +1,34 @@
+{
+  "description": "New vs Returning visitors — Google Analytics CyberDay 2024 vs 2025",
+  "2024": {
+    "new": 75767,
+    "returning": 48803,
+    "not_set": 12591,
+    "total": 137161,
+    "new_pct": 55.2,
+    "returning_pct": 35.6,
+    "not_set_pct": 9.2
+  },
+  "2025": {
+    "new": 130387,
+    "returning": 104575,
+    "not_set": 11736,
+    "total": 246698,
+    "new_pct": 52.9,
+    "returning_pct": 42.4,
+    "not_set_pct": 4.8
+  },
+  "yoy": {
+    "new_growth": 72.1,
+    "returning_growth": 114.3,
+    "total_growth": 79.9
+  },
+  "chart_data": [
+    { "type": "New", "2024": 75767, "2025": 130387, "growth": 72.1 },
+    { "type": "Returning", "2024": 48803, "2025": 104575, "growth": 114.3 }
+  ],
+  "composition": [
+    { "year": "2024", "New": 55.2, "Returning": 35.6 },
+    { "year": "2025", "New": 52.9, "Returning": 42.4 }
+  ]
+}
