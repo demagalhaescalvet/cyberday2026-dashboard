@@ -9,7 +9,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { ChartContainer, type ChartConfig } from '@/components/ui/chart'
-import { RadialBarChart, RadialBar, PolarGrid, PolarRadiusAxis, Label } from 'recharts'
+import { ScatterChart, Scatter, ZAxis, ReferenceLine } from 'recharts'
 import type { PricingAuditItem } from '@/data/pricing-audit'
 import pricingData from '@/data/pricing-audit.json'
 
@@ -128,9 +128,6 @@ export function AuditoriaView() {
     return (total / data.products.length).toFixed(1)
   }, [])
 
-  const gaugeData = [{ value: competitivePct, fill: '#2b7fff' }]
-  const gaugeConfig = { value: { label: 'Competitividad', color: '#2b7fff' } } satisfies ChartConfig
-
   const renderSortIcon = (column: SortColumn) => {
     if (sortColumn !== column) return null
     return sortDir === 'asc' ? ' ▲' : ' ▼'
@@ -140,29 +137,19 @@ export function AuditoriaView() {
     <div className="space-y-6">
       {/* KPI Row */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        {/* Radial gauge - col-span-2 */}
-        <Card className="col-span-1 lg:col-span-2 flex flex-col items-center justify-center py-6">
-          <ChartContainer config={gaugeConfig} className="mx-auto aspect-square w-[180px] h-[180px]">
-            <RadialBarChart data={gaugeData} startAngle={180} endAngle={180 - (competitivePct / 100) * 360} outerRadius={70} innerRadius={55}>
-              <PolarGrid gridType="circle" radialLines={false} stroke="none" className="first:fill-muted last:fill-background" polarRadius={[70, 55]} />
-              <RadialBar dataKey="value" background cornerRadius={10} />
-              <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
-                <Label
-                  content={({ viewBox }) => {
-                    if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                      return (
-                        <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                          <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-bold">{competitivePct}%</tspan>
-                          <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 18} className="fill-muted-foreground text-xs">competitivo</tspan>
-                          <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 32} className="fill-muted-foreground text-[10px]">{competitiveCount}/{data.total_products} productos</tspan>
-                        </text>
-                      )
-                    }
-                  }}
-                />
-              </PolarRadiusAxis>
-            </RadialBarChart>
-          </ChartContainer>
+        {/* Competitiveness KPI */}
+        <Card className="col-span-1 lg:col-span-2 flex flex-col justify-center p-6">
+          <div className="space-y-3">
+            <p className="text-xs font-medium text-muted-foreground">Competitividad</p>
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-bold">{competitivePct}%</span>
+              <span className="text-sm text-muted-foreground">{competitiveCount}/{data.total_products}</span>
+            </div>
+            <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+              <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${competitivePct}%` }} />
+            </div>
+            <p className="text-xs text-muted-foreground">productos con precio ≤ mercado</p>
+          </div>
         </Card>
 
         <Card>
@@ -201,6 +188,47 @@ export function AuditoriaView() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Scatter Plot: Cyber vs Market Price */}
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Análisis de Competitividad</CardTitle>
+          <CardDescription>Precio CyberDay vs Precio Mercado</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="w-full h-[350px]">
+            <ChartContainer config={{}} className="w-full h-full">
+              <ScatterChart margin={{ top: 20, right: 30, left: 60, bottom: 60 }} accessibilityLayer>
+                <ZAxis dataKey="status" type="category" width={0} height={0} />
+                <ReferenceLine segment={[
+                  { x: Math.min(...data.products.map(p => p.marketLow)), y: Math.min(...data.products.map(p => p.marketLow)) },
+                  { x: Math.max(...data.products.map(p => p.marketLow)), y: Math.max(...data.products.map(p => p.marketLow)) }
+                ]} stroke="#64748b" strokeDasharray="5 5" strokeWidth={1} />
+                <Scatter
+                  name="Productos"
+                  data={data.products.map(item => ({
+                    x: item.marketLow,
+                    y: item.cyberPlan,
+                    name: item.product,
+                    status: item.status
+                  }))}
+                  fill="#8b5cf6"
+                >
+                  {data.products.map((item, idx) => {
+                    let color = '#10b981' // emerald for ok
+                    if (item.status === 'match') color = '#3b82f6' // blue
+                    if (item.status === 'warn') color = '#f59e0b' // amber
+                    return <circle key={idx} cx={0} cy={0} r={4} fill={color} />
+                  })}
+                </Scatter>
+              </ScatterChart>
+            </ChartContainer>
+          </div>
+          <p className="text-xs text-muted-foreground text-center mt-4">
+            Puntos bajo la diagonal = precio competitivo vs mercado
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Main Table Card */}
       <Card>
@@ -251,7 +279,7 @@ export function AuditoriaView() {
                       <TableHead className="text-right cursor-pointer hover:text-foreground" onClick={() => handleHeaderClick('diff')}>
                         Δ Mercado{renderSortIcon('diff')}
                       </TableHead>
-                      <TableHead className="w-[140px]">Comparación</TableHead>
+                      <TableHead className="w-[140px]">vs Mercado</TableHead>
                       <TableHead>Estado</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -286,16 +314,16 @@ export function AuditoriaView() {
                               {diff >= 0 ? '+' : ''}{formatPrice(diff)}
                             </TableCell>
                             <TableCell>
-                              <div className="space-y-1 w-[130px]">
-                                <div className="bg-muted rounded h-2 overflow-hidden">
-                                  <div className="bg-blue-500 h-full transition-all" style={{ width: `${cyberW}%` }} />
+                              <div className="w-[130px]">
+                                <div className="relative h-4 bg-muted rounded overflow-hidden">
+                                  <div
+                                    className={`absolute left-0 top-0 h-full rounded ${item.cyberPlan <= item.marketLow ? 'bg-emerald-500' : 'bg-amber-500'}`}
+                                    style={{ width: `${(item.cyberPlan / item.marketLow) * 100}%` }}
+                                  />
+                                  <div className="absolute right-0 top-0 h-full w-0.5 bg-foreground/50" title="Precio Mercado" />
                                 </div>
-                                <div className="bg-muted rounded h-2 overflow-hidden">
-                                  <div className="bg-violet-500 h-full transition-all" style={{ width: `${marketW}%` }} />
-                                </div>
-                                <div className="flex gap-3 text-[10px] text-muted-foreground">
-                                  <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" />Cyber</span>
-                                  <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-violet-500" />Mercado</span>
+                                <div className="text-[10px] text-muted-foreground mt-0.5">
+                                  {((item.cyberPlan / item.marketLow) * 100).toFixed(0)}% del mercado
                                 </div>
                               </div>
                             </TableCell>

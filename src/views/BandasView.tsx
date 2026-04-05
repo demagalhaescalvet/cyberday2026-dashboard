@@ -8,7 +8,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
+import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts'
 import bandasData from '@/data/bandas-cuotas.json'
 import skuGridData from '@/data/sku-grid.json'
 import priceBandsData from '@/data/price-bands.json'
@@ -452,6 +452,33 @@ function DetailedBandsTable() {
     r2026: rows.reduce((sum, r) => sum + r.r2026, 0),
   }
 
+  // Find max values for unit and revenue columns
+  const maxU2024 = Math.max(...rows.map(r => r.u2024))
+  const maxU2025 = Math.max(...rows.map(r => r.u2025))
+  const maxU2026 = Math.max(...rows.map(r => r.u2026))
+  const maxR2024 = Math.max(...rows.map(r => r.r2024))
+  const maxR2025 = Math.max(...rows.map(r => r.r2025))
+  const maxR2026 = Math.max(...rows.map(r => r.r2026))
+
+  const getUnitBackgroundColor = (value: number, max: number): string => {
+    const pct = (value / max) * 100
+    if (pct < 25) return ''
+    if (pct < 50) return 'bg-blue-500/10'
+    if (pct < 75) return 'bg-blue-500/20'
+    return 'bg-blue-500/30'
+  }
+
+  const getRevenueBackgroundColor = (value: number, max: number): string => {
+    const pct = (value / max) * 100
+    if (pct < 25) return ''
+    if (pct < 50) return 'bg-emerald-500/10'
+    if (pct < 75) return 'bg-emerald-500/20'
+    return 'bg-emerald-500/30'
+  }
+
+  // Find row with highest 2026 units
+  const maxU2026Idx = rows.findIndex(r => r.u2026 === maxU2026)
+
   return (
     <Card>
       <CardHeader>
@@ -473,17 +500,20 @@ function DetailedBandsTable() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.band}>
-                  <TableCell className="font-medium">{row.band}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.u2024.toLocaleString()}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.u2025.toLocaleString()}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.u2026.toLocaleString()}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.r2024.toLocaleString()}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.r2025.toLocaleString()}</TableCell>
-                  <TableCell className="text-right font-mono text-sm">{row.r2026.toLocaleString()}</TableCell>
-                </TableRow>
-              ))}
+              {rows.map((row, idx) => {
+                const isBolded = idx === maxU2026Idx
+                return (
+                  <TableRow key={row.band} className={isBolded ? 'font-bold' : ''}>
+                    <TableCell className={`font-medium ${isBolded ? 'font-bold' : ''}`}>{row.band}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2024, maxU2024)} ${isBolded ? 'font-bold' : ''}`}>{row.u2024.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2025, maxU2025)} ${isBolded ? 'font-bold' : ''}`}>{row.u2025.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getUnitBackgroundColor(row.u2026, maxU2026)} ${isBolded ? 'font-bold' : ''}`}>{row.u2026.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2024, maxR2024)} ${isBolded ? 'font-bold' : ''}`}>{row.r2024.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2025, maxR2025)} ${isBolded ? 'font-bold' : ''}`}>{row.r2025.toLocaleString()}</TableCell>
+                    <TableCell className={`text-right font-mono text-sm ${getRevenueBackgroundColor(row.r2026, maxR2026)} ${isBolded ? 'font-bold' : ''}`}>{row.r2026.toLocaleString()}</TableCell>
+                  </TableRow>
+                )
+              })}
               <TableRow className="border-t-2 border-border font-semibold bg-muted/50 hover:bg-muted/50">
                 <TableCell>Total</TableCell>
                 <TableCell className="text-right font-mono">{totals.u2024.toLocaleString()}</TableCell>
@@ -507,53 +537,117 @@ function InstallmentDistributionChart() {
     units_by_year: { '2024': number[]; '2025': number[]; '2026_target': number[] }
   }
 
-  const chartData = data.tiers.map((tier, idx) => ({
-    tier,
-    '2024': data.units_by_year['2024'][idx],
-    '2025': data.units_by_year['2025'][idx],
-    '2026': data.units_by_year['2026_target'][idx],
-  }))
+  // Transform data: rows per year with each tier as a column
+  const areaData = [
+    {
+      year: '2024',
+      'Sin Cuotas': data.units_by_year['2024'][0],
+      '3 Cuotas': data.units_by_year['2024'][1],
+      '6 Cuotas': data.units_by_year['2024'][2],
+      '12 Cuotas': data.units_by_year['2024'][3],
+      '24 Cuotas': data.units_by_year['2024'][4],
+      '36+ Cuotas': data.units_by_year['2024'][5],
+    },
+    {
+      year: '2025',
+      'Sin Cuotas': data.units_by_year['2025'][0],
+      '3 Cuotas': data.units_by_year['2025'][1],
+      '6 Cuotas': data.units_by_year['2025'][2],
+      '12 Cuotas': data.units_by_year['2025'][3],
+      '24 Cuotas': data.units_by_year['2025'][4],
+      '36+ Cuotas': data.units_by_year['2025'][5],
+    },
+    {
+      year: '2026',
+      'Sin Cuotas': data.units_by_year['2026_target'][0],
+      '3 Cuotas': data.units_by_year['2026_target'][1],
+      '6 Cuotas': data.units_by_year['2026_target'][2],
+      '12 Cuotas': data.units_by_year['2026_target'][3],
+      '24 Cuotas': data.units_by_year['2026_target'][4],
+      '36+ Cuotas': data.units_by_year['2026_target'][5],
+    },
+  ]
 
   const chartConfig = {
-    '2024': { label: '2024', color: '#8ec5ff' },
-    '2025': { label: '2025', color: '#2b7fff' },
-    '2026': { label: '2026', color: '#155dfc' },
+    'Sin Cuotas': { label: 'Sin Cuotas', color: '#e0edff' },
+    '3 Cuotas': { label: '3 Cuotas', color: '#8ec5ff' },
+    '6 Cuotas': { label: '6 Cuotas', color: '#5ba3ff' },
+    '12 Cuotas': { label: '12 Cuotas', color: '#2b7fff' },
+    '24 Cuotas': { label: '24 Cuotas', color: '#155dfc' },
+    '36+ Cuotas': { label: '36+ Cuotas', color: '#193cb8' },
   } satisfies ChartConfig
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Distribución por Tipo de Cuota</CardTitle>
-        <CardDescription>Unidades por tier de cuotas (2024, 2025, 2026)</CardDescription>
+        <CardDescription>Composición de tiers de cuotas por año (2024, 2025, 2026)</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[320px] w-full">
-          <BarChart
+          <AreaChart
             accessibilityLayer
-            data={chartData}
-            layout="vertical"
-            margin={{ top: 0, right: 16, left: 100, bottom: 0 }}
+            data={areaData}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            stackOffset="expand"
           >
-            <CartesianGrid horizontal={false} className="stroke-border/50" />
-            <YAxis
-              dataKey="tier"
-              type="category"
-              tickLine={false}
-              axisLine={false}
-              width={95}
-              tick={{ fontSize: 11 }}
-            />
+            <CartesianGrid className="stroke-border/50" />
             <XAxis
-              type="number"
+              dataKey="year"
               tickLine={false}
               axisLine={false}
               tick={{ fontSize: 11 }}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} />
-            <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} />
-            <Bar dataKey="2026" fill="#155dfc" radius={[0, 6, 6, 0]} />
-          </BarChart>
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tick={{ fontSize: 11 }}
+              tickFormatter={(v) => `${v}%`}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v}%`} />} />
+            <Area
+              type="monotone"
+              dataKey="Sin Cuotas"
+              fill="#e0edff"
+              stroke="#e0edff"
+              stackId="a"
+            />
+            <Area
+              type="monotone"
+              dataKey="3 Cuotas"
+              fill="#8ec5ff"
+              stroke="#8ec5ff"
+              stackId="a"
+            />
+            <Area
+              type="monotone"
+              dataKey="6 Cuotas"
+              fill="#5ba3ff"
+              stroke="#5ba3ff"
+              stackId="a"
+            />
+            <Area
+              type="monotone"
+              dataKey="12 Cuotas"
+              fill="#2b7fff"
+              stroke="#2b7fff"
+              stackId="a"
+            />
+            <Area
+              type="monotone"
+              dataKey="24 Cuotas"
+              fill="#155dfc"
+              stroke="#155dfc"
+              stackId="a"
+            />
+            <Area
+              type="monotone"
+              dataKey="36+ Cuotas"
+              fill="#193cb8"
+              stroke="#193cb8"
+              stackId="a"
+            />
+          </AreaChart>
         </ChartContainer>
       </CardContent>
     </Card>
@@ -570,12 +664,13 @@ function InstallmentMixHeatmap() {
 
   const tiers = ['Sin Cuotas', '3 Cuotas', '6 Cuotas', '12 Cuotas', '24 Cuotas', '36+ Cuotas']
 
-  const getBackgroundColor = (percentage: number): string => {
-    if (percentage === 0) return 'bg-background'
-    if (percentage < 5) return 'bg-blue-100/40'
-    if (percentage < 15) return 'bg-blue-200/50'
-    if (percentage < 30) return 'bg-blue-400/40'
-    return 'bg-blue-600/50'
+  const getHeatmapStyle = (pct: number): React.CSSProperties => {
+    if (pct === 0) return {}
+    if (pct < 5) return { backgroundColor: 'rgba(43, 127, 255, 0.08)' }
+    if (pct < 15) return { backgroundColor: 'rgba(43, 127, 255, 0.18)' }
+    if (pct < 30) return { backgroundColor: 'rgba(43, 127, 255, 0.32)' }
+    if (pct < 45) return { backgroundColor: 'rgba(43, 127, 255, 0.48)' }
+    return { backgroundColor: 'rgba(43, 127, 255, 0.65)' }
   }
 
   return (
@@ -602,7 +697,8 @@ function InstallmentMixHeatmap() {
                   {data.mix_by_price_band.percentages[bandIdx].map((percentage, tierIdx) => (
                     <TableCell
                       key={`${band}-${tierIdx}`}
-                      className={`text-center font-mono text-sm ${getBackgroundColor(percentage)}`}
+                      className="text-center font-mono text-sm"
+                      style={getHeatmapStyle(percentage)}
                     >
                       {percentage}%
                     </TableCell>
@@ -614,6 +710,23 @@ function InstallmentMixHeatmap() {
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+function ExpandableDetailedBandsTable() {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div className="space-y-3">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-background hover:bg-muted transition-colors font-medium text-sm"
+      >
+        <span>{isExpanded ? '▼' : '▶'}</span>
+        Ver distribución detallada (12 bandas)
+      </button>
+      {isExpanded && <DetailedBandsTable />}
+    </div>
   )
 }
 
@@ -662,8 +775,8 @@ export function BandasView() {
       {/* Price Bands Distribution */}
       <PriceBandsDistribution />
 
-      {/* Detailed Bands Table */}
-      <DetailedBandsTable />
+      {/* Detailed Bands Table — Expandable */}
+      <ExpandableDetailedBandsTable />
 
       {/* Installment Distribution Chart */}
       <InstallmentDistributionChart />

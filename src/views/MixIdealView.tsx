@@ -8,7 +8,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
-import { PieChart, Pie, Cell, Label } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis } from 'recharts'
 import type { ProductMixCategory } from '@/types/product-mix'
 import productMixData from '@/data/product-mix.json'
 import elasticityData from '@/data/elasticity.json'
@@ -78,10 +78,49 @@ export function MixIdealView() {
     return filtered
   }, [categories, searchTerm, sortColumn, sortDir, totalRevenue])
 
-  const donutData = useMemo(() => sorted.map((c) => ({ name: c.name, value: c.revenue })), [sorted])
-  const donutConfig: ChartConfig = Object.fromEntries(
-    donutData.map((d, i) => [d.name, { label: d.name, color: CHART_COLORS[i % CHART_COLORS.length] }])
-  )
+  const barChartData = useMemo(() => {
+    // Sort by revenue descending for the bar chart
+    return [...categories].sort((a, b) => b.revenue - a.revenue).map((c) => ({
+      name: c.name,
+      value: c.revenue
+    }))
+  }, [categories])
+
+  const radarTop5 = useMemo(() => {
+    // Get top 5 categories by revenue
+    const top5Categories = [...categories].sort((a, b) => b.revenue - a.revenue).slice(0, 5)
+
+    // Find max values for normalization
+    const maxUnits = Math.max(...categories.map(c => c.units))
+    const maxRevenue = Math.max(...categories.map(c => c.revenue))
+    const maxAsp = Math.max(...categories.map(c => c.asp))
+    const maxElasticity = Math.max(...Object.values(elasticityData.categories).map((d: any) => d.elasticity))
+
+    return top5Categories.map(cat => {
+      const elasticity = (elasticityData.categories[cat.name] as any)?.elasticity || 0
+      return {
+        name: cat.name,
+        units: Math.round((cat.units / maxUnits) * 100),
+        revenue: Math.round((cat.revenue / maxRevenue) * 100),
+        asp: Math.round((cat.asp / maxAsp) * 100),
+        elasticity: Math.round((elasticity / maxElasticity) * 100)
+      }
+    })
+  }, [categories])
+
+  const growthData = useMemo(() => {
+    return [...categories]
+      .sort((a, b) => b.revenue - a.revenue)
+      .map(cat => {
+        const units2025 = (multiYearData.units['2025'] as any)?.[cat.name] || 0
+        const units2026 = (multiYearData.units['2026_target'] as any)?.[cat.name] || 0
+        const growthPct = units2025 > 0 ? ((units2026 - units2025) / units2025) * 100 : 0
+        return {
+          name: cat.name,
+          growth: growthPct
+        }
+      })
+  }, [categories])
 
   const toggleExpand = (name: string) => setExpandedCategory(expandedCategory === name ? null : name)
 
@@ -150,54 +189,29 @@ export function MixIdealView() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Donut */}
-        <Card className="flex flex-col">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Mix por Categoría</CardTitle>
-            <CardDescription>Distribución de revenue</CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer config={donutConfig} className="mx-auto aspect-square max-h-[280px]">
-              <PieChart accessibilityLayer>
-                <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel formatter={(v) => `$${v}M`} />} />
-                <Pie data={donutData} dataKey="value" nameKey="name" innerRadius={65} strokeWidth={2}>
-                  {donutData.map((_, i) => (
-                    <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                  ))}
-                  <Label
-                    content={({ viewBox }) => {
-                      if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                        return (
-                          <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle" dominantBaseline="middle">
-                            <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-2xl font-bold">
-                              {sorted.length}
-                            </tspan>
-                            <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 20} className="fill-muted-foreground text-xs">
-                              categorías
-                            </tspan>
-                          </text>
-                        )
-                      }
-                    }}
-                  />
-                </Pie>
-              </PieChart>
-            </ChartContainer>
-          </CardContent>
-          <div className="px-4 pb-4 flex flex-wrap gap-x-3 gap-y-1 text-xs justify-center">
-            {donutData.slice(0, 6).map((d, i) => (
-              <div key={d.name} className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: CHART_COLORS[i] }} />
-                <span className="text-muted-foreground">{d.name}</span>
-              </div>
-            ))}
-            {donutData.length > 6 && <span className="text-muted-foreground">+{donutData.length - 6} más</span>}
-          </div>
-        </Card>
+      {/* Horizontal Bar Chart - Revenue por Categoría */}
+      <Card className="flex flex-col">
+        <CardHeader className="pb-3">
+          <CardTitle>Revenue por Categoría (Ranked)</CardTitle>
+          <CardDescription>Todas las categorías ordenadas por revenue descendente</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-1">
+          <ChartContainer config={{ revenue: { label: 'Revenue', color: '#2b7fff' } }} className="w-full">
+            <BarChart data={barChartData} layout="vertical" height={500} margin={{ left: 100, right: 80 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" width={95} tick={{ fontSize: 12 }} />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `$${v}M`} />} />
+              <Bar dataKey="value" fill="#2b7fff" accessibilityLayer>
+                <LabelList dataKey="value" position="right" formatter={(v) => `$${v}M`} />
+              </Bar>
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
 
-        {/* Table */}
-        <Card className="xl:col-span-2">
+      {/* Details Table */}
+      <Card className="flex flex-col">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle>Detalle por Categoría</CardTitle>
@@ -328,8 +342,7 @@ export function MixIdealView() {
               </Table>
             </div>
           </CardContent>
-        </Card>
-      </div>
+      </Card>
 
       {/* Elasticity & Discount Matrix */}
       <Card>
@@ -352,11 +365,11 @@ export function MixIdealView() {
               <TableBody>
                 {Object.entries(elasticityData.categories).map(([categoryName, data]) => {
                   const elasticity = (data as any).elasticity
-                  let elasticityColor = 'bg-amber-100 text-amber-900'
+                  let elasticityColor = 'bg-amber-400/20 text-amber-600 dark:text-amber-400'
                   if (elasticity < 0.8) {
-                    elasticityColor = 'bg-emerald-100 text-emerald-900'
+                    elasticityColor = 'bg-emerald-400/20 text-emerald-600 dark:text-emerald-400'
                   } else if (elasticity > 1.2) {
-                    elasticityColor = 'bg-red-100 text-red-900'
+                    elasticityColor = 'bg-red-400/20 text-red-600 dark:text-red-400'
                   }
 
                   return (
@@ -379,40 +392,53 @@ export function MixIdealView() {
         </CardContent>
       </Card>
 
-      {/* Year-over-Year Units Growth */}
-      <div className="grid grid-cols-3 gap-4">
-        <Card>
-          <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Unidades 2024</CardTitle>
-          </CardHeader>
-          <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2024']).toLocaleString()}</p>
-            <p className="text-xs text-muted-foreground mt-1">Baseline year</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Unidades 2025</CardTitle>
-          </CardHeader>
-          <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2025']).toLocaleString()}</p>
-            <p className="text-xs text-green-600 mt-1">
-              +{(((multiYearData.totals.units['2025'] - multiYearData.totals.units['2024']) / multiYearData.totals.units['2024']) * 100).toFixed(1)}% YoY
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-1 pt-4 px-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Target Unidades 2026</CardTitle>
-          </CardHeader>
-          <CardContent className="px-4 pb-4">
-            <p className="text-2xl font-bold tabular-nums">{(multiYearData.totals.units['2026_target']).toLocaleString()}</p>
-            <p className="text-xs text-green-600 mt-1">
-              +{(((multiYearData.totals.units['2026_target'] - multiYearData.totals.units['2025']) / multiYearData.totals.units['2025']) * 100).toFixed(1)}% YoY
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Growth % Bar Chart - Per Category */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle>Crecimiento de Unidades (2025-2026)</CardTitle>
+          <CardDescription>Porcentaje de crecimiento por categoría</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={{ growth: { label: 'Growth %', color: '#2b7fff' } }} className="w-full">
+            <BarChart data={growthData} layout="vertical" height={500} margin={{ left: 100, right: 60 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" width={95} tick={{ fontSize: 12 }} />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v.toFixed(1)}%`} />} />
+              <Bar dataKey="growth">
+                {growthData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.growth >= 0 ? '#10b981' : '#ef4444'}
+                  />
+                ))}
+                <LabelList dataKey="growth" position="right" formatter={(v) => `${Number(v).toFixed(1)}%`} />
+              </Bar>
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+
+      {/* Radar Chart - Top 5 Categories */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle>Top 5 Categorías - Análisis Multidimensional</CardTitle>
+          <CardDescription>Comparación normalizada de Units, Revenue, ASP y Elasticidad</CardDescription>
+        </CardHeader>
+        <CardContent className="flex justify-center">
+          <ChartContainer config={{ units: { label: 'Units', color: '#2b7fff' }, revenue: { label: 'Revenue', color: '#155dfc' }, asp: { label: 'ASP', color: '#1447e6' }, elasticity: { label: 'Elasticity', color: '#193cb8' } }} className="w-full aspect-square max-w-[400px]">
+            <RadarChart data={radarTop5} accessibilityLayer>
+              <PolarGrid strokeDasharray="3 3" />
+              <PolarAngleAxis dataKey="name" />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `${v}/100`} />} />
+              <Radar name="Units" dataKey="units" stroke="#2b7fff" fill="#2b7fff" fillOpacity={0.25} />
+              <Radar name="Revenue" dataKey="revenue" stroke="#155dfc" fill="#155dfc" fillOpacity={0.25} />
+              <Radar name="ASP" dataKey="asp" stroke="#1447e6" fill="#1447e6" fillOpacity={0.25} />
+              <Radar name="Elasticity" dataKey="elasticity" stroke="#193cb8" fill="#193cb8" fillOpacity={0.25} />
+            </RadarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
     </div>
   )
 }

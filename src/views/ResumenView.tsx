@@ -17,7 +17,7 @@ import {
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   PieChart, Pie, Label, Cell, Sector,
-  AreaChart, Area, LabelList,
+  AreaChart, Area, LabelList, LineChart, Line,
 } from 'recharts'
 import revenueData from '@/data/revenue.json'
 import unitsData from '@/data/units.json'
@@ -80,7 +80,6 @@ const trendData = [
 
 const trendConfig: ChartConfig = {
   revenue: { label: 'Ingresos (M)', color: '#2b7fff' },
-  units: { label: 'Unidades', color: '#8ec5ff' },
 } satisfies ChartConfig
 
 // Custom active sector renderer for interactive donut
@@ -161,7 +160,7 @@ export function ResumenView() {
         <CardHeader className="flex flex-col items-stretch border-b p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-4">
             <CardTitle>Evolución Revenue 2024 → 2026</CardTitle>
-            <CardDescription>Ingresos y unidades por año</CardDescription>
+            <CardDescription>Ingresos por año</CardDescription>
           </div>
         </CardHeader>
         <CardContent className="px-2 pt-4 sm:p-6">
@@ -171,16 +170,6 @@ export function ResumenView() {
               data={trendData}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
-              <defs>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#2b7fff" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#2b7fff" stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="colorUnits" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#8ec5ff" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#8ec5ff" stopOpacity={0} />
-                </linearGradient>
-              </defs>
               <CartesianGrid vertical={false} className="stroke-border/50" />
               <XAxis
                 dataKey="year"
@@ -203,19 +192,9 @@ export function ResumenView() {
                 dataKey="revenue"
                 stroke="#2b7fff"
                 strokeWidth={2}
-                fillOpacity={1}
-                fill="url(#colorRevenue)"
+                fillOpacity={0.3}
+                fill="#2b7fff"
                 name="Ingresos (M)"
-              />
-              <Area
-                type="monotone"
-                dataKey="units"
-                stroke="#8ec5ff"
-                strokeWidth={2}
-                fillOpacity={1}
-                fill="url(#colorUnits)"
-                stackId="1"
-                name="Unidades"
               />
             </AreaChart>
           </ChartContainer>
@@ -230,17 +209,17 @@ export function ResumenView() {
         </CardFooter>
       </Card>
 
-      {/* Year-over-Year Category Comparison */}
+      {/* Year-over-Year Category Comparison — Slope Chart */}
       <Card>
         <CardHeader className="flex flex-col items-stretch border-b p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-4 pb-3 sm:py-4">
             <CardTitle>Comparación Categorías por Año</CardTitle>
-            <CardDescription>Revenue 2024 vs 2025 vs 2026 Target (Top 8)</CardDescription>
+            <CardDescription>Tendencias Revenue 2024 → 2026 Target (Top 5)</CardDescription>
           </div>
         </CardHeader>
         <CardContent className="px-2 pt-4 sm:p-6">
           {(() => {
-            // Build comparison data for top 8 categories by 2025 revenue
+            // Build comparison data for top 5 categories by 2025 revenue
             const comparisonData = multiYearData.categories.map((cat, i) => ({
               name: cat,
               '2024': multiYearData.revenue['2024'][i] || 0,
@@ -248,35 +227,40 @@ export function ResumenView() {
               '2026': multiYearData.revenue['2026_target'][i] || 0,
             }))
 
-            const top8 = [...comparisonData]
+            const top5 = [...comparisonData]
               .sort((a, b) => b['2025'] - a['2025'])
-              .slice(0, 8)
+              .slice(0, 5)
+
+            // Build slope chart data structure
+            const slopeData = [
+              { year: '2024', ...Object.fromEntries(top5.map((cat) => [cat.name, cat['2024']])) },
+              { year: '2025', ...Object.fromEntries(top5.map((cat) => [cat.name, cat['2025']])) },
+              { year: '2026', ...Object.fromEntries(top5.map((cat) => [cat.name, cat['2026']])) },
+            ]
 
             return (
               <ChartContainer
-                config={{
-                  '2024': { label: '2024', color: '#8ec5ff' },
-                  '2025': { label: '2025', color: '#2b7fff' },
-                  '2026': { label: '2026 Target', color: '#155dfc' },
-                } satisfies ChartConfig}
-                className="aspect-auto h-[350px] w-full"
+                config={Object.fromEntries(
+                  top5.map((cat, i) => [
+                    cat.name,
+                    { label: cat.name, color: CHART_COLORS[i] || '#64748b' },
+                  ])
+                )}
+                className="aspect-auto h-[300px] w-full"
               >
-                <BarChart
+                <LineChart
                   accessibilityLayer
-                  data={top8}
-                  layout="vertical"
-                  margin={{ top: 10, right: 30, left: 100, bottom: 10 }}
+                  data={slopeData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 10 }}
                 >
-                  <CartesianGrid horizontal={false} className="stroke-border/50" />
-                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
-                  <YAxis
-                    type="category"
-                    dataKey="name"
+                  <CartesianGrid vertical={false} className="stroke-border/50" />
+                  <XAxis
+                    dataKey="year"
                     tickLine={false}
                     axisLine={false}
-                    tick={{ fontSize: 11 }}
-                    width={100}
+                    tick={{ fontSize: 12 }}
                   />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
@@ -286,10 +270,18 @@ export function ResumenView() {
                       />
                     }
                   />
-                  <Bar dataKey="2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} />
-                  <Bar dataKey="2025" fill="#2b7fff" radius={[0, 6, 6, 0]} />
-                  <Bar dataKey="2026" fill="#155dfc" radius={[0, 6, 6, 0]} />
-                </BarChart>
+                  {top5.map((cat, i) => (
+                    <Line
+                      key={cat.name}
+                      type="monotone"
+                      dataKey={cat.name}
+                      stroke={CHART_COLORS[i] || '#64748b'}
+                      strokeWidth={2}
+                      dot
+                      name={cat.name}
+                    />
+                  ))}
+                </LineChart>
               </ChartContainer>
             )
           })()}
@@ -558,50 +550,69 @@ export function ResumenView() {
         </Card>
       </div>
 
-      {/* iPhone Model Breakdown */}
+      {/* iPhone Model Breakdown — Horizontal Bar Chart */}
       <Card>
         <CardHeader>
           <CardTitle>iPhone - Desglose de Modelos</CardTitle>
           <CardDescription>Unidades 2024/2025 y Revenue 2026 Target</CardDescription>
         </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Modelo</TableHead>
-                <TableHead className="text-right">Unidades 2024</TableHead>
-                <TableHead className="text-right">Unidades 2025</TableHead>
-                <TableHead className="text-right">Crecimiento %</TableHead>
-                <TableHead className="text-right">Revenue 2026</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {iphoneBreakdown.models.map((model, i) => {
-                const units2024 = iphoneBreakdown.units_2024[i] || 0
-                const units2025 = iphoneBreakdown.units_2025[i] || 0
-                const revenue2026 = iphoneBreakdown.revenue_2026[i] || 0
-                const growth = units2024 > 0 ? ((units2025 - units2024) / units2024) * 100 : 0
+        <CardContent className="px-2 pt-4 sm:p-6">
+          {(() => {
+            // Build bar chart data
+            const barData = iphoneBreakdown.models.map((model, i) => ({
+              model: `iPhone ${model}`,
+              units_2024: iphoneBreakdown.units_2024[i] || 0,
+              units_2025: iphoneBreakdown.units_2025[i] || 0,
+              revenue_2026: iphoneBreakdown.revenue_2026[i] || 0,
+            }))
 
-                return (
-                  <TableRow key={model}>
-                    <TableCell className="font-medium">iPhone {model}</TableCell>
-                    <TableCell className="text-right">{units2024.toLocaleString()}</TableCell>
-                    <TableCell className="text-right">{units2025.toLocaleString()}</TableCell>
-                    <TableCell className="text-right">
-                      <span
-                        className={`font-medium ${
-                          growth > 0 ? 'text-emerald-400' : growth < 0 ? 'text-red-500' : 'text-muted-foreground'
-                        }`}
-                      >
-                        {growth > 0 ? '+' : ''}{growth.toFixed(1)}%
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-right font-semibold">${revenue2026}M</TableCell>
-                  </TableRow>
-                )
-              })}
-            </TableBody>
-          </Table>
+            return (
+              <ChartContainer
+                config={{
+                  units_2024: { label: 'Unidades 2024', color: '#8ec5ff' },
+                  units_2025: { label: 'Unidades 2025', color: '#2b7fff' },
+                } satisfies ChartConfig}
+                className="aspect-auto h-[300px] w-full"
+              >
+                <BarChart
+                  accessibilityLayer
+                  data={barData}
+                  layout="vertical"
+                  margin={{ top: 10, right: 100, left: 80, bottom: 10 }}
+                >
+                  <CartesianGrid horizontal={false} className="stroke-border/50" />
+                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
+                  <YAxis
+                    type="category"
+                    dataKey="model"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    width={80}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        className="w-[160px]"
+                        labelFormatter={(v) => v}
+                        formatter={(value) => `${Number(value).toLocaleString()} uds`}
+                      />
+                    }
+                  />
+                  <Bar dataKey="units_2024" fill="#8ec5ff" radius={[0, 6, 6, 0]} />
+                  <Bar dataKey="units_2025" fill="#2b7fff" radius={[0, 6, 6, 0]}>
+                    <LabelList
+                      dataKey="revenue_2026"
+                      position="right"
+                      fill="currentColor"
+                      formatter={(v) => `$${v}M`}
+                      fontSize={11}
+                    />
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+            )
+          })()}
         </CardContent>
       </Card>
     </div>
