@@ -8,13 +8,80 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { ProductMixCategory } from '@/types/product-mix'
 import productMixData from '@/data/product-mix.json'
 import elasticityData from '@/data/elasticity.json'
 import multiYearData from '@/data/multi-year.json'
 
 const CHART_COLORS = ['#2b7fff', '#155dfc', '#1447e6', '#193cb8', '#8ec5ff', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#64748b']
+
+const GROUP_COLORS: Record<string, string> = {
+  'iPhone': '#2b7fff',
+  'Mac': '#155dfc',
+  'iPad': '#f472b6',
+  'Audio': '#f59e0b',
+  'Apple Watch': '#f472b6',
+  'Accesorios Apple': '#10b981',
+  'Terceros': '#64748b',
+}
+
+// Maps multi-year category indices → group + display tier name
+const GROUP_MAP: { group: string; tiers: { myIdx: number; tierName: string; pmIdx: number }[] }[] = [
+  {
+    group: 'iPhone',
+    tiers: [
+      { myIdx: 1, tierName: 'iPhone Pro Max', pmIdx: 1 },
+      { myIdx: 0, tierName: 'iPhone Pro', pmIdx: 0 },
+      { myIdx: 2, tierName: 'iPhone Air', pmIdx: 2 },
+      { myIdx: 3, tierName: 'iPhone 17 Standard', pmIdx: 3 },
+      { myIdx: 4, tierName: 'iPhone e (Budget)', pmIdx: 4 },
+    ],
+  },
+  {
+    group: 'Mac',
+    tiers: [
+      { myIdx: 6, tierName: 'MacBook / Notebook', pmIdx: 6 },
+      { myIdx: 7, tierName: 'iMac / Desktop', pmIdx: 7 },
+    ],
+  },
+  {
+    group: 'iPad',
+    tiers: [
+      { myIdx: 8, tierName: 'iPad (todas las líneas)', pmIdx: 8 },
+    ],
+  },
+  {
+    group: 'Audio',
+    tiers: [
+      { myIdx: 5, tierName: 'AirPods & HomePod', pmIdx: 5 },
+      { myIdx: 11, tierName: 'Audio Terceros', pmIdx: 11 },
+    ],
+  },
+  {
+    group: 'Apple Watch',
+    tiers: [
+      { myIdx: 9, tierName: 'Apple Watch', pmIdx: 9 },
+    ],
+  },
+  {
+    group: 'Accesorios Apple',
+    tiers: [
+      { myIdx: 10, tierName: 'Accesorios Apple', pmIdx: 10 },
+    ],
+  },
+  {
+    group: 'Terceros',
+    tiers: [
+      { myIdx: 12, tierName: 'Protección (ZAGG/ItSkins)', pmIdx: 12 },
+      { myIdx: 13, tierName: 'Fundas 3P', pmIdx: 13 },
+      { myIdx: 14, tierName: 'Carga 3P', pmIdx: 14 },
+      { myIdx: 15, tierName: 'Almacenamiento (SanDisk)', pmIdx: 15 },
+      { myIdx: 16, tierName: 'Otros 3P', pmIdx: 16 },
+    ],
+  },
+]
 
 const clpFormatter = new Intl.NumberFormat('es-CL', {
   style: 'currency', currency: 'CLP', minimumFractionDigits: 0, maximumFractionDigits: 0,
@@ -28,6 +95,7 @@ export function MixIdealView() {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
   const [sortColumn, setSortColumn] = useState<SortColumn>('revenue')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
+  const [selectedGroup, setSelectedGroup] = useState<string>('iPhone')
 
   const categories = useMemo(() => {
     const data = productMixData as unknown as { categories: ProductMixCategory[] }
@@ -122,6 +190,39 @@ export function MixIdealView() {
       })
   }, [categories])
 
+  // === Hierarchical group data ===
+  const groupBarData = useMemo(() => {
+    const my = multiYearData as any
+    return GROUP_MAP.map((g) => {
+      const rev26 = g.tiers.reduce((s, t) => s + (my.revenue['2026_target'][t.myIdx] || 0), 0)
+      const rev25 = g.tiers.reduce((s, t) => s + (my.revenue['2025'][t.myIdx] || 0), 0)
+      const delta = rev25 > 0 ? ((rev26 - rev25) / rev25) * 100 : null
+      return { group: g.group, revenue: rev26, delta }
+    }).sort((a, b) => b.revenue - a.revenue)
+  }, [])
+
+  const selectedGroupTiers = useMemo(() => {
+    const my = multiYearData as any
+    const gDef = GROUP_MAP.find((g) => g.group === selectedGroup)
+    if (!gDef) return { tiers: [], totalRev25: 0, totalRev26: 0, delta: 0 }
+
+    const tiers = gDef.tiers.map((t) => {
+      const r24 = my.revenue['2024'][t.myIdx] || 0
+      const r25 = my.revenue['2025'][t.myIdx] || 0
+      const r26 = my.revenue['2026_target'][t.myIdx] || 0
+      const u24 = my.units['2024'][t.myIdx] || 0
+      const u25 = my.units['2025'][t.myIdx] || 0
+      const u26 = my.units['2026_target'][t.myIdx] || 0
+      const deltaPct = r25 > 0 ? ((r26 - r25) / r25) * 100 : (r26 > 0 ? null : 0) // null = NUEVO
+      return { name: t.tierName, r24, r25, r26, u24, u25, u26, deltaPct }
+    }).sort((a, b) => b.r26 - a.r26)
+
+    const totalRev25 = tiers.reduce((s, t) => s + t.r25, 0)
+    const totalRev26 = tiers.reduce((s, t) => s + t.r26, 0)
+    const delta = totalRev25 > 0 ? ((totalRev26 - totalRev25) / totalRev25) * 100 : 0
+    return { tiers, totalRev25, totalRev26, delta }
+  }, [selectedGroup])
+
   const toggleExpand = (name: string) => setExpandedCategory(expandedCategory === name ? null : name)
 
   const handleHeaderClick = (col: SortColumn) => {
@@ -189,24 +290,111 @@ export function MixIdealView() {
         </Card>
       </div>
 
-      {/* Horizontal Bar Chart - Revenue por Categoría */}
-      <Card className="flex flex-col">
+      {/* Hierarchical Product View: Group → Tier */}
+      <Card>
         <CardHeader className="pb-3">
-          <CardTitle>Revenue por Categoría (Ranked)</CardTitle>
-          <CardDescription>Todas las categorías ordenadas por revenue descendente</CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle>Jerarquía de Producto: Grupo → Tier</CardTitle>
+              <CardDescription>Revenue y unidades 2024 vs 2025 vs 2026 target por grupo y tier</CardDescription>
+            </div>
+            <Select value={selectedGroup} onValueChange={setSelectedGroup}>
+              <SelectTrigger className="w-[220px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {groupBarData.map((g) => (
+                  <SelectItem key={g.group} value={g.group}>
+                    {g.group} — ${g.revenue}M
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </CardHeader>
-        <CardContent className="flex-1">
-          <ChartContainer config={{ revenue: { label: 'Revenue', color: '#2b7fff' } }} className="w-full">
-            <BarChart data={barChartData} layout="vertical" height={500} margin={{ left: 100, right: 80 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" type="category" width={95} tick={{ fontSize: 12 }} />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `$${v}M`} />} />
-              <Bar dataKey="value" fill="#2b7fff" accessibilityLayer>
-                <LabelList dataKey="value" position="right" formatter={(v) => `$${v}M`} />
-              </Bar>
-            </BarChart>
-          </ChartContainer>
+        <CardContent>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-6">
+            {/* Left: Groups bar chart */}
+            <div>
+              <p className="text-sm text-muted-foreground mb-3">Todos los Grupos — Revenue ($M)</p>
+              <ChartContainer config={{ revenue: { label: 'Revenue', color: '#2b7fff' } }} className="w-full">
+                <BarChart data={groupBarData} layout="vertical" height={300} margin={{ left: 100, right: 80 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" />
+                  <YAxis dataKey="group" type="category" width={100} tick={{ fontSize: 12 }} />
+                  <ChartTooltip cursor={false} content={<ChartTooltipContent formatter={(v) => `$${v}M`} />} />
+                  <Bar dataKey="revenue" cursor="pointer" onClick={(_: any, idx: number) => setSelectedGroup(groupBarData[idx].group)}>
+                    {groupBarData.map((entry) => (
+                      <Cell
+                        key={entry.group}
+                        fill={entry.group === selectedGroup ? (GROUP_COLORS[entry.group] || '#2b7fff') : '#334155'}
+                        stroke={entry.group === selectedGroup ? '#fff' : 'transparent'}
+                        strokeWidth={entry.group === selectedGroup ? 1.5 : 0}
+                      />
+                    ))}
+                    <LabelList dataKey="revenue" position="right" formatter={(v: number) => `$${v}M`} />
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+            </div>
+
+            {/* Right: Tier breakdown table */}
+            <div>
+              <p className="text-sm text-muted-foreground mb-3">
+                <span className="font-medium text-foreground">{selectedGroup}</span>
+                {' '}— Tiers{' '}
+                <span className="text-muted-foreground">
+                  ${selectedGroupTiers.totalRev25}M → ${selectedGroupTiers.totalRev26}M
+                </span>
+                {' '}
+                <span className={selectedGroupTiers.delta >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                  ({selectedGroupTiers.delta >= 0 ? '+' : ''}{selectedGroupTiers.delta.toFixed(0)}%)
+                </span>
+              </p>
+              <div className="overflow-x-auto">
+                <Table style={{ tableLayout: 'fixed', width: '100%' }}>
+                  <colgroup>
+                    <col style={{ width: '30%' }} />
+                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '14%' }} />
+                  </colgroup>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Tier</TableHead>
+                      <TableHead className="text-right">Rev 2024</TableHead>
+                      <TableHead className="text-right">Rev 2025</TableHead>
+                      <TableHead className="text-right">Rev 2026</TableHead>
+                      <TableHead className="text-right">Δ% 25→26</TableHead>
+                      <TableHead className="text-right">Uds 2026</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {selectedGroupTiers.tiers.map((tier) => (
+                      <TableRow key={tier.name}>
+                        <TableCell className="font-medium">{tier.name}</TableCell>
+                        <TableCell className="text-right tabular-nums">${tier.r24}M</TableCell>
+                        <TableCell className="text-right tabular-nums">${tier.r25}M</TableCell>
+                        <TableCell className="text-right tabular-nums font-medium">${tier.r26}M</TableCell>
+                        <TableCell className="text-right tabular-nums">
+                          {tier.deltaPct === null ? (
+                            <span className="text-cyan-400 font-medium">NUEVO</span>
+                          ) : (
+                            <span className={tier.deltaPct >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                              {tier.deltaPct >= 0 ? '+' : ''}{tier.deltaPct.toFixed(0)}%
+                            </span>
+                          )}
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums">{tier.u26.toLocaleString()}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
